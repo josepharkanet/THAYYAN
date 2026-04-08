@@ -1,0 +1,212 @@
+/* Stonic Export Custom Styles */
+
+/* Hero Section */
+.hero-section {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+}
+
+.hero-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to right, rgba(0, 0, 0, 0.5) 0%, rgba(0, 0, 0, 0.2) 100%);
+}
+
+/* Product Card Hover */
+.product-card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.product-card:hover {
+    transform: translateY(-4px);
+}
+
+.product-card-image {
+    transition: transform 0.5s ease;
+}
+
+.product-card:hover .product-card-image {
+    transform: scale(1.05);
+}
+
+/* Category Card */
+.category-card {
+    position: relative;
+    overflow: hidden;
+}
+
+.category-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.7) 0%, transparent 60%);
+    z-index: 1;
+    transition: background 0.3s ease;
+}
+
+.category-card:hover::before {
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.8) 0%, rgba(0, 0, 0, 0.2) 100%);
+}
+
+.category-card-content {
+    position: relative;
+    z-index: 2;
+}
+
+/* Room Visualizer */
+.visualizer-room {
+    position: relative;
+    aspect-ratio: 16/10;
+    overflow: hidden;
+}
+
+.visualizer-floor {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 40%;
+    background-size: cover;
+    background-position: center;
+    transform: perspective(500px) rotateX(15deg);
+    transform-origin: bottom;
+}
+
+.visualizer-wall {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 60%;
+    background-size: cover;
+    background-position: center;
+}
+
+/* Texture Selector */
+.texture-option {
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.texture-option:hover {
+    transform: scale(1.05);
+}
+
+.texture-option.selected {
+    ring: 2px;
+    ring-color: var(--color-accent);
+}
+
+/* Admin Dashboard */
+.admin-sidebar {
+    transition: width 0.3s ease;
+}
+
+.admin-nav-item {
+    transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.admin-nav-item:hover,
+.admin-nav-item.active {
+    background-color: rgba(74, 93, 78, 0.1);
+    color: var(--color-accent);
+}
+
+/* Form Styles */
+.form-input {
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.form-input:focus {
+    border-color: var(--color-accent);
+    box-shadow: 0 0 0 3px rgba(74, 93, 78, 0.1);
+}
+
+/* Button Styles */
+.btn-primary {
+    background-color: var(--color-primary);
+    color: white;
+    transition: background-color 0.2s ease, transform 0.1s ease;
+}
+
+.btn-primary:hover {
+    background-color: var(--color-secondary);
+}
+
+.btn-primary:active {
+    transform: scale(0.98);
+}
+
+.btn-whatsapp {
+    background-color: var(--color-whatsapp);
+    color: white;
+    transition: background-color 0.2s ease, transform 0.1s ease;
+}
+
+.btn-whatsapp:hover {
+    background-color: #20bd5a;
+}
+
+/* Navigation */
+.nav-link {
+    position: relative;
+}
+
+.nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 0;
+    height: 1px;
+    background-color: var(--color-primary);
+    transition: width 0.3s ease;
+}
+
+.nav-link:hover::after,
+.nav-link.active::after {
+    width: 100%;
+}
+
+/* Loading Skeleton */
+@keyframes shimmer {
+    0% { background-position: -200% 0; }
+    100% { background-position: 200% 0; }
+}
+
+.skeleton {
+    background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+    background-size: 200% 100%;
+    animation: shimmer 1.5s infinite;
+}
+
+/* Mobile Menu */
+.mobile-menu {
+    transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.mobile-menu.closed {
+    transform: translateX(-100%);
+    opacity: 0;
+}
+
+.mobile-menu.open {
+    transform: translateX(0);
+    opacity: 1;
+}
+
+/* Image Zoom on Hover */
+.image-zoom {
+    overflow: hidden;
+}
+
+.image-zoom img {
+    transition: transform 0.5s ease;
+}
+
+.image-zoom:hover img {
+    transform: scale(1.1);
+}
