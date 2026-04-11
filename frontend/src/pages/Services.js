@@ -79,10 +79,10 @@ const productCategories = [
 ];
 
 const whyChooseUs = [
-  { icon: Certificate, title: '8+ Years Excellence', description: 'Industry expertise and quality commitment' },
-  { icon: Globe, title: 'Global Delivery', description: 'Shipping to Europe, America and beyond' },
-  { icon: Package, title: 'Premium Quality', description: 'Every piece meets export standards' },
-  { icon: Leaf, title: 'Eco-Friendly Sourcing', description: 'Sustainable, responsibly sourced materials' },
+  { id: 'excellence', icon: Certificate, title: '8+ Years Excellence', description: 'Industry expertise and quality commitment' },
+  { id: 'global', icon: Globe, title: 'Global Delivery', description: 'Shipping to Europe, America and beyond' },
+  { id: 'quality', icon: Package, title: 'Premium Quality', description: 'Every piece meets export standards' },
+  { id: 'eco', icon: Leaf, title: 'Eco-Friendly Sourcing', description: 'Sustainable, responsibly sourced materials' },
 ];
 
 export default function Services() {
@@ -147,8 +147,8 @@ export default function Services() {
                     {service.description}
                   </p>
                   <div className="grid grid-cols-2 gap-3">
-                    {service.highlights.map((highlight, i) => (
-                      <div key={i} className="flex items-center gap-2">
+                    {service.highlights.map((highlight) => (
+                      <div key={`${service.id}-${highlight}`} className="flex items-center gap-2">
                         <svg className="w-5 h-5 text-[#4A5D4E]" fill="currentColor" viewBox="0 0 20 20">
                           <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                         </svg>
@@ -209,8 +209,8 @@ export default function Services() {
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-            {whyChooseUs.map((item, index) => (
-              <div key={index} className="text-center p-6" data-testid={`why-${index}`}>
+            {whyChooseUs.map((item) => (
+              <div key={item.id} className="text-center p-6" data-testid={`why-${item.id}`}>
                 <div className="w-16 h-16 mx-auto mb-6 flex items-center justify-center bg-[#4A5D4E]/10 rounded-full">
                   <item.icon size={32} className="text-[#4A5D4E]" weight="duotone" />
                 </div>

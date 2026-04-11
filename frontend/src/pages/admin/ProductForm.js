@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { productsApi, categoriesApi, formatApiError } from '../../lib/api';
 import { ArrowLeft, Plus, X } from '@phosphor-icons/react';
@@ -34,36 +34,36 @@ export default function ProductForm() {
   const [newApplication, setNewApplication] = useState('');
   const [newGalleryImage, setNewGalleryImage] = useState('');
 
-  useEffect(() => {
-    async function fetchData() {
-      try {
-        const cats = await categoriesApi.getAll();
-        setCategories(cats);
+  const fetchData = useCallback(async () => {
+    try {
+      const cats = await categoriesApi.getAll();
+      setCategories(cats);
 
-        if (isEditing) {
-          const product = await productsApi.getById(id);
-          setFormData({
-            name: product.name || '',
-            category: product.category || '',
-            description: product.description || '',
-            origin: product.origin || '',
-            finish: product.finish || '',
-            thickness: product.thickness || '',
-            applications: product.applications || [],
-            image_url: product.image_url || '',
-            gallery_images: product.gallery_images || [],
-            featured: product.featured || false
-          });
-        }
-      } catch (error) {
-        console.error('Error fetching data:', error);
-        toast.error('Failed to load data');
-      } finally {
-        setFetching(false);
+      if (isEditing && id) {
+        const product = await productsApi.getById(id);
+        setFormData({
+          name: product.name || '',
+          category: product.category || '',
+          description: product.description || '',
+          origin: product.origin || '',
+          finish: product.finish || '',
+          thickness: product.thickness || '',
+          applications: product.applications || [],
+          image_url: product.image_url || '',
+          gallery_images: product.gallery_images || [],
+          featured: product.featured || false
+        });
       }
+    } catch {
+      toast.error('Failed to load data');
+    } finally {
+      setFetching(false);
     }
-    fetchData();
   }, [id, isEditing]);
+
+  useEffect(() => {
+    fetchData();
+  }, [fetchData]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -263,13 +263,13 @@ export default function ProductForm() {
                 </Button>
               </div>
               <div className="flex flex-wrap gap-2">
-                {formData.applications.map((app, index) => (
+                {formData.applications.map((app) => (
                   <span
-                    key={index}
+                    key={`app-${app}`}
                     className="inline-flex items-center gap-1 px-3 py-1 bg-[#F9F8F6] rounded-full text-sm"
                   >
                     {app}
-                    <button type="button" onClick={() => removeApplication(index)}>
+                    <button type="button" onClick={() => removeApplication(formData.applications.indexOf(app))}>
                       <X size={14} />
                     </button>
                   </span>
@@ -313,7 +313,7 @@ export default function ProductForm() {
               </div>
               <div className="flex flex-wrap gap-2">
                 {formData.gallery_images.map((img, index) => (
-                  <div key={index} className="relative">
+                  <div key={`gallery-${img.substring(img.lastIndexOf('/') + 1, img.lastIndexOf('/') + 15)}-${index}`} className="relative">
                     <img src={img} alt="" className="w-20 h-20 object-cover rounded" />
                     <button
                       type="button"

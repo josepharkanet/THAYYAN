@@ -5,13 +5,21 @@ const AuthContext = createContext(null);
 
 const API = `${process.env.REACT_APP_BACKEND_URL}/api`;
 
+// Secure token storage using sessionStorage (cleared on browser close)
+// For production, consider implementing httpOnly cookies on the backend
+const tokenStorage = {
+  get: () => sessionStorage.getItem('access_token'),
+  set: (token) => sessionStorage.setItem('access_token', token),
+  remove: () => sessionStorage.removeItem('access_token')
+};
+
 export function AuthProvider({ children }) {
-  const [user, setUser] = useState(null); // null = checking, false = not auth, object = auth
+  const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
 
   const checkAuth = useCallback(async () => {
     try {
-      const token = localStorage.getItem('access_token');
+      const token = tokenStorage.get();
       if (!token) {
         setUser(false);
         setLoading(false);
@@ -23,8 +31,8 @@ export function AuthProvider({ children }) {
         withCredentials: true
       });
       setUser(response.data);
-    } catch (error) {
-      localStorage.removeItem('access_token');
+    } catch {
+      tokenStorage.remove();
       setUser(false);
     } finally {
       setLoading(false);
@@ -40,7 +48,7 @@ export function AuthProvider({ children }) {
       { email, password },
       { withCredentials: true }
     );
-    localStorage.setItem('access_token', response.data.access_token);
+    tokenStorage.set(response.data.access_token);
     setUser(response.data);
     return response.data;
   };
@@ -48,10 +56,10 @@ export function AuthProvider({ children }) {
   const logout = async () => {
     try {
       await axios.post(`${API}/auth/logout`, {}, { withCredentials: true });
-    } catch (error) {
-      console.error('Logout error:', error);
+    } catch {
+      // Silently handle logout errors
     }
-    localStorage.removeItem('access_token');
+    tokenStorage.remove();
     setUser(false);
   };
 
@@ -69,3 +77,6 @@ export function useAuth() {
   }
   return context;
 }
+
+// Export token storage for API module
+export { tokenStorage };

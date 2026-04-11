@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowRight, WhatsappLogo, Cube, Globe, Certificate, Truck } from '@phosphor-icons/react';
 import Layout from '../components/layout/Layout';
@@ -18,10 +18,10 @@ const categoryImages = {
 };
 
 const features = [
-  { icon: Certificate, title: '8+ Years Excellence', description: 'Industry expertise and quality commitment' },
-  { icon: Globe, title: 'Global Delivery', description: 'Shipping to Europe, America and beyond' },
-  { icon: Cube, title: 'Premium Quality', description: 'Every piece meets export standards' },
-  { icon: Truck, title: 'Full Service', description: 'From quarry to installation' },
+  { id: 'excellence', icon: Certificate, title: '8+ Years Excellence', description: 'Industry expertise and quality commitment' },
+  { id: 'global', icon: Globe, title: 'Global Delivery', description: 'Shipping to Europe, America and beyond' },
+  { id: 'quality', icon: Cube, title: 'Premium Quality', description: 'Every piece meets export standards' },
+  { id: 'service', icon: Truck, title: 'Full Service', description: 'From quarry to installation' },
 ];
 
 export default function Home() {
@@ -29,23 +29,24 @@ export default function Home() {
   const [featuredProducts, setFeaturedProducts] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    async function fetchData() {
-      try {
-        const [cats, products] = await Promise.all([
-          categoriesApi.getAll(),
-          productsApi.getAll(null, true)
-        ]);
-        setCategories(cats);
-        setFeaturedProducts(products.slice(0, 3));
-      } catch (error) {
-        console.error('Error fetching data:', error);
-      } finally {
-        setLoading(false);
-      }
+  const fetchData = useCallback(async () => {
+    try {
+      const [cats, products] = await Promise.all([
+        categoriesApi.getAll(),
+        productsApi.getAll(null, true)
+      ]);
+      setCategories(cats);
+      setFeaturedProducts(products.slice(0, 3));
+    } catch {
+      // Silent fail - data will show as empty
+    } finally {
+      setLoading(false);
     }
-    fetchData();
   }, []);
+
+  useEffect(() => {
+    fetchData();
+  }, [fetchData]);
 
   return (
     <Layout>
@@ -188,8 +189,8 @@ export default function Home() {
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-            {features.map((feature, index) => (
-              <div key={index} className="text-center p-6" data-testid={`feature-${index}`}>
+            {features.map((feature) => (
+              <div key={feature.id} className="text-center p-6" data-testid={`feature-${feature.id}`}>
                 <div className="w-16 h-16 mx-auto mb-6 flex items-center justify-center bg-[#4A5D4E]/10 rounded-full">
                   <feature.icon size={32} className="text-[#4A5D4E]" weight="duotone" />
                 </div>

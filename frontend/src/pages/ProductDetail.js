@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { ArrowLeft, WhatsappLogo, MapPin, Ruler, Palette, Buildings } from '@phosphor-icons/react';
 import Layout from '../components/layout/Layout';
@@ -12,23 +12,24 @@ export default function ProductDetail() {
   const [loading, setLoading] = useState(true);
   const [selectedImage, setSelectedImage] = useState(0);
 
-  useEffect(() => {
-    async function fetchData() {
-      try {
-        const [prod, cats] = await Promise.all([
-          productsApi.getById(id),
-          categoriesApi.getAll()
-        ]);
-        setProduct(prod);
-        setCategories(cats);
-      } catch (error) {
-        console.error('Error fetching product:', error);
-      } finally {
-        setLoading(false);
-      }
+  const fetchData = useCallback(async () => {
+    try {
+      const [prod, cats] = await Promise.all([
+        productsApi.getById(id),
+        categoriesApi.getAll()
+      ]);
+      setProduct(prod);
+      setCategories(cats);
+    } catch {
+      // Silent fail
+    } finally {
+      setLoading(false);
     }
-    fetchData();
   }, [id]);
+
+  useEffect(() => {
+    fetchData();
+  }, [fetchData]);
 
   const getCategoryName = (catId) => {
     const cat = categories.find(c => c.id === catId);
@@ -119,7 +120,7 @@ export default function ProductDetail() {
                 <div className="flex gap-3">
                   {allImages.map((img, idx) => (
                     <button
-                      key={idx}
+                      key={`gallery-${idx}-${img.substring(img.lastIndexOf('/') + 1, img.lastIndexOf('/') + 10)}`}
                       onClick={() => setSelectedImage(idx)}
                       className={`w-20 h-20 rounded-sm overflow-hidden border-2 transition-all ${
                         selectedImage === idx ? 'border-[#4A5D4E]' : 'border-[#E5E5E5]'

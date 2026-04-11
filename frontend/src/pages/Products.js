@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { Link, useSearchParams } from 'react-router-dom';
 import { MagnifyingGlass, Funnel, WhatsappLogo, X } from '@phosphor-icons/react';
 import Layout from '../components/layout/Layout';
@@ -15,23 +15,24 @@ export default function Products() {
   const [search, setSearch] = useState('');
   const [selectedCategory, setSelectedCategory] = useState(searchParams.get('category') || 'all');
 
-  useEffect(() => {
-    async function fetchData() {
-      try {
-        const [prods, cats] = await Promise.all([
-          productsApi.getAll(),
-          categoriesApi.getAll()
-        ]);
-        setProducts(prods);
-        setCategories(cats);
-      } catch (error) {
-        console.error('Error fetching products:', error);
-      } finally {
-        setLoading(false);
-      }
+  const fetchData = useCallback(async () => {
+    try {
+      const [prods, cats] = await Promise.all([
+        productsApi.getAll(),
+        categoriesApi.getAll()
+      ]);
+      setProducts(prods);
+      setCategories(cats);
+    } catch {
+      // Silent fail
+    } finally {
+      setLoading(false);
     }
-    fetchData();
   }, []);
+
+  useEffect(() => {
+    fetchData();
+  }, [fetchData]);
 
   useEffect(() => {
     const cat = searchParams.get('category');

@@ -7,29 +7,33 @@ const PROPRIETOR_IMAGE = "https://customer-assets.emergentagent.com/job_design-p
 const GRANITE_IMAGE = "https://static.prod-images.emergentagent.com/jobs/d7be1953-c1b2-4391-b4cf-169457290853/images/f11360bcab07e833ac42c1125d6072727a090078e13e0c7262e777b9a23c9a3c.png";
 
 const stats = [
-  { value: '8+', label: 'Years of Excellence' },
-  { value: '500+', label: 'Products Delivered' },
-  { value: '42+', label: 'Countries Served' },
-  { value: '100%', label: 'Quality Assured' },
+  { id: 'years', value: '8+', label: 'Years of Excellence' },
+  { id: 'products', value: '500+', label: 'Products Delivered' },
+  { id: 'countries', value: '42+', label: 'Countries Served' },
+  { id: 'quality', value: '100%', label: 'Quality Assured' },
 ];
 
 const services = [
   {
+    id: 'premium',
     icon: Certificate,
     title: 'Premium Quality',
     description: 'Every piece is carefully inspected to meet the highest export standards. We source only the finest stones from select quarries.'
   },
   {
+    id: 'global',
     icon: Globe,
     title: 'Global Delivery',
     description: 'Seamless end-to-end logistics solution covering the entire globe, with professional export-grade packaging and customs handling.'
   },
   {
+    id: 'diverse',
     icon: Cube,
     title: 'Diverse Collection',
     description: 'From classic marble to exotic granite, paving stones to artistic handicrafts - we offer a comprehensive range of natural stones.'
   },
   {
+    id: 'installation',
     icon: Truck,
     title: 'Professional Installation',
     description: 'Our dedicated team ensures perfect leveling, precision cutting, and a flawless professional finish for every project.'
@@ -68,8 +72,8 @@ export default function About() {
       <section className="py-16 px-6 sm:px-12 lg:px-24 bg-[#1A1A1A]" data-testid="about-stats">
         <div className="max-w-7xl mx-auto">
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-8">
-            {stats.map((stat, index) => (
-              <div key={index} className="text-center" data-testid={`stat-${index}`}>
+            {stats.map((stat) => (
+              <div key={stat.id} className="text-center" data-testid={`stat-${stat.id}`}>
                 <p className="font-heading text-4xl sm:text-5xl text-white mb-2">{stat.value}</p>
                 <p className="font-body text-sm uppercase tracking-wider text-white/60">{stat.label}</p>
               </div>
@@ -125,11 +129,11 @@ export default function About() {
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
-            {services.map((service, index) => (
+            {services.map((service) => (
               <div 
-                key={index} 
+                key={service.id} 
                 className="p-8 bg-white rounded-sm border border-[#E5E5E5]"
-                data-testid={`service-${index}`}
+                data-testid={`service-${service.id}`}
               >
                 <div className="w-14 h-14 flex items-center justify-center bg-[#4A5D4E]/10 rounded-full mb-6">
                   <service.icon size={28} className="text-[#4A5D4E]" weight="duotone" />

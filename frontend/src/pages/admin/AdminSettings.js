@@ -1,7 +1,6 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { Link } from 'react-router-dom';
-import { useAuth } from '../../contexts/AuthContext';
-import { ArrowLeft, Image, Info, Check } from '@phosphor-icons/react';
+import { ArrowLeft, Image, Info } from '@phosphor-icons/react';
 import { Button } from '../../components/ui/button';
 import { Input } from '../../components/ui/input';
 import { toast } from 'sonner';
@@ -9,13 +8,14 @@ import axios from 'axios';
 
 const API = `${process.env.REACT_APP_BACKEND_URL}/api`;
 
+const getAuthToken = () => sessionStorage.getItem('access_token');
+
 const getAuthHeaders = () => {
-  const token = localStorage.getItem('access_token');
+  const token = getAuthToken();
   return token ? { Authorization: `Bearer ${token}` } : {};
 };
 
 export default function AdminSettings() {
-  const { user } = useAuth();
   const [settings, setSettings] = useState({
     hero_image: '',
     about_image: '',
@@ -25,11 +25,7 @@ export default function AdminSettings() {
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
 
-  useEffect(() => {
-    fetchSettings();
-  }, []);
-
-  const fetchSettings = async () => {
+  const fetchSettings = useCallback(async () => {
     try {
       const response = await axios.get(`${API}/settings`);
       setSettings({
@@ -38,12 +34,16 @@ export default function AdminSettings() {
         logo_image: response.data.logo_image || ''
       });
       setRequirements(response.data.image_requirements || {});
-    } catch (error) {
-      console.error('Error fetching settings:', error);
+    } catch {
+      toast.error('Failed to load settings');
     } finally {
       setLoading(false);
     }
-  };
+  }, []);
+
+  useEffect(() => {
+    fetchSettings();
+  }, [fetchSettings]);
 
   const handleSave = async () => {
     setSaving(true);
@@ -53,7 +53,7 @@ export default function AdminSettings() {
         withCredentials: true
       });
       toast.success('Settings saved successfully');
-    } catch (error) {
+    } catch {
       toast.error('Failed to save settings');
     } finally {
       setSaving(false);

@@ -2,9 +2,12 @@ import axios from 'axios';
 
 const API = `${process.env.REACT_APP_BACKEND_URL}/api`;
 
+// Secure token retrieval from sessionStorage
+const getAuthToken = () => sessionStorage.getItem('access_token');
+
 // Helper to get auth headers
 const getAuthHeaders = () => {
-  const token = localStorage.getItem('access_token');
+  const token = getAuthToken();
   return token ? { Authorization: `Bearer ${token}` } : {};
 };
 

@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { useAuth } from '../../contexts/AuthContext';
 import { productsApi, contactApi } from '../../lib/api';
@@ -107,21 +107,22 @@ export function AdminDashboard() {
   const [stats, setStats] = useState({ products: 0, contacts: 0 });
   const [recentProducts, setRecentProducts] = useState([]);
 
-  useEffect(() => {
-    async function fetchData() {
-      try {
-        const [products, contacts] = await Promise.all([
-          productsApi.getAll(),
-          contactApi.getAll().catch(() => [])
-        ]);
-        setStats({ products: products.length, contacts: contacts.length });
-        setRecentProducts(products.slice(0, 5));
-      } catch (error) {
-        console.error('Error fetching dashboard data:', error);
-      }
+  const fetchData = useCallback(async () => {
+    try {
+      const [products, contacts] = await Promise.all([
+        productsApi.getAll(),
+        contactApi.getAll().catch(() => [])
+      ]);
+      setStats({ products: products.length, contacts: contacts.length });
+      setRecentProducts(products.slice(0, 5));
+    } catch {
+      // Silent fail
     }
-    fetchData();
   }, []);
+
+  useEffect(() => {
+    fetchData();
+  }, [fetchData]);
 
   return (
     <AdminLayout>
@@ -181,20 +182,20 @@ export function AdminProducts() {
   const [deleteDialog, setDeleteDialog] = useState({ open: false, product: null });
   const navigate = useNavigate();
 
-  useEffect(() => {
-    fetchProducts();
-  }, []);
-
-  const fetchProducts = async () => {
+  const fetchProducts = useCallback(async () => {
     try {
       const data = await productsApi.getAll();
       setProducts(data);
-    } catch (error) {
-      console.error('Error fetching products:', error);
+    } catch {
+      // Silent fail
     } finally {
       setLoading(false);
     }
-  };
+  }, []);
+
+  useEffect(() => {
+    fetchProducts();
+  }, [fetchProducts]);
 
   const handleDelete = async () => {
     if (!deleteDialog.product) return;
@@ -202,8 +203,8 @@ export function AdminProducts() {
       await productsApi.delete(deleteDialog.product.id);
       setProducts(products.filter(p => p.id !== deleteDialog.product.id));
       setDeleteDialog({ open: false, product: null });
-    } catch (error) {
-      console.error('Error deleting product:', error);
+    } catch {
+      // Silent fail
     }
   };
 
@@ -326,19 +327,20 @@ export function AdminContacts() {
   const [contacts, setContacts] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    async function fetchContacts() {
-      try {
-        const data = await contactApi.getAll();
-        setContacts(data);
-      } catch (error) {
-        console.error('Error fetching contacts:', error);
-      } finally {
-        setLoading(false);
-      }
+  const fetchContacts = useCallback(async () => {
+    try {
+      const data = await contactApi.getAll();
+      setContacts(data);
+    } catch {
+      // Silent fail
+    } finally {
+      setLoading(false);
     }
-    fetchContacts();
   }, []);
+
+  useEffect(() => {
+    fetchContacts();
+  }, [fetchContacts]);
 
   return (
     <AdminLayout>
