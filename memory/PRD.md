@@ -1,31 +1,30 @@
 # Stonic Export - PRD
 
 ## Original Problem Statement
-Build a luxury natural stone website for Stonic Export (inspired by marblecentre.in) with admin panel, services page, WhatsApp integration, contact form, and luxury stone-inspired design. Deploy on Host Armada shared hosting.
+Luxury natural stone website for Stonic Export (inspired by marblecentre.in). Admin panel, products, services, WhatsApp, contact form. Deploy on Host Armada shared hosting.
 
 ## Tech Stack
-- Frontend: React 19, Tailwind CSS, Shadcn UI, React Router, Axios, React Helmet
-- Backend: FastAPI (Python) with MySQL via PyMySQL
+- Frontend: React 19, Tailwind CSS, Shadcn UI
+- Backend: PHP API (no Python needed)
 - Database: MySQL (Host Armada cPanel)
-- Deployment: cPanel Python App (Passenger WSGI) + static frontend in public_html
 
-## Implemented Features (Complete)
+## Implemented Features
 - Full product catalog with CRUD (7 categories)
 - Admin panel (Dashboard, Products, Contacts, Settings)
-- JWT Authentication (sessionStorage + httpOnly cookies)
-- WhatsApp integration on all product pages
-- Contact form with backend storage
+- JWT Authentication
+- WhatsApp integration
+- Contact form
 - SEO tags via react-helmet-async
-- Site settings management
-- Services page, About page
-- MySQL backend (converted from MongoDB) with passenger_wsgi.py for cPanel
-- database.sql for phpMyAdmin import
-- Clean npm-based build (no Emergent platform deps)
+- PHP backend connecting to MySQL (converted from Python/MongoDB)
+- database.sql with seed data
 
 ## Admin Credentials
 - Email: shijo@stonic.export.com
 - Password: Asdf@1234&stonic
 
-## Deployment Target
-- Host Armada shared hosting (cPanel)
-- GitHub repo: josepharkanet/THAYYAN
+## Deployment: Host Armada
+1. Import database.sql via phpMyAdmin
+2. Edit api/config.php with DB credentials
+3. Build frontend: cd frontend && npm install && npm run build
+4. Upload build/ contents + api/ folder to public_html
+5. Create .htaccess in public_html (see README)

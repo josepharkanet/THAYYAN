@@ -114,9 +114,9 @@ CREATE TABLE IF NOT EXISTS site_settings (
 -- =====================================================
 
 -- Default Admin User (Password: Asdf@1234&stonic)
--- Note: You need to hash this password with bcrypt in your PHP backend
+-- Password: Asdf@1234&stonic (bcrypt hashed, PHP compatible)
 INSERT INTO users (email, password_hash, name, role) VALUES 
-('shijo@stonic.export.com', '$2b$12$LQv3c1yqBWVHxkd0LHAkCOYz6TtxMQJqhN8/X4.VttYD/qKIjL7Wy', 'Shijo Thayyil', 'admin')
+('shijo@stonic.export.com', '$2y$12$FzX22AeQ0Y4f4XcNR0L46.xAaKGsWSSsB7wAZnyxtC0AzXYhEh9.K', 'Shijo Thayyil', 'admin')
 ON DUPLICATE KEY UPDATE name = 'Shijo Thayyil';
 
 -- Default Categories

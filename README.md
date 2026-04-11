@@ -1,124 +1,130 @@
 # Stonic Export - Premium Indian Natural Stones
 
-## Host Armada Deployment Guide
+## Host Armada Deployment Guide (No Python needed!)
 
-### Architecture
+Everything runs on Host Armada's shared hosting using **PHP + MySQL**.
+
+---
+
+## What You'll Upload
+
 ```
-yourdomain.com          → Frontend (React static files in public_html)
-api.yourdomain.com      → Backend (Python FastAPI + MySQL)
+public_html/
+├── index.html          ← From frontend/build/
+├── static/             ← From frontend/build/
+├── asset-manifest.json ← From frontend/build/
+├── .htaccess           ← Create this (see below)
+└── api/                ← Upload the api/ folder as-is
+    ├── .htaccess
+    ├── index.php
+    ├── config.php      ← Edit DB credentials here
+    └── routes/
+        ├── auth.php
+        ├── products.php
+        ├── categories.php
+        ├── contacts.php
+        └── settings.php
 ```
 
 ---
 
 ## Step 1: Set Up MySQL Database
 
-1. In cPanel → **MySQL Databases** → Create database (e.g., `stonic_export`)
-2. Create a database user → Assign **ALL PRIVILEGES** to the database
-3. Go to **phpMyAdmin** → Select your database → **Import** tab
+1. cPanel → **MySQL Databases** → Create database (e.g., `stonic_export`)
+2. Create a database user → Assign **ALL PRIVILEGES**
+3. cPanel → **phpMyAdmin** → Select your database → **Import**
 4. Upload `database.sql` → Click **Go**
 
-This creates all tables and seeds: admin user, 7 categories, 7 sample products, site settings.
+This creates all tables + seeds admin user, categories, and sample products.
 
 ---
 
-## Step 2: Deploy Backend (Python API)
+## Step 2: Configure the PHP API
 
-### 2a. Create a Subdomain
-1. In cPanel → **Domains** or **Subdomains**
-2. Create: `api.yourdomain.com`
+Open `api/config.php` and update **lines 3-5** with your Host Armada MySQL credentials:
 
-### 2b. Create Python App
-1. In cPanel → **Software** → **Setup Python App**
-2. Click **Create Application**:
-   - **Python version**: 3.11 (or latest available)
-   - **Application root**: `api` (or `python_api`)
-   - **Application URL**: `api.yourdomain.com`
-   - **Application startup file**: `passenger_wsgi.py`
-   - **Application entry point**: `application`
-3. Click **CREATE**
-
-### 2c. Upload Backend Files
-Upload these files from `backend/` folder to the Application root directory:
-- `server.py`
-- `passenger_wsgi.py`
-- `requirements.txt`
-- `.env` (create from `.env.example` with your real MySQL credentials)
-
-### 2d. Create `.env` in the Application root
-```env
-DB_HOST=localhost
-DB_PORT=3306
-DB_NAME=your_cpanel_database_name
-DB_USER=your_cpanel_db_user
-DB_PASSWORD=your_db_password
-JWT_SECRET=any_random_string_at_least_32_characters_long
-CORS_ORIGINS=https://yourdomain.com,https://www.yourdomain.com
+```php
+define('DB_HOST', 'localhost');
+define('DB_NAME', 'your_cpanel_database_name');  // e.g., username_stonic
+define('DB_USER', 'your_cpanel_db_user');         // e.g., username_dbuser
+define('DB_PASS', 'your_database_password');
 ```
 
-### 2e. Install Dependencies
-1. In **Setup Python App**, click the **pencil icon** to edit your app
-2. In **Configuration files**, add `requirements.txt`
-3. Click **Run Pip Install**
-4. OR use SSH/Terminal:
-```bash
-source /home/username/virtualenv/api/3.11/bin/activate
-cd ~/api
-pip install -r requirements.txt
+Also update **line 8** with your domain:
+```php
+define('FRONTEND_URL', 'https://yourdomain.com');
 ```
 
-### 2f. Restart the App
-Click **Restart** in Setup Python App.
-
-### 2g. Test
-Visit `https://api.yourdomain.com/api/` — you should see:
-```json
-{"message": "Stonic Export API", "status": "running"}
+And **line 11** — change the JWT secret to any random string:
+```php
+define('JWT_SECRET', 'any_random_string_here_make_it_long');
 ```
 
 ---
 
-## Step 3: Deploy Frontend
+## Step 3: Build the Frontend
 
-### 3a. Set the Backend URL
-Before building, create `frontend/.env`:
-```env
-REACT_APP_BACKEND_URL=https://api.yourdomain.com
-```
+On your PC:
 
-### 3b. Build
 ```bash
 cd frontend
+```
+
+Create a file called `.env` inside the `frontend` folder:
+```
+REACT_APP_BACKEND_URL=https://yourdomain.com
+```
+
+Then build:
+```bash
 npm install
 npm run build
 ```
 
-### 3c. Upload to Host Armada
-1. Go to **File Manager** → `public_html`
-2. Delete any default files
-3. Upload **everything inside** `frontend/build/` into `public_html`
+---
 
-### 3d. Create `.htaccess` in `public_html`
+## Step 4: Upload Everything to Host Armada
+
+1. cPanel → **File Manager** → Go to `public_html`
+2. Delete any default files (like `index.html` from cPanel)
+3. Upload **all contents** from `frontend/build/` into `public_html`
+4. Upload the **entire `api/` folder** into `public_html` (so it sits at `public_html/api/`)
+
+---
+
+## Step 5: Create `.htaccess` in `public_html`
+
+Create a new file `.htaccess` in `public_html` (NOT inside `api/`):
+
 ```apache
 <IfModule mod_rewrite.c>
   RewriteEngine On
   RewriteBase /
-  RewriteRule ^index\.html$ - [L]
+
+  # Don't rewrite API requests - let them go to api/ folder
+  RewriteRule ^api/ - [L]
+
+  # Don't rewrite actual files
   RewriteCond %{REQUEST_FILENAME} !-f
   RewriteCond %{REQUEST_FILENAME} !-d
   RewriteCond %{REQUEST_FILENAME} !-l
+
+  # Send everything else to React
   RewriteRule . /index.html [L]
 </IfModule>
 ```
 
+> **Important:** The `api/` folder already has its own `.htaccess` — don't modify that one.
+
 ---
 
-## Admin Panel
+## Step 6: Test
 
-**URL:** `https://yourdomain.com/admin/login`
-
-**Default Credentials:**
-- Email: `shijo@stonic.export.com`
-- Password: `Asdf@1234&stonic`
+1. Visit `https://yourdomain.com` → Should show your website
+2. Visit `https://yourdomain.com/api/` → Should show `{"message":"Stonic Export API","status":"running"}`
+3. Visit `https://yourdomain.com/admin/login` → Login with:
+   - **Email:** `shijo@stonic.export.com`
+   - **Password:** `Asdf@1234&stonic`
 
 ---
 
@@ -126,11 +132,19 @@ npm run build
 
 | Problem | Solution |
 |---------|----------|
-| Admin login shows blank page | Backend not running. Check `https://api.yourdomain.com/api/` |
-| 404 on page refresh | `.htaccess` missing in `public_html` |
-| CORS errors in console | Update `CORS_ORIGINS` in backend `.env` with your exact domain |
-| API returns 500 | Check Python app error logs in cPanel → Setup Python App |
-| Database connection failed | Verify DB credentials in backend `.env` match cPanel MySQL settings |
+| API returns blank page | Check `config.php` DB credentials match cPanel MySQL |
+| 500 error on API | cPanel → Error Logs. Usually wrong DB credentials |
+| Login fails | Re-import `database.sql` (the password hash might be wrong). Or check CORS in `config.php` |
+| 404 on page refresh | `.htaccess` missing or wrong in `public_html` |
+| Admin page blank after login | API not responding. Test `yourdomain.com/api/` first |
+
+---
+
+## Admin Panel
+
+- **URL:** `https://yourdomain.com/admin/login`
+- **Email:** `shijo@stonic.export.com`
+- **Password:** `Asdf@1234&stonic`
 
 ---
 
@@ -138,17 +152,8 @@ npm run build
 
 | File | Purpose |
 |------|---------|
-| `database.sql` | MySQL schema — import into phpMyAdmin |
-| `backend/server.py` | FastAPI backend (MySQL) |
-| `backend/passenger_wsgi.py` | cPanel Passenger entry point |
-| `backend/requirements.txt` | Python dependencies |
-| `backend/.env.example` | Backend env template |
-| `frontend/.env.example` | Frontend env template |
-| `frontend/` | React source code |
-
----
-
-## Contact
-**Stonic Export** — Shijo Thayyil
-- Phone: +91 9544982471, +91 7559912233
-- Email: info@stonicexport.com
+| `database.sql` | Import into phpMyAdmin — creates all tables + seed data |
+| `api/config.php` | Database credentials + JWT secret — **EDIT THIS** |
+| `api/index.php` | API router |
+| `api/routes/*.php` | API endpoints (auth, products, contacts, settings) |
+| `frontend/` | React source code (build locally, upload `build/`) |
