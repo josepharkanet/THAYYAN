@@ -86,6 +86,11 @@ switch (true) {
         handleGetImageRequirements();
         break;
 
+    // Upload
+    case $path === '/upload' && $method === 'POST':
+        require __DIR__ . '/upload.php';
+        break;
+
     // 404
     default:
         http_response_code(404);

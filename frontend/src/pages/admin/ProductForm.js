@@ -1,13 +1,62 @@
 import { useState, useEffect, useCallback } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { productsApi, categoriesApi, formatApiError } from '../../lib/api';
-import { ArrowLeft, Plus, X } from '@phosphor-icons/react';
+import { ArrowLeft, Plus, X, Upload } from '@phosphor-icons/react';
+import ImageUpload from '../../components/ImageUpload';
 import { Button } from '../../components/ui/button';
 import { Input } from '../../components/ui/input';
 import { Textarea } from '../../components/ui/textarea';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '../../components/ui/select';
 import { Switch } from '../../components/ui/switch';
 import { toast } from 'sonner';
+
+function GalleryUpload({ images, onAdd, onRemove }) {
+  const [uploading, setUploading] = useState(false);
+  const fileRef = useState(null);
+
+  const handleFiles = async (e) => {
+    const files = Array.from(e.target.files || []);
+    if (!files.length) return;
+    setUploading(true);
+    const API = `${process.env.REACT_APP_BACKEND_URL}/api`;
+    const token = sessionStorage.getItem('access_token');
+    for (const file of files) {
+      try {
+        const fd = new FormData();
+        fd.append('image', file);
+        const res = await fetch(`${API}/upload`, {
+          method: 'POST',
+          headers: { Authorization: `Bearer ${token}` },
+          body: fd
+        });
+        const data = await res.json();
+        if (data.url) onAdd(data.url);
+      } catch { /* skip failed */ }
+    }
+    setUploading(false);
+    if (e.target) e.target.value = '';
+  };
+
+  return (
+    <div>
+      <div className="flex flex-wrap gap-2 mb-3">
+        {images.map((img, index) => (
+          <div key={`gallery-${index}`} className="relative">
+            <img src={img} alt="" className="w-20 h-20 object-cover rounded" />
+            <button type="button" onClick={() => onRemove(index)} className="absolute -top-2 -right-2 w-5 h-5 bg-red-500 text-white rounded-full flex items-center justify-center">
+              <X size={12} />
+            </button>
+          </div>
+        ))}
+      </div>
+      <label className="inline-flex items-center gap-2 px-4 py-2 border border-dashed border-[#E5E5E5] rounded cursor-pointer hover:border-[#4A5D4E] transition-colors">
+        <input type="file" accept="image/*" multiple onChange={handleFiles} className="hidden" />
+        <Upload size={16} />
+        <span className="font-body text-sm text-[#4A4A4A]">{uploading ? 'Uploading...' : 'Add gallery images'}</span>
+      </label>
+    </div>
+  );
+}
 
 export default function ProductForm() {
   const { id } = useParams();
@@ -32,7 +81,6 @@ export default function ProductForm() {
   });
 
   const [newApplication, setNewApplication] = useState('');
-  const [newGalleryImage, setNewGalleryImage] = useState('');
 
   const fetchData = useCallback(async () => {
     try {
@@ -92,23 +140,6 @@ export default function ProductForm() {
     setFormData(prev => ({
       ...prev,
       applications: prev.applications.filter((_, i) => i !== index)
-    }));
-  };
-
-  const addGalleryImage = () => {
-    if (newGalleryImage.trim()) {
-      setFormData(prev => ({
-        ...prev,
-        gallery_images: [...prev.gallery_images, newGalleryImage.trim()]
-      }));
-      setNewGalleryImage('');
-    }
-  };
-
-  const removeGalleryImage = (index) => {
-    setFormData(prev => ({
-      ...prev,
-      gallery_images: prev.gallery_images.filter((_, i) => i !== index)
     }));
   };
 
@@ -277,54 +308,23 @@ export default function ProductForm() {
               </div>
             </div>
 
-            {/* Images */}
-            <div>
-              <label className="block font-body text-sm text-[#4A4A4A] mb-2">
-                Main Image URL *
-              </label>
-              <Input
-                name="image_url"
-                value={formData.image_url}
-                onChange={handleChange}
-                required
-                placeholder="https://..."
-                data-testid="product-image-input"
-              />
-              {formData.image_url && (
-                <img src={formData.image_url} alt="Preview" className="mt-2 w-32 h-32 object-cover rounded" />
-              )}
-            </div>
+            {/* Main Image */}
+            <ImageUpload
+              label="Main Image *"
+              value={formData.image_url}
+              onChange={(url) => setFormData(prev => ({ ...prev, image_url: url }))}
+            />
 
+            {/* Gallery Images */}
             <div>
               <label className="block font-body text-sm text-[#4A4A4A] mb-2">
                 Gallery Images
               </label>
-              <div className="flex gap-2 mb-2">
-                <Input
-                  value={newGalleryImage}
-                  onChange={(e) => setNewGalleryImage(e.target.value)}
-                  placeholder="https://..."
-                  onKeyDown={(e) => e.key === 'Enter' && (e.preventDefault(), addGalleryImage())}
-                  data-testid="gallery-image-input"
-                />
-                <Button type="button" variant="outline" onClick={addGalleryImage}>
-                  <Plus size={18} />
-                </Button>
-              </div>
-              <div className="flex flex-wrap gap-2">
-                {formData.gallery_images.map((img, index) => (
-                  <div key={`gallery-${img.substring(img.lastIndexOf('/') + 1, img.lastIndexOf('/') + 15)}-${index}`} className="relative">
-                    <img src={img} alt="" className="w-20 h-20 object-cover rounded" />
-                    <button
-                      type="button"
-                      onClick={() => removeGalleryImage(index)}
-                      className="absolute -top-2 -right-2 w-5 h-5 bg-red-500 text-white rounded-full flex items-center justify-center"
-                    >
-                      <X size={12} />
-                    </button>
-                  </div>
-                ))}
-              </div>
+              <GalleryUpload
+                images={formData.gallery_images}
+                onAdd={(url) => setFormData(prev => ({ ...prev, gallery_images: [...prev.gallery_images, url] }))}
+                onRemove={(index) => setFormData(prev => ({ ...prev, gallery_images: prev.gallery_images.filter((_, i) => i !== index) }))}
+              />
             </div>
 
             {/* Featured */}

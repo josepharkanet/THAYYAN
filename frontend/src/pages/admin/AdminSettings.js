@@ -1,6 +1,7 @@
 import { useState, useEffect, useCallback } from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowLeft, Image, Info } from '@phosphor-icons/react';
+import { ArrowLeft, Info } from '@phosphor-icons/react';
+import ImageUpload from '../../components/ImageUpload';
 import { Button } from '../../components/ui/button';
 import { Input } from '../../components/ui/input';
 import { toast } from 'sonner';
@@ -62,14 +63,11 @@ export default function AdminSettings() {
 
   const ImageField = ({ label, field, requirement }) => (
     <div className="bg-white rounded-sm border border-[#E5E5E5] p-6">
-      <div className="flex items-start justify-between mb-4">
-        <div>
-          <h3 className="font-heading text-lg text-[#1A1A1A]">{label}</h3>
-          {requirement && (
-            <p className="font-body text-sm text-[#4A4A4A] mt-1">{requirement.description}</p>
-          )}
-        </div>
-        <Image size={24} className="text-[#4A5D4E]" weight="duotone" />
+      <div className="mb-4">
+        <h3 className="font-heading text-lg text-[#1A1A1A]">{label}</h3>
+        {requirement && (
+          <p className="font-body text-sm text-[#4A4A4A] mt-1">{requirement.description}</p>
+        )}
       </div>
       
       {requirement && (
@@ -81,25 +79,10 @@ export default function AdminSettings() {
         </div>
       )}
 
-      <div className="space-y-3">
-        <Input
-          value={settings[field]}
-          onChange={(e) => setSettings(prev => ({ ...prev, [field]: e.target.value }))}
-          placeholder="Enter image URL..."
-          className="w-full"
-        />
-        
-        {settings[field] && (
-          <div className="relative">
-            <img 
-              src={settings[field]} 
-              alt={label}
-              className="w-full h-40 object-cover rounded-sm border border-[#E5E5E5]"
-              onError={(e) => { e.target.style.display = 'none'; }}
-            />
-          </div>
-        )}
-      </div>
+      <ImageUpload
+        value={settings[field]}
+        onChange={(url) => setSettings(prev => ({ ...prev, [field]: url }))}
+      />
     </div>
   );
 
