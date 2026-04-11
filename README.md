@@ -2,8 +2,6 @@
 
 A modern, SEO-friendly website for Stonic Export - India's premier source for luxury natural stones including Marble, Granite, Paving Stones, Cobbles, and Artistic Handicrafts.
 
-![Stonic Export](https://static.prod-images.emergentagent.com/jobs/d7be1953-c1b2-4391-b4cf-169457290853/images/3eda6b8e24809bd6028cb07fecfdd62dc519881e7e26072e0318301ceb793ef5.png)
-
 ## Features
 
 - **Product Catalog** - 7 categories with multiple products each
@@ -16,123 +14,95 @@ A modern, SEO-friendly website for Stonic Export - India's premier source for lu
 ## Tech Stack
 
 ### Frontend
-- React 18
+- React 19
 - Tailwind CSS
 - Shadcn UI Components
 - React Router
 - Axios
 - React Helmet (SEO)
 
-### Backend (Original)
-- FastAPI (Python)
-- MongoDB
-- JWT Authentication
-
-### Database (For Hostinger)
+### Database
 - MySQL 8.0+
 - See `database.sql` for schema
 
 ---
 
-## Quick Start
+## Host Armada Deployment Guide
 
-### Prerequisites
-- Node.js 18+ 
-- npm or yarn
-- MySQL database (for production)
-
-### Installation
+### Step 1: Build the Frontend
 
 ```bash
-# Clone the repository
-git clone https://github.com/yourusername/stonic-export.git
-cd stonic-export
-
-# Install frontend dependencies
 cd frontend
 npm install
-
-# Build for production
 npm run build
 ```
 
-### Development
+This creates a `build/` folder with all production-ready static files.
 
-```bash
-cd frontend
-npm start
+### Step 2: Upload to Host Armada File Manager
+
+1. Log in to your **Host Armada cPanel**
+2. Open **File Manager**
+3. Navigate to `public_html`
+4. Upload **all contents** from `frontend/build/` folder into `public_html`
+5. Create an `.htaccess` file in `public_html` with the following content:
+
+```apache
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteBase /
+  RewriteRule ^index\.html$ - [L]
+  RewriteCond %{REQUEST_FILENAME} !-f
+  RewriteCond %{REQUEST_FILENAME} !-d
+  RewriteCond %{REQUEST_FILENAME} !-l
+  RewriteRule . /index.html [L]
+</IfModule>
 ```
 
-The app will run at `http://localhost:3000`
+> This `.htaccess` ensures React Router works properly - all routes are redirected to `index.html`.
+
+### Step 3: Set Up MySQL Database
+
+1. In cPanel, go to **MySQL Databases**
+2. Create a new database (e.g., `stonic_export`)
+3. Create a database user and assign it full privileges to the database
+4. Open **phpMyAdmin**
+5. Select your database
+6. Click **Import** tab
+7. Choose `database.sql` file and click **Go**
+
+This will create all tables and seed default data including:
+- Admin user (`shijo@stonic.export.com`)
+- 7 product categories
+- 7 sample products
+- Default site settings
+
+### Step 4: Set Up Environment
+
+Copy `.env.example` to `.env` and update with your Host Armada details:
+
+```env
+DB_HOST=localhost
+DB_NAME=your_cpanel_database_name
+DB_USER=your_cpanel_db_user
+DB_PASSWORD=your_db_password
+REACT_APP_BACKEND_URL=https://yourdomain.com
+JWT_SECRET=your_secure_random_string
+```
 
 ---
 
-## Deployment Guide
-
-### Option 1: Hostinger Shared Hosting (Frontend Only)
-
-1. **Build the frontend:**
-   ```bash
-   cd frontend
-   npm install
-   npm run build
-   ```
-
-2. **Upload to Hostinger:**
-   - Go to File Manager in hPanel
-   - Navigate to `public_html`
-   - Upload all contents from `frontend/build/` folder
-   - Upload `.htaccess` file (see below)
-
-3. **Create `.htaccess` in public_html:**
-   ```apache
-   <IfModule mod_rewrite.c>
-     RewriteEngine On
-     RewriteBase /
-     RewriteRule ^index\.html$ - [L]
-     RewriteCond %{REQUEST_FILENAME} !-f
-     RewriteCond %{REQUEST_FILENAME} !-d
-     RewriteCond %{REQUEST_FILENAME} !-l
-     RewriteRule . /index.html [L]
-   </IfModule>
-   ```
-
-### Option 2: Full Stack Deployment
-
-For the backend, you'll need:
-- **VPS/Cloud hosting** (Railway, Render, DigitalOcean) for Python/FastAPI
-- **Or convert to PHP** for Hostinger shared hosting
-
----
-
-## Database Setup (MySQL)
-
-### 1. Create Database in phpMyAdmin
-
-1. Log in to Hostinger hPanel
-2. Go to **Databases** → **MySQL Databases**
-3. Create a new database (e.g., `stonic_export`)
-4. Create a database user and assign to the database
-
-### 2. Import Schema
-
-1. Go to **phpMyAdmin**
-2. Select your database
-3. Click **Import**
-4. Upload `database.sql`
-5. Click **Go**
-
-### 3. Database Tables
+## Database Tables
 
 | Table | Description |
 |-------|-------------|
 | `users` | Admin authentication |
-| `categories` | Product categories |
+| `categories` | Product categories (7 default) |
 | `products` | Main products table |
-| `product_applications` | Product usage types |
+| `product_applications` | Product usage types (many-to-many) |
 | `product_gallery` | Additional product images |
 | `contacts` | Contact form submissions |
-| `site_settings` | Site configuration |
+| `site_settings` | Site configuration (images, contact info) |
 
 ---
 
@@ -146,50 +116,21 @@ For the backend, you'll need:
 
 ### Admin Features:
 - Dashboard with stats
-- Product management (CRUD)
-- Contact inquiries
-- Site settings (images, etc.)
+- Product management (Add/Edit/Delete)
+- Contact inquiries viewer
+- Site settings (Hero image, About image, Logo)
 
 ---
 
-## Environment Variables
+## Product Categories
 
-Copy `.env.example` to `.env` and configure:
-
-```env
-# Database
-DB_HOST=localhost
-DB_NAME=stonic_export
-DB_USER=your_user
-DB_PASSWORD=your_password
-
-# App
-REACT_APP_BACKEND_URL=https://yourdomain.com/api
-```
-
----
-
-## Folder Structure
-
-```
-stonic-export/
-├── frontend/               # React frontend
-│   ├── public/
-│   ├── src/
-│   │   ├── components/     # UI components
-│   │   ├── contexts/       # React contexts
-│   │   ├── lib/            # API utilities
-│   │   └── pages/          # Page components
-│   ├── package.json
-│   └── build/              # Production build
-├── backend/                # FastAPI backend
-│   ├── server.py
-│   └── requirements.txt
-├── dist/                   # Production-ready files
-├── database.sql            # MySQL schema
-├── .env.example            # Environment template
-└── README.md
-```
+1. Indian Marbles
+2. Imported Marbles
+3. Granite
+4. Paving & Natural Stones
+5. Cobbles
+6. Artistic Handicrafts
+7. Cemetery Works
 
 ---
 
@@ -206,14 +147,37 @@ stonic-export/
 
 ---
 
+## Folder Structure
+
+```
+THAYYAN/
+├── frontend/               # React frontend
+│   ├── public/
+│   ├── src/
+│   │   ├── components/     # UI components (Shadcn)
+│   │   ├── contexts/       # Auth context
+│   │   ├── lib/            # API utilities
+│   │   └── pages/          # Page components
+│   ├── package.json
+│   └── build/              # Production build (after npm run build)
+├── backend/                # FastAPI backend (Python/MongoDB)
+│   ├── server.py
+│   └── requirements.txt
+├── database.sql            # MySQL schema - IMPORT THIS
+├── .env.example            # Environment template
+└── README.md
+```
+
+---
+
 ## SEO Features
 
-- **Meta Tags** - Title, description, keywords per page
-- **Open Graph** - Facebook/social sharing
-- **Twitter Cards** - Twitter sharing optimization
-- **JSON-LD** - Structured data for products
-- **Canonical URLs** - Prevent duplicate content
-- **Semantic HTML** - Proper heading hierarchy
+- Meta Tags (title, description, keywords per page)
+- Open Graph (Facebook/social sharing)
+- Twitter Cards
+- JSON-LD (structured data for products)
+- Canonical URLs
+- Semantic HTML with proper heading hierarchy
 
 ---
 
@@ -223,16 +187,10 @@ stonic-export/
 - **Proprietor:** Shijo Thayyil
 - **Phone:** +91 9544982471, +91 7559912233
 - **Email:** info@stonicexport.com
-- **Website:** www.stonicexport.com
+- **WhatsApp:** +91 9544982471
 
 ---
 
 ## License
 
 This project is proprietary software for Stonic Export.
-
----
-
-## Support
-
-For technical support, contact the development team.
