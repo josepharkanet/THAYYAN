@@ -17,14 +17,14 @@
     {
       "id": "natural-stones",
       "name": "Natural Stones",
-      "description": "Architectural stones, Tandoor, Kadappa & Kota, with cobbles and pebbles for premium landscaping.",
+      "description": "Architectural stones, Tandoor, Kadappa and Kota, with cobbles and pebbles for premium landscaping.",
       "sortOrder": 3,
       "imageUrl": "/product-images/kota-stone/main.jpg"
     },
     {
       "id": "cladding",
       "name": "Cladding Stone",
-      "description": "Natural stone wall cladding for striking, low-maintenance façades and feature walls.",
+      "description": "Natural stone wall cladding for striking, low-maintenance facades and feature walls.",
       "sortOrder": 4,
       "imageUrl": "/product-images/natural-stone-wall-cladding/main.jpg"
     }
@@ -37,7 +37,7 @@
       "description": "A bright, premium Indian white marble with delicate grey veining, a timeless choice for elegant flooring and cladding.",
       "origin": "India",
       "finish": "Polished",
-      "thickness": "16–18mm",
+      "thickness": "16-18mm",
       "featured": true,
       "sortOrder": 0,
       "applications": [
@@ -50,7 +50,20 @@
       "gallery": [
         "/product-images/arna-white-marble/g1.jpg",
         "/product-images/arna-white-marble/g2.jpg",
-        "/product-images/arna-white-marble/g3.jpg"
+        "/product-images/arna-white-marble/g3.jpg",
+        "/product-images/arna-white-marble/g4.jpg",
+        "/product-images/arna-white-marble/g5.jpg",
+        "/product-images/arna-white-marble/g6.jpg",
+        "/product-images/arna-white-marble/g7.jpg",
+        "/product-images/arna-white-marble/g8.jpg",
+        "/product-images/arna-white-marble/g9.jpg",
+        "/product-images/arna-white-marble/g10.jpg",
+        "/product-images/arna-white-marble/g11.jpg",
+        "/product-images/arna-white-marble/g12.jpg",
+        "/product-images/arna-white-marble/g13.jpg",
+        "/product-images/arna-white-marble/g14.jpg",
+        "/product-images/arna-white-marble/g15.jpg",
+        "/product-images/arna-white-marble/g16.jpg"
       ]
     },
     {
@@ -60,7 +73,7 @@
       "description": "Warm-toned Katni marble prized for its consistent background and fine natural patterning.",
       "origin": "Katni, India",
       "finish": "Polished",
-      "thickness": "16–20mm",
+      "thickness": "16-20mm",
       "featured": true,
       "sortOrder": 1,
       "applications": [
@@ -73,7 +86,27 @@
       "gallery": [
         "/product-images/katni-marble/g1.jpg",
         "/product-images/katni-marble/g2.jpg",
-        "/product-images/katni-marble/g3.jpg"
+        "/product-images/katni-marble/g3.jpg",
+        "/product-images/katni-marble/g4.jpg",
+        "/product-images/katni-marble/g5.jpg",
+        "/product-images/katni-marble/g6.jpg",
+        "/product-images/katni-marble/g7.jpg",
+        "/product-images/katni-marble/g8.jpg",
+        "/product-images/katni-marble/g9.jpg",
+        "/product-images/katni-marble/g10.jpg",
+        "/product-images/katni-marble/g11.jpg",
+        "/product-images/katni-marble/g12.jpg",
+        "/product-images/katni-marble/g13.jpg",
+        "/product-images/katni-marble/g14.jpg",
+        "/product-images/katni-marble/g15.jpg",
+        "/product-images/katni-marble/g16.jpg",
+        "/product-images/katni-marble/g17.jpg",
+        "/product-images/katni-marble/g18.jpg",
+        "/product-images/katni-marble/g19.jpg",
+        "/product-images/katni-marble/g20.jpg",
+        "/product-images/katni-marble/g21.jpg",
+        "/product-images/katni-marble/g22.jpg",
+        "/product-images/katni-marble/g23.jpg"
       ]
     },
     {
@@ -83,7 +116,7 @@
       "description": "One of India's most popular white marbles, bright, durable and versatile across interiors.",
       "origin": "India",
       "finish": "Polished",
-      "thickness": "16–18mm",
+      "thickness": "16-18mm",
       "featured": false,
       "sortOrder": 2,
       "applications": [
@@ -96,7 +129,19 @@
       "gallery": [
         "/product-images/morwad-white-marble/g1.jpg",
         "/product-images/morwad-white-marble/g2.jpg",
-        "/product-images/morwad-white-marble/g3.jpg"
+        "/product-images/morwad-white-marble/g3.jpg",
+        "/product-images/morwad-white-marble/g4.jpg",
+        "/product-images/morwad-white-marble/g5.jpg",
+        "/product-images/morwad-white-marble/g6.jpg",
+        "/product-images/morwad-white-marble/g7.jpg",
+        "/product-images/morwad-white-marble/g8.jpg",
+        "/product-images/morwad-white-marble/g9.jpg",
+        "/product-images/morwad-white-marble/g10.jpg",
+        "/product-images/morwad-white-marble/g11.jpg",
+        "/product-images/morwad-white-marble/g12.jpg",
+        "/product-images/morwad-white-marble/g13.jpg",
+        "/product-images/morwad-white-marble/g14.jpg",
+        "/product-images/morwad-white-marble/g15.jpg"
       ]
     },
     {
@@ -106,7 +151,7 @@
       "description": "A clean, snow-white marble with subtle veining, ideal for premium flooring and temple work.",
       "origin": "India",
       "finish": "Polished",
-      "thickness": "16–18mm",
+      "thickness": "16-18mm",
       "featured": false,
       "sortOrder": 3,
       "applications": [
@@ -119,7 +164,19 @@
       "gallery": [
         "/product-images/jk-white-marble/g1.jpg",
         "/product-images/jk-white-marble/g2.jpg",
-        "/product-images/jk-white-marble/g3.jpg"
+        "/product-images/jk-white-marble/g3.jpg",
+        "/product-images/jk-white-marble/g4.jpg",
+        "/product-images/jk-white-marble/g5.jpg",
+        "/product-images/jk-white-marble/g6.jpg",
+        "/product-images/jk-white-marble/g7.jpg",
+        "/product-images/jk-white-marble/g8.jpg",
+        "/product-images/jk-white-marble/g9.jpg",
+        "/product-images/jk-white-marble/g10.jpg",
+        "/product-images/jk-white-marble/g11.jpg",
+        "/product-images/jk-white-marble/g12.jpg",
+        "/product-images/jk-white-marble/g13.jpg",
+        "/product-images/jk-white-marble/g14.jpg",
+        "/product-images/jk-white-marble/g15.jpg"
       ]
     },
     {
@@ -129,7 +186,7 @@
       "description": "Fine-grained white marble with a soft, even tone for refined interior surfaces.",
       "origin": "India",
       "finish": "Polished",
-      "thickness": "16–18mm",
+      "thickness": "16-18mm",
       "featured": false,
       "sortOrder": 4,
       "applications": [
@@ -151,7 +208,7 @@
       "description": "A crisp white marble with gentle veining, well suited to large-format flooring.",
       "origin": "India",
       "finish": "Polished",
-      "thickness": "16–18mm",
+      "thickness": "16-18mm",
       "featured": false,
       "sortOrder": 5,
       "applications": [
@@ -164,7 +221,14 @@
       "gallery": [
         "/product-images/thalayi-white-marble/g1.jpg",
         "/product-images/thalayi-white-marble/g2.jpg",
-        "/product-images/thalayi-white-marble/g3.jpg"
+        "/product-images/thalayi-white-marble/g3.jpg",
+        "/product-images/thalayi-white-marble/g4.jpg",
+        "/product-images/thalayi-white-marble/g5.jpg",
+        "/product-images/thalayi-white-marble/g6.jpg",
+        "/product-images/thalayi-white-marble/g7.jpg",
+        "/product-images/thalayi-white-marble/g8.jpg",
+        "/product-images/thalayi-white-marble/g9.jpg",
+        "/product-images/thalayi-white-marble/g10.jpg"
       ]
     },
     {
@@ -174,7 +238,7 @@
       "description": "Elegant white marble with a smooth finish for sophisticated interiors.",
       "origin": "India",
       "finish": "Polished",
-      "thickness": "16–18mm",
+      "thickness": "16-18mm",
       "featured": false,
       "sortOrder": 6,
       "applications": [
@@ -186,7 +250,11 @@
       "imageUrl": "/product-images/morchana-white-marble/main.jpg",
       "gallery": [
         "/product-images/morchana-white-marble/g1.jpg",
-        "/product-images/morchana-white-marble/g2.jpg"
+        "/product-images/morchana-white-marble/g2.jpg",
+        "/product-images/morchana-white-marble/g3.jpg",
+        "/product-images/morchana-white-marble/g4.jpg",
+        "/product-images/morchana-white-marble/g5.jpg",
+        "/product-images/morchana-white-marble/g6.jpg"
       ]
     },
     {
@@ -196,7 +264,7 @@
       "description": "A durable, richly patterned marble that makes a statement in feature areas.",
       "origin": "India",
       "finish": "Polished",
-      "thickness": "16–20mm",
+      "thickness": "16-20mm",
       "featured": false,
       "sortOrder": 7,
       "applications": [
@@ -209,7 +277,10 @@
       "gallery": [
         "/product-images/gt-marble/g1.jpg",
         "/product-images/gt-marble/g2.jpg",
-        "/product-images/gt-marble/g3.jpg"
+        "/product-images/gt-marble/g3.jpg",
+        "/product-images/gt-marble/g4.jpg",
+        "/product-images/gt-marble/g5.jpg",
+        "/product-images/gt-marble/g6.jpg"
       ]
     },
     {
@@ -219,7 +290,7 @@
       "description": "Imported Italian marble known for its luxurious depth, clarity and dramatic veining.",
       "origin": "Italy",
       "finish": "Polished",
-      "thickness": "18–20mm",
+      "thickness": "18-20mm",
       "featured": true,
       "sortOrder": 8,
       "applications": [
@@ -232,7 +303,21 @@
       "gallery": [
         "/product-images/italian-marble/g1.jpg",
         "/product-images/italian-marble/g2.jpg",
-        "/product-images/italian-marble/g3.jpg"
+        "/product-images/italian-marble/g3.jpg",
+        "/product-images/italian-marble/g4.jpg",
+        "/product-images/italian-marble/g5.jpg",
+        "/product-images/italian-marble/g6.jpg",
+        "/product-images/italian-marble/g7.jpg",
+        "/product-images/italian-marble/g8.jpg",
+        "/product-images/italian-marble/g9.jpg",
+        "/product-images/italian-marble/g10.jpg",
+        "/product-images/italian-marble/g11.jpg",
+        "/product-images/italian-marble/g12.jpg",
+        "/product-images/italian-marble/g13.jpg",
+        "/product-images/italian-marble/g14.jpg",
+        "/product-images/italian-marble/g15.jpg",
+        "/product-images/italian-marble/g16.jpg",
+        "/product-images/italian-marble/g17.jpg"
       ]
     },
     {
@@ -242,7 +327,7 @@
       "description": "A distinctive marble with flowing patterns for elegant feature walls and floors.",
       "origin": "India",
       "finish": "Polished",
-      "thickness": "16–20mm",
+      "thickness": "16-20mm",
       "featured": false,
       "sortOrder": 9,
       "applications": [
@@ -254,7 +339,8 @@
       "imageUrl": "/product-images/torrento-marble/main.jpg",
       "gallery": [
         "/product-images/torrento-marble/g1.jpg",
-        "/product-images/torrento-marble/g2.jpg"
+        "/product-images/torrento-marble/g2.jpg",
+        "/product-images/torrento-marble/g3.jpg"
       ]
     },
     {
@@ -264,7 +350,7 @@
       "description": "A deep green marble with striking natural movement, perfect for accent surfaces.",
       "origin": "India",
       "finish": "Polished",
-      "thickness": "16–20mm",
+      "thickness": "16-20mm",
       "featured": false,
       "sortOrder": 10,
       "applications": [
@@ -285,7 +371,7 @@
       "description": "Rich green marble with bold veining that brings character to interiors.",
       "origin": "India",
       "finish": "Polished",
-      "thickness": "16–20mm",
+      "thickness": "16-20mm",
       "featured": false,
       "sortOrder": 11,
       "applications": [
@@ -297,7 +383,8 @@
       "imageUrl": "/product-images/wonder-green-marble/main.jpg",
       "gallery": [
         "/product-images/wonder-green-marble/g1.jpg",
-        "/product-images/wonder-green-marble/g2.jpg"
+        "/product-images/wonder-green-marble/g2.jpg",
+        "/product-images/wonder-green-marble/g3.jpg"
       ]
     },
     {
@@ -307,7 +394,7 @@
       "description": "A premium Katni variant with warm tones and elegant natural patterning.",
       "origin": "Katni, India",
       "finish": "Polished",
-      "thickness": "16–20mm",
+      "thickness": "16-20mm",
       "featured": false,
       "sortOrder": 12,
       "applications": [
@@ -320,7 +407,10 @@
       "gallery": [
         "/product-images/wonder-katni-marble/g1.jpg",
         "/product-images/wonder-katni-marble/g2.jpg",
-        "/product-images/wonder-katni-marble/g3.jpg"
+        "/product-images/wonder-katni-marble/g3.jpg",
+        "/product-images/wonder-katni-marble/g4.jpg",
+        "/product-images/wonder-katni-marble/g5.jpg",
+        "/product-images/wonder-katni-marble/g6.jpg"
       ]
     },
     {
@@ -330,7 +420,7 @@
       "description": "A characterful marble with wood-grain-like veining for distinctive designs.",
       "origin": "India",
       "finish": "Polished",
-      "thickness": "16–20mm",
+      "thickness": "16-20mm",
       "featured": false,
       "sortOrder": 13,
       "applications": [
@@ -353,7 +443,7 @@
       "description": "An imported pure-white marble with an exceptionally clean, bright surface.",
       "origin": "Imported",
       "finish": "Polished",
-      "thickness": "18–20mm",
+      "thickness": "18-20mm",
       "featured": false,
       "sortOrder": 14,
       "applications": [
@@ -372,7 +462,7 @@
       "description": "Our highlight granite, a deep jet-black stone scattered with golden flecks like a starlit sky. Available on special request.",
       "origin": "India",
       "finish": "Polished",
-      "thickness": "18–30mm",
+      "thickness": "18-30mm",
       "featured": true,
       "sortOrder": 15,
       "applications": [
@@ -391,7 +481,7 @@
       "description": "A light, elegant granite with a soft speckled pattern for durable surfaces.",
       "origin": "India",
       "finish": "Polished",
-      "thickness": "18–30mm",
+      "thickness": "18-30mm",
       "featured": false,
       "sortOrder": 16,
       "applications": [
@@ -413,7 +503,7 @@
       "description": "A refined granite with balanced tones, ideal for countertops and flooring.",
       "origin": "India",
       "finish": "Polished",
-      "thickness": "18–30mm",
+      "thickness": "18-30mm",
       "featured": false,
       "sortOrder": 17,
       "applications": [
@@ -434,7 +524,7 @@
       "description": "A warm, patterned granite offering excellent durability for high-traffic surfaces.",
       "origin": "India",
       "finish": "Polished",
-      "thickness": "18–30mm",
+      "thickness": "18-30mm",
       "featured": false,
       "sortOrder": 18,
       "applications": [
@@ -456,7 +546,7 @@
       "description": "A dense black granite with fine detailing, a bold, hard-wearing choice.",
       "origin": "India",
       "finish": "Polished",
-      "thickness": "18–30mm",
+      "thickness": "18-30mm",
       "featured": false,
       "sortOrder": 19,
       "applications": [
@@ -477,7 +567,7 @@
       "description": "Deep black granite with a uniform tone for sleek, modern surfaces.",
       "origin": "India",
       "finish": "Polished",
-      "thickness": "18–30mm",
+      "thickness": "18-30mm",
       "featured": false,
       "sortOrder": 20,
       "applications": [
@@ -496,7 +586,7 @@
       "description": "A striking dark granite that lends a premium, dramatic finish.",
       "origin": "India",
       "finish": "Polished",
-      "thickness": "18–30mm",
+      "thickness": "18-30mm",
       "featured": false,
       "sortOrder": 21,
       "applications": [
@@ -515,7 +605,7 @@
       "description": "A black granite in a textured leather (lapotra) finish for a contemporary look.",
       "origin": "India",
       "finish": "Lapotra / Leather",
-      "thickness": "18–30mm",
+      "thickness": "18-30mm",
       "featured": false,
       "sortOrder": 22,
       "applications": [
@@ -534,7 +624,7 @@
       "description": "A classic deep-red Indian granite, rich in colour and highly durable.",
       "origin": "India",
       "finish": "Polished",
-      "thickness": "18–30mm",
+      "thickness": "18-30mm",
       "featured": false,
       "sortOrder": 23,
       "applications": [
@@ -544,7 +634,9 @@
         "Staircases"
       ],
       "imageUrl": "/product-images/lakha-red-granite/main.jpg",
-      "gallery": []
+      "gallery": [
+        "/product-images/lakha-red-granite/g1.jpg"
+      ]
     },
     {
       "slug": "p-white-granite",
@@ -553,7 +645,7 @@
       "description": "A popular light granite with a clean speckled surface, versatile for interiors.",
       "origin": "India",
       "finish": "Polished",
-      "thickness": "18–30mm",
+      "thickness": "18-30mm",
       "featured": false,
       "sortOrder": 24,
       "applications": [
@@ -572,7 +664,7 @@
       "description": "A dark, flowing granite pattern that adds depth to any surface.",
       "origin": "India",
       "finish": "Polished",
-      "thickness": "18–30mm",
+      "thickness": "18-30mm",
       "featured": false,
       "sortOrder": 25,
       "applications": [
@@ -591,7 +683,7 @@
       "description": "A warm brown granite with natural movement for elegant countertops.",
       "origin": "India",
       "finish": "Polished",
-      "thickness": "18–30mm",
+      "thickness": "18-30mm",
       "featured": false,
       "sortOrder": 26,
       "applications": [
@@ -610,7 +702,7 @@
       "description": "A refined green-toned granite with subtle veining and excellent durability.",
       "origin": "India",
       "finish": "Polished",
-      "thickness": "18–30mm",
+      "thickness": "18-30mm",
       "featured": false,
       "sortOrder": 27,
       "applications": [
@@ -631,7 +723,7 @@
       "description": "A hard-wearing blue-green limestone ideal for flooring, paving and cladding, available honed or polished.",
       "origin": "Kota, India",
       "finish": "Natural / Honed / Polished",
-      "thickness": "20–40mm",
+      "thickness": "20-40mm",
       "featured": true,
       "sortOrder": 28,
       "applications": [
@@ -651,9 +743,9 @@
       "name": "Tandoor Stone",
       "categoryId": "natural-stones",
       "description": "Authentic Tandoor (Tandur) stone, a versatile natural stone for paving and rustic wall cladding.",
-      "origin": "Telangana, India",
+      "origin": "India",
       "finish": "Natural",
-      "thickness": "20–40mm",
+      "thickness": "20-40mm",
       "featured": false,
       "sortOrder": 29,
       "applications": [
@@ -674,7 +766,7 @@
       "description": "Durable black Kadappa stone, a dependable choice for flooring, steps and skirting.",
       "origin": "India",
       "finish": "Natural",
-      "thickness": "20–40mm",
+      "thickness": "20-40mm",
       "featured": false,
       "sortOrder": 30,
       "applications": [
@@ -694,7 +786,7 @@
       "description": "A tough natural paving stone laid beautifully for driveways, courtyards and pathways.",
       "origin": "India",
       "finish": "Natural",
-      "thickness": "20–40mm",
+      "thickness": "20-40mm",
       "featured": false,
       "sortOrder": 31,
       "applications": [
@@ -705,7 +797,10 @@
       "imageUrl": "/product-images/bangalore-stone/main.jpg",
       "gallery": [
         "/product-images/bangalore-stone/g1.jpg",
-        "/product-images/bangalore-stone/g2.jpg"
+        "/product-images/bangalore-stone/g2.jpg",
+        "/product-images/bangalore-stone/g3.jpg",
+        "/product-images/bangalore-stone/g4.jpg",
+        "/product-images/bangalore-stone/g5.jpg"
       ]
     },
     {
@@ -715,7 +810,7 @@
       "description": "Premium natural cobblestones for elegant driveways, courtyards and landscaped pathways.",
       "origin": "India",
       "finish": "Natural / Tumbled",
-      "thickness": "40–60mm",
+      "thickness": "40-60mm",
       "featured": false,
       "sortOrder": 32,
       "applications": [
@@ -726,14 +821,15 @@
       "imageUrl": "/product-images/cobblestones/main.jpg",
       "gallery": [
         "/product-images/cobblestones/g1.jpg",
-        "/product-images/cobblestones/g2.jpg"
+        "/product-images/cobblestones/g2.jpg",
+        "/product-images/cobblestones/g3.jpg"
       ]
     },
     {
       "slug": "natural-stone-wall-cladding",
       "name": "Natural Stone Wall Cladding",
       "categoryId": "cladding",
-      "description": "Natural stone wall cladding that brings rich texture and warmth to façades and feature walls.",
+      "description": "Natural stone wall cladding that brings rich texture and warmth to facades and feature walls.",
       "origin": "India",
       "finish": "Natural Split",
       "thickness": "Varies",
@@ -751,14 +847,19 @@
         "/product-images/natural-stone-wall-cladding/g2.jpg",
         "/product-images/natural-stone-wall-cladding/g3.jpg",
         "/product-images/natural-stone-wall-cladding/g4.jpg",
-        "/product-images/natural-stone-wall-cladding/g5.jpg"
+        "/product-images/natural-stone-wall-cladding/g5.jpg",
+        "/product-images/natural-stone-wall-cladding/g6.jpg",
+        "/product-images/natural-stone-wall-cladding/g7.jpg",
+        "/product-images/natural-stone-wall-cladding/g8.jpg",
+        "/product-images/natural-stone-wall-cladding/g9.jpg",
+        "/product-images/natural-stone-wall-cladding/g10.jpg"
       ]
     },
     {
-      "slug": "rustic-stone-cladding",
-      "name": "Rustic Stone Cladding",
+      "slug": "rustic-ledgestone-cladding",
+      "name": "Rustic Ledgestone Cladding",
       "categoryId": "cladding",
-      "description": "Rustic split-face cladding for characterful exterior elevations and interior accents.",
+      "description": "Rustic split-face ledgestone for characterful exterior elevations and interior accents.",
       "origin": "India",
       "finish": "Natural Split",
       "thickness": "Varies",
@@ -770,13 +871,18 @@
         "Elevations",
         "Interiors"
       ],
-      "imageUrl": "/product-images/rustic-stone-cladding/main.jpg",
+      "imageUrl": "/product-images/rustic-ledgestone-cladding/main.jpg",
       "gallery": [
-        "/product-images/rustic-stone-cladding/g1.jpg",
-        "/product-images/rustic-stone-cladding/g2.jpg",
-        "/product-images/rustic-stone-cladding/g3.jpg",
-        "/product-images/rustic-stone-cladding/g4.jpg",
-        "/product-images/rustic-stone-cladding/g5.jpg"
+        "/product-images/rustic-ledgestone-cladding/g1.jpg",
+        "/product-images/rustic-ledgestone-cladding/g2.jpg",
+        "/product-images/rustic-ledgestone-cladding/g3.jpg",
+        "/product-images/rustic-ledgestone-cladding/g4.jpg",
+        "/product-images/rustic-ledgestone-cladding/g5.jpg",
+        "/product-images/rustic-ledgestone-cladding/g6.jpg",
+        "/product-images/rustic-ledgestone-cladding/g7.jpg",
+        "/product-images/rustic-ledgestone-cladding/g8.jpg",
+        "/product-images/rustic-ledgestone-cladding/g9.jpg",
+        "/product-images/rustic-ledgestone-cladding/g10.jpg"
       ]
     },
     {
@@ -801,7 +907,39 @@
         "/product-images/stacked-stone-cladding/g2.jpg",
         "/product-images/stacked-stone-cladding/g3.jpg",
         "/product-images/stacked-stone-cladding/g4.jpg",
-        "/product-images/stacked-stone-cladding/g5.jpg"
+        "/product-images/stacked-stone-cladding/g5.jpg",
+        "/product-images/stacked-stone-cladding/g6.jpg",
+        "/product-images/stacked-stone-cladding/g7.jpg",
+        "/product-images/stacked-stone-cladding/g8.jpg",
+        "/product-images/stacked-stone-cladding/g9.jpg",
+        "/product-images/stacked-stone-cladding/g10.jpg"
+      ]
+    },
+    {
+      "slug": "split-face-stone-cladding",
+      "name": "Split-Face Stone Cladding",
+      "categoryId": "cladding",
+      "description": "Bold split-face natural stone for standout compound walls, pillars and entrances.",
+      "origin": "India",
+      "finish": "Natural Split",
+      "thickness": "Varies",
+      "featured": false,
+      "sortOrder": 36,
+      "applications": [
+        "Facades",
+        "Feature Walls",
+        "Elevations",
+        "Interiors"
+      ],
+      "imageUrl": "/product-images/split-face-stone-cladding/main.jpg",
+      "gallery": [
+        "/product-images/split-face-stone-cladding/g1.jpg",
+        "/product-images/split-face-stone-cladding/g2.jpg",
+        "/product-images/split-face-stone-cladding/g3.jpg",
+        "/product-images/split-face-stone-cladding/g4.jpg",
+        "/product-images/split-face-stone-cladding/g5.jpg",
+        "/product-images/split-face-stone-cladding/g6.jpg",
+        "/product-images/split-face-stone-cladding/g7.jpg"
       ]
     }
   ]
