@@ -165,6 +165,94 @@
   background: var(--color-ink-2);
 }
 
+/* Article / blog prose */
+.prose {
+  color: var(--color-ink-2);
+  font-size: 1.05rem;
+  line-height: 1.75;
+}
+.prose > * + * {
+  margin-top: 1.35rem;
+}
+.prose h2 {
+  font-family: var(--font-serif);
+  color: var(--color-ink);
+  font-size: 1.9rem;
+  line-height: 1.15;
+  letter-spacing: -0.01em;
+  margin-top: 2.6rem;
+  margin-bottom: 0.2rem;
+}
+.prose h3 {
+  font-family: var(--font-serif);
+  color: var(--color-ink);
+  font-size: 1.35rem;
+  margin-top: 2rem;
+}
+.prose p {
+  color: var(--color-ink-2);
+}
+.prose strong {
+  color: var(--color-ink);
+  font-weight: 600;
+}
+.prose a {
+  color: var(--color-sage);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  text-decoration-thickness: 1px;
+}
+.prose a:hover {
+  color: var(--color-sage-2);
+}
+.prose ul,
+.prose ol {
+  padding-left: 1.3rem;
+  color: var(--color-ink-2);
+}
+.prose ul {
+  list-style: none;
+  padding-left: 0;
+}
+.prose ul li {
+  position: relative;
+  padding-left: 1.4rem;
+  margin-top: 0.6rem;
+}
+.prose ul li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.7em;
+  width: 6px;
+  height: 6px;
+  background: var(--color-sage);
+  border-radius: 1px;
+  transform: rotate(45deg);
+}
+.prose ol {
+  list-style: decimal;
+}
+.prose ol li {
+  margin-top: 0.6rem;
+  padding-left: 0.3rem;
+}
+.prose ol li::marker {
+  color: var(--color-ink-3);
+  font-family: var(--font-serif);
+}
+.prose hr {
+  border: 0;
+  border-top: 1px solid var(--color-line);
+  margin: 2.5rem 0;
+}
+.prose blockquote {
+  border-left: 2px solid var(--color-sage);
+  padding-left: 1.25rem;
+  color: var(--color-ink-2);
+  font-style: italic;
+}
+
 /* Utility: clamp text to N lines */
 .line-clamp-2 {
   display: -webkit-box;

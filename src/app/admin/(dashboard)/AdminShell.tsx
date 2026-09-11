@@ -7,6 +7,7 @@ import {
   LayoutDashboard,
   Package,
   Layers,
+  Newspaper,
   Settings,
   ExternalLink,
   LogOut,
@@ -20,6 +21,7 @@ const NAV = [
   { href: "/admin", label: "Dashboard", icon: LayoutDashboard, exact: true },
   { href: "/admin/products", label: "Products", icon: Package },
   { href: "/admin/categories", label: "Categories", icon: Layers },
+  { href: "/admin/blog", label: "Blog", icon: Newspaper },
   { href: "/admin/settings", label: "Site Content", icon: Settings },
 ];
 

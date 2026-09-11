@@ -5,11 +5,14 @@ export const dynamic = "force-dynamic";
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const base = process.env.NEXT_PUBLIC_SITE_URL || "https://www.stonicexport.com";
-  const products = await prisma.product
-    .findMany({ select: { slug: true, updatedAt: true } })
-    .catch(() => []);
+  const [products, posts] = await Promise.all([
+    prisma.product.findMany({ select: { slug: true, updatedAt: true } }).catch(() => []),
+    prisma.post
+      .findMany({ where: { published: true }, select: { slug: true, updatedAt: true } })
+      .catch(() => []),
+  ]);
 
-  const staticRoutes = ["", "/products", "/services", "/about", "/contact"].map(
+  const staticRoutes = ["", "/products", "/services", "/blog", "/about", "/contact"].map(
     (path) => ({
       url: `${base}${path}`,
       lastModified: new Date(),
@@ -25,5 +28,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority: 0.6,
   }));
 
-  return [...staticRoutes, ...productRoutes];
+  const postRoutes = posts.map((p) => ({
+    url: `${base}/blog/${p.slug}`,
+    lastModified: p.updatedAt,
+    changeFrequency: "monthly" as const,
+    priority: 0.7,
+  }));
+
+  return [...staticRoutes, ...productRoutes, ...postRoutes];
 }

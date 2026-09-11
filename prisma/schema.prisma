@@ -79,3 +79,23 @@ model Setting {
   value     String?
   updatedAt DateTime @updatedAt
 }
+
+/// Blog / journal articles (SEO content), managed from the dashboard.
+model Post {
+  id          String   @id @default(cuid())
+  slug        String   @unique
+  title       String
+  excerpt     String?
+  /// Article body in Markdown.
+  content     String
+  coverImage  String?
+  /// Comma-separated SEO keywords.
+  keywords    String?
+  published   Boolean  @default(true)
+  publishedAt DateTime @default(now())
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@index([published])
+  @@index([publishedAt])
+}

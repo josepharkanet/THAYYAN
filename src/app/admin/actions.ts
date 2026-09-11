@@ -208,3 +208,59 @@ export async function saveSettings(values: Record<string, string>) {
   revalidateSite();
   return { ok: true };
 }
+
+/* ─────────────────────────── Blog posts ──────────────────────────── */
+
+const postSchema = z.object({
+  id: z.string().optional(),
+  title: z.string().min(1, "Title is required"),
+  slug: z.string().optional(),
+  excerpt: z.string().optional().default(""),
+  content: z.string().min(1, "Content is required"),
+  coverImage: z.string().optional().default(""),
+  keywords: z.string().optional().default(""),
+  published: z.boolean().optional().default(true),
+});
+
+export type PostInput = z.input<typeof postSchema>;
+
+async function uniquePostSlug(base: string, ignoreId?: string) {
+  let slug = slugify(base) || "post";
+  const existing = await prisma.post.findUnique({ where: { slug } });
+  if (existing && existing.id !== ignoreId) {
+    slug = `${slug}-${Math.random().toString(36).slice(2, 6)}`;
+  }
+  return slug;
+}
+
+export async function upsertPost(input: PostInput) {
+  await requireAdmin();
+  const data = postSchema.parse(input);
+  const slug = await uniquePostSlug(data.slug || data.title, data.id);
+
+  const base = {
+    title: data.title,
+    slug,
+    excerpt: data.excerpt || null,
+    content: data.content,
+    coverImage: data.coverImage || null,
+    keywords: data.keywords || null,
+    published: data.published,
+  };
+
+  if (data.id) {
+    await prisma.post.update({ where: { id: data.id }, data: base });
+  } else {
+    await prisma.post.create({ data: { ...base, publishedAt: new Date() } });
+  }
+
+  revalidateSite();
+  return { ok: true };
+}
+
+export async function deletePost(id: string) {
+  await requireAdmin();
+  await prisma.post.delete({ where: { id } });
+  revalidateSite();
+  return { ok: true };
+}
