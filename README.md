@@ -66,7 +66,8 @@ the database and the uploaded images.
 
 ### 1. Create the application
 1. Coolify → **New Resource → Application**.
-2. Connect this Git repository.
+2. Connect this Git repository (`josepharkanet/THAYYAN`) and choose the
+   **`stonic`** branch.
 3. **Build Pack: Dockerfile** (Coolify auto-detects the `Dockerfile`).
 4. **Ports Exposes:** `3000`.
 
