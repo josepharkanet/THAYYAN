@@ -19,9 +19,9 @@ export const SERVICES: ServiceItem[] = [
     subtitle: "From the Source",
     image: "/product-images/katni-marble/main.jpg",
     description:
-      "True quality control begins at the source. Based in the stone hubs of Rajasthan, including Kishangarh, our team regularly visits renowned quarries to handpick the finest raw blocks — eliminating middlemen to ensure premium quality and competitive pricing.",
+      "True quality control begins at the source. Based in India's key stone hubs, including Kishangarh, our team regularly visits renowned quarries to handpick the finest raw blocks — eliminating middlemen to ensure premium quality and competitive pricing.",
     highlights: [
-      "Kishangarh, Rajasthan",
+      "Kishangarh, India",
       "Handpicked Raw Blocks",
       "No Middlemen",
       "Competitive Pricing",
@@ -66,7 +66,7 @@ export type ValueItem = {
 };
 
 export const VALUES: ValueItem[] = [
-  { icon: "mountain", title: "Quarry-Direct", description: "Handpicked at the source in Rajasthan — no middlemen, better value." },
+  { icon: "mountain", title: "Quarry-Direct", description: "Handpicked at the source across India — no middlemen, better value." },
   { icon: "globe", title: "Global Export Network", description: "Trusted supply across the Middle East, expanding to China & Canada." },
   { icon: "gem", title: "Export-Grade Quality", description: "Every slab finished to strict international standards." },
   { icon: "award", title: "12 Years of Expertise", description: "Over a decade sourcing and finishing the finest natural stone." },

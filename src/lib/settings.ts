@@ -8,10 +8,10 @@ import { prisma } from "./db";
  */
 export const SETTING_DEFAULTS = {
   siteName: "Stonic Export",
-  tagline: "Rajasthan's Finest Natural Stones",
+  tagline: "India's Finest Natural Stones",
 
   // Hero
-  heroTitle: "Excellence in Rajasthan's Natural Stones",
+  heroTitle: "Excellence in Indian Natural Stones",
   heroSubtitle:
     "Direct from the quarries to the global market — uncompromising quality for over 12 years.",
   // Marketing hero uses polished stock imagery; real product photos live on the
@@ -23,7 +23,7 @@ export const SETTING_DEFAULTS = {
   aboutParagraphs: [
     "Under the visionary leadership of proprietor Shijo Thayyil, Stonic Marbles & Granites was built on a foundation of trust, quality and rigorous material selection. With over 12 years of hands-on experience, we have mastered the art of identifying top-tier natural stone directly from the source — eliminating middlemen to ensure premium quality and competitive pricing.",
     "We have established a strong, reliable export network across the Middle East, successfully supplying premium projects in Bahrain, Saudi Arabia, Kuwait and Qatar. Driven by a vision for global expansion, we are extending our operations to introduce our premium stone to markets in China and Canada.",
-    "True quality control begins at the source. Based in the stone hubs of Rajasthan, including Kishangarh, our team handpicks the finest raw blocks and finishes them in state-of-the-art factories to strict international export standards.",
+    "True quality control begins at the source. Based in India's key stone hubs, including Kishangarh, our team handpicks the finest raw blocks and finishes them in state-of-the-art factories to strict international export standards.",
   ].join("\n\n"),
   aboutImage: "https://images.unsplash.com/photo-1694378061058-bb6532de3bba?q=80&w=1200",
 
@@ -42,7 +42,7 @@ export const SETTING_DEFAULTS = {
   contactPhone2: "+91 7559912233",
   contactEmail: "info@stonicexport.com",
   whatsappNumber: "919544982471",
-  address: "Kishangarh, Rajasthan, India",
+  address: "Kishangarh, India",
 
   // Social
   instagramUrl: "",

@@ -93,12 +93,12 @@ export default async function HomePage() {
           <Reveal className="lg:col-span-6">
             <p className="eyebrow">Since {settings.foundedYear}</p>
             <h2 className="mt-5 font-serif text-[2.3rem] font-light leading-[1.08] text-ink sm:text-[3.2rem]">
-              We bring the timeless beauty of Rajasthan&rsquo;s natural stone to the world.
+              We bring the timeless beauty of India&rsquo;s natural stone to the world.
             </h2>
           </Reveal>
           <Reveal className="flex flex-col justify-end lg:col-span-5 lg:col-start-8" delay={120}>
             <p className="text-base leading-relaxed text-ink-2">
-              Direct from the quarries of Rajasthan to projects worldwide, {settings.siteName}{" "}
+              Direct from India&rsquo;s finest quarries to projects worldwide, {settings.siteName}{" "}
               delivers marble, granite and natural stone with complete, end-to-end care —
               from handpicked sourcing and in-house finishing to global export.
             </p>
@@ -134,7 +134,7 @@ export default async function HomePage() {
             <SectionHeading
               eyebrow="The Collection"
               title="Four collections, one standard"
-              description="A curated range of premium Rajasthan stone — marble, granite, natural stones and cladding."
+              description="A curated range of premium Indian stone — marble, granite, natural stones and cladding."
             />
           </Reveal>
           <Reveal className="mt-14 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">

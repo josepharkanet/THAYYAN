@@ -187,7 +187,7 @@ export default function ProductForm({
           <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
             <div>
               <label className={labelCls} htmlFor="p-origin">Origin</label>
-              <input id="p-origin" className={`${inputCls} mt-2`} value={form.origin} onChange={(e) => set("origin", e.target.value)} placeholder="Rajasthan" />
+              <input id="p-origin" className={`${inputCls} mt-2`} value={form.origin} onChange={(e) => set("origin", e.target.value)} placeholder="India" />
             </div>
             <div>
               <label className={labelCls} htmlFor="p-finish">Finish</label>

@@ -13,7 +13,7 @@ export const metadata: Metadata = {
 };
 
 const OFFERINGS = [
-  { icon: Mountain, title: "Quarry-Direct Sourcing", description: "We handpick the finest raw blocks directly from Rajasthan's quarries, cutting out middlemen for quality and value." },
+  { icon: Mountain, title: "Quarry-Direct Sourcing", description: "We handpick the finest raw blocks directly from India's quarries, cutting out middlemen for quality and value." },
   { icon: Factory, title: "In-House Processing", description: "Precise cutting, polishing and finishing in state-of-the-art factories, prepared to strict export standards." },
   { icon: Gem, title: "Export-Grade Quality", description: "Rigorous quality control on every slab, so what you order is exactly what arrives." },
   { icon: Ship, title: "Global Logistics", description: "Robust wooden-crate packaging and reliable international shipping across the Middle East and beyond." },
@@ -39,7 +39,7 @@ export default async function AboutPage() {
             Crafting excellence since {settings.foundedYear}
           </h1>
           <p className="mt-6 max-w-2xl text-base leading-relaxed text-ink-2 sm:text-lg">
-            {settings.siteName} is a premier source for premium Rajasthan natural
+            {settings.siteName} is a premier source for premium Indian natural
             stone. With over 12 years of hands-on experience, we&rsquo;ve built a
             reputation for delivering exceptional marble, granite and natural stone
             to clients across the Middle East — and, increasingly, worldwide.

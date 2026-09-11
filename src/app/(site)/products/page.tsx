@@ -8,7 +8,7 @@ import ProductCard from "@/components/site/ProductCard";
 export const metadata: Metadata = {
   title: "Products",
   description:
-    "Browse our collection of premium Rajasthan marble, granite (including Black Galaxy), Kota & Tandoor natural stone, and stone cladding.",
+    "Browse our collection of premium Indian marble, granite (including Black Galaxy), Kota & Tandoor natural stone, and stone cladding.",
 };
 
 export default async function ProductsPage({
@@ -40,7 +40,7 @@ export default async function ProductsPage({
           </h1>
           <p className="mt-5 max-w-xl text-base leading-relaxed text-ink-2">
             {active?.description ??
-              "Explore our full range of Rajasthan marble, granite, natural stone and cladding — each finished to strict export standards."}
+              "Explore our full range of Indian marble, granite, natural stone and cladding — each finished to strict export standards."}
           </p>
         </div>
       </section>

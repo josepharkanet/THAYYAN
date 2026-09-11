@@ -26,7 +26,7 @@ export default function Footer({ settings, categories }: FooterProps) {
             />
             <p className="mt-5 max-w-xs text-sm leading-relaxed text-paper/55">
               {settings.tagline}. Over 12 years of export excellence delivering
-              premium marble, granite &amp; natural stone from Rajasthan.
+              premium marble, granite &amp; natural stone from India.
             </p>
             <div className="mt-6 flex items-center gap-3">
               <a
