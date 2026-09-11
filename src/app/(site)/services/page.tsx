@@ -69,6 +69,9 @@ export default async function ServicesPage() {
                       loading="lazy"
                       className="h-full w-full object-cover"
                     />
+                    <span className="index-numeral absolute left-5 top-3 text-6xl text-white/85 sm:text-7xl">
+                      0{index + 1}
+                    </span>
                   </div>
                 </div>
                 <div className={flipped ? "lg:order-1" : ""}>
@@ -80,7 +83,7 @@ export default async function ServicesPage() {
                       {s.subtitle}
                     </p>
                   </div>
-                  <h3 className="mt-5 font-serif text-[2rem] leading-tight text-ink sm:text-[2.6rem]">
+                  <h3 className="mt-5 font-serif text-[2.2rem] leading-tight text-ink sm:text-[3rem]">
                     {s.title}
                   </h3>
                   <p className="mt-5 text-base leading-relaxed text-ink-2">{s.description}</p>

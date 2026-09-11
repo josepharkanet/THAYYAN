@@ -10,9 +10,11 @@ export type CategoryCardData = {
 
 export default function CategoryCard({
   category,
+  index,
   className = "",
 }: {
   category: CategoryCardData;
+  index?: string;
   className?: string;
 }) {
   return (
@@ -29,20 +31,27 @@ export default function CategoryCard({
         alt={category.name}
         loading="lazy"
         decoding="async"
-        className="absolute inset-0 h-full w-full object-cover transition-transform duration-[1.2s] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-110"
+        className="absolute inset-0 h-full w-full object-cover transition-transform duration-[1.2s] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-105"
       />
-      <div className="absolute inset-0 bg-gradient-to-t from-ink/85 via-ink/25 to-transparent" />
-      <div className="relative flex h-full flex-col justify-end p-6 sm:p-7">
-        <h3 className="font-serif text-[1.7rem] leading-tight text-white sm:text-3xl">
+      <div className="absolute inset-0 bg-gradient-to-t from-ink/90 via-ink/30 to-transparent" />
+
+      {index ? (
+        <span className="index-numeral absolute right-6 top-5 text-5xl text-white/25 sm:text-6xl">
+          {index}
+        </span>
+      ) : null}
+
+      <div className="relative flex h-full flex-col justify-end p-7 sm:p-9">
+        <h3 className="font-serif text-[1.9rem] font-light leading-tight text-white sm:text-4xl">
           {category.name}
         </h3>
         {category.description ? (
-          <p className="mt-2 max-w-xs text-sm leading-relaxed text-white/70">
+          <p className="mt-2 max-w-sm text-sm leading-relaxed text-white/70">
             {category.description}
           </p>
         ) : null}
-        <span className="mt-4 inline-flex items-center gap-2 text-[0.72rem] font-semibold uppercase tracking-[0.16em] text-white/90">
-          <span className="h-px w-6 bg-white/60 transition-all duration-500 group-hover:w-10" />
+        <span className="mt-5 inline-flex items-center gap-2 text-[0.72rem] font-semibold uppercase tracking-[0.18em] text-white/90">
+          <span className="h-px w-6 bg-white/60 transition-all duration-500 group-hover:w-12" />
           View Collection
           <ArrowRight size={15} className="transition-transform duration-500 group-hover:translate-x-1" />
         </span>
