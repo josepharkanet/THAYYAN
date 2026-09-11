@@ -4,8 +4,9 @@
 @theme {
   --font-sans: var(--font-manrope), ui-sans-serif, system-ui, -apple-system,
     "Segoe UI", sans-serif;
-  --font-serif: var(--font-cormorant), ui-serif, Georgia, "Times New Roman",
-    serif;
+  /* "serif" utility now renders an elegant geometric sans (Jost) for headings */
+  --font-serif: var(--font-display), ui-sans-serif, system-ui, -apple-system,
+    "Segoe UI", sans-serif;
 
   /* Warm stone neutrals */
   --color-paper: #f7f5f0;
