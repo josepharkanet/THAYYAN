@@ -1,0 +1,81 @@
+// Stonic Export — data model
+// SQLite keeps the whole app to a single container + one persistent volume.
+// Switching to PostgreSQL later is a two-line change (provider + url).
+
+generator client {
+  provider      = "prisma-client-js"
+  // "native" for local dev (macOS); the debian target matches the Docker image.
+  binaryTargets = ["native", "debian-openssl-3.0.x"]
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+/// Admin users who can sign in to the dashboard (Shijo).
+model User {
+  id           Int      @id @default(autoincrement())
+  email        String   @unique
+  passwordHash String
+  name         String   @default("Admin")
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+}
+
+/// Product categories (Indian Marbles, Granite, …). id is a URL slug.
+model Category {
+  id          String    @id
+  name        String
+  description String?
+  imageUrl    String?
+  sortOrder   Int       @default(0)
+  products    Product[]
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+
+  @@index([sortOrder])
+}
+
+/// A stone product / item shown in the catalogue.
+model Product {
+  id           String         @id @default(cuid())
+  slug         String         @unique
+  name         String
+  categoryId   String
+  category     Category       @relation(fields: [categoryId], references: [id])
+  description  String?
+  origin       String?
+  finish       String?
+  thickness    String?
+  /// JSON-encoded string array of applications, e.g. ["Flooring","Countertops"].
+  applications String?
+  imageUrl     String
+  gallery      ProductImage[]
+  featured     Boolean        @default(false)
+  sortOrder    Int            @default(0)
+  createdAt    DateTime       @default(now())
+  updatedAt    DateTime       @updatedAt
+
+  @@index([categoryId])
+  @@index([featured])
+  @@index([sortOrder])
+}
+
+/// Extra gallery images attached to a product.
+model ProductImage {
+  id        Int     @id @default(autoincrement())
+  productId String
+  product   Product @relation(fields: [productId], references: [id], onDelete: Cascade)
+  url       String
+  sortOrder Int     @default(0)
+
+  @@index([productId])
+}
+
+/// Editable site content & contact details (key/value), managed from Settings.
+model Setting {
+  key       String   @id
+  value     String?
+  updatedAt DateTime @updatedAt
+}

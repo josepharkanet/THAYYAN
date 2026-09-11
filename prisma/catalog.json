@@ -1,0 +1,808 @@
+{
+  "categories": [
+    {
+      "id": "marble",
+      "name": "Marble",
+      "description": "Premium Rajasthan marble — from pure whites to intricate patterns, chosen for durability and aesthetic brilliance.",
+      "sortOrder": 1,
+      "imageUrl": "/product-images/arna-white-marble/main.jpg"
+    },
+    {
+      "id": "granite",
+      "name": "Granite",
+      "description": "Durable Rajasthan granites and specialty stones, including the sought-after Black Galaxy on special request.",
+      "sortOrder": 2,
+      "imageUrl": "https://static.prod-images.emergentagent.com/jobs/d7be1953-c1b2-4391-b4cf-169457290853/images/f11360bcab07e833ac42c1125d6072727a090078e13e0c7262e777b9a23c9a3c.png"
+    },
+    {
+      "id": "natural-stones",
+      "name": "Natural Stones",
+      "description": "Architectural stones — Tandoor, Kadappa & Kota — with cobbles and pebbles for premium landscaping.",
+      "sortOrder": 3,
+      "imageUrl": "/product-images/kota-stone/main.jpg"
+    },
+    {
+      "id": "cladding",
+      "name": "Cladding Stone",
+      "description": "Natural stone wall cladding for striking, low-maintenance façades and feature walls.",
+      "sortOrder": 4,
+      "imageUrl": "/product-images/natural-stone-wall-cladding/main.jpg"
+    }
+  ],
+  "products": [
+    {
+      "slug": "arna-white-marble",
+      "name": "Arna White Marble",
+      "categoryId": "marble",
+      "description": "A bright, premium Rajasthan white marble with delicate grey veining — a timeless choice for elegant flooring and cladding.",
+      "origin": "Rajasthan, India",
+      "finish": "Polished",
+      "thickness": "16–18mm",
+      "featured": true,
+      "sortOrder": 0,
+      "applications": [
+        "Flooring",
+        "Wall Cladding",
+        "Countertops",
+        "Staircases"
+      ],
+      "imageUrl": "/product-images/arna-white-marble/main.jpg",
+      "gallery": [
+        "/product-images/arna-white-marble/g1.jpg",
+        "/product-images/arna-white-marble/g2.jpg",
+        "/product-images/arna-white-marble/g3.jpg"
+      ]
+    },
+    {
+      "slug": "katni-marble",
+      "name": "Katni Marble",
+      "categoryId": "marble",
+      "description": "Warm-toned Katni marble prized for its consistent background and fine natural patterning.",
+      "origin": "Katni, India",
+      "finish": "Polished",
+      "thickness": "16–20mm",
+      "featured": true,
+      "sortOrder": 1,
+      "applications": [
+        "Flooring",
+        "Wall Cladding",
+        "Countertops",
+        "Staircases"
+      ],
+      "imageUrl": "/product-images/katni-marble/main.jpg",
+      "gallery": [
+        "/product-images/katni-marble/g1.jpg",
+        "/product-images/katni-marble/g2.jpg",
+        "/product-images/katni-marble/g3.jpg"
+      ]
+    },
+    {
+      "slug": "morwad-white-marble",
+      "name": "Morwad White Marble",
+      "categoryId": "marble",
+      "description": "One of Rajasthan's most popular white marbles — bright, durable and versatile across interiors.",
+      "origin": "Rajasthan, India",
+      "finish": "Polished",
+      "thickness": "16–18mm",
+      "featured": false,
+      "sortOrder": 2,
+      "applications": [
+        "Flooring",
+        "Wall Cladding",
+        "Countertops",
+        "Staircases"
+      ],
+      "imageUrl": "/product-images/morwad-white-marble/main.jpg",
+      "gallery": [
+        "/product-images/morwad-white-marble/g1.jpg",
+        "/product-images/morwad-white-marble/g2.jpg",
+        "/product-images/morwad-white-marble/g3.jpg"
+      ]
+    },
+    {
+      "slug": "jk-white-marble",
+      "name": "JK White Marble",
+      "categoryId": "marble",
+      "description": "A clean, snow-white marble with subtle veining, ideal for premium flooring and temple work.",
+      "origin": "Rajasthan, India",
+      "finish": "Polished",
+      "thickness": "16–18mm",
+      "featured": false,
+      "sortOrder": 3,
+      "applications": [
+        "Flooring",
+        "Wall Cladding",
+        "Countertops",
+        "Staircases"
+      ],
+      "imageUrl": "/product-images/jk-white-marble/main.jpg",
+      "gallery": [
+        "/product-images/jk-white-marble/g1.jpg",
+        "/product-images/jk-white-marble/g2.jpg",
+        "/product-images/jk-white-marble/g3.jpg"
+      ]
+    },
+    {
+      "slug": "dungri-white-marble",
+      "name": "Dungri White Marble",
+      "categoryId": "marble",
+      "description": "Fine-grained white marble with a soft, even tone for refined interior surfaces.",
+      "origin": "Rajasthan, India",
+      "finish": "Polished",
+      "thickness": "16–18mm",
+      "featured": false,
+      "sortOrder": 4,
+      "applications": [
+        "Flooring",
+        "Wall Cladding",
+        "Countertops",
+        "Staircases"
+      ],
+      "imageUrl": "/product-images/dungri-white-marble/main.jpg",
+      "gallery": [
+        "/product-images/dungri-white-marble/g1.jpg",
+        "/product-images/dungri-white-marble/g2.jpg"
+      ]
+    },
+    {
+      "slug": "thalayi-white-marble",
+      "name": "Thalayi White Marble",
+      "categoryId": "marble",
+      "description": "A crisp white marble with gentle veining, well suited to large-format flooring.",
+      "origin": "Rajasthan, India",
+      "finish": "Polished",
+      "thickness": "16–18mm",
+      "featured": false,
+      "sortOrder": 5,
+      "applications": [
+        "Flooring",
+        "Wall Cladding",
+        "Countertops",
+        "Staircases"
+      ],
+      "imageUrl": "/product-images/thalayi-white-marble/main.jpg",
+      "gallery": [
+        "/product-images/thalayi-white-marble/g1.jpg",
+        "/product-images/thalayi-white-marble/g2.jpg",
+        "/product-images/thalayi-white-marble/g3.jpg"
+      ]
+    },
+    {
+      "slug": "morchana-white-marble",
+      "name": "Morchana White Marble",
+      "categoryId": "marble",
+      "description": "Elegant white marble with a smooth finish for sophisticated interiors.",
+      "origin": "Rajasthan, India",
+      "finish": "Polished",
+      "thickness": "16–18mm",
+      "featured": false,
+      "sortOrder": 6,
+      "applications": [
+        "Flooring",
+        "Wall Cladding",
+        "Countertops",
+        "Staircases"
+      ],
+      "imageUrl": "/product-images/morchana-white-marble/main.jpg",
+      "gallery": [
+        "/product-images/morchana-white-marble/g1.jpg",
+        "/product-images/morchana-white-marble/g2.jpg"
+      ]
+    },
+    {
+      "slug": "gt-marble",
+      "name": "GT Marble",
+      "categoryId": "marble",
+      "description": "A durable, richly patterned marble that makes a statement in feature areas.",
+      "origin": "Rajasthan, India",
+      "finish": "Polished",
+      "thickness": "16–20mm",
+      "featured": false,
+      "sortOrder": 7,
+      "applications": [
+        "Flooring",
+        "Wall Cladding",
+        "Countertops",
+        "Staircases"
+      ],
+      "imageUrl": "/product-images/gt-marble/main.jpg",
+      "gallery": [
+        "/product-images/gt-marble/g1.jpg",
+        "/product-images/gt-marble/g2.jpg",
+        "/product-images/gt-marble/g3.jpg"
+      ]
+    },
+    {
+      "slug": "italian-marble",
+      "name": "Italian Marble",
+      "categoryId": "marble",
+      "description": "Imported Italian marble known for its luxurious depth, clarity and dramatic veining.",
+      "origin": "Italy",
+      "finish": "Polished",
+      "thickness": "18–20mm",
+      "featured": true,
+      "sortOrder": 8,
+      "applications": [
+        "Flooring",
+        "Wall Cladding",
+        "Countertops",
+        "Staircases"
+      ],
+      "imageUrl": "/product-images/italian-marble/main.jpg",
+      "gallery": [
+        "/product-images/italian-marble/g1.jpg",
+        "/product-images/italian-marble/g2.jpg",
+        "/product-images/italian-marble/g3.jpg"
+      ]
+    },
+    {
+      "slug": "torrento-marble",
+      "name": "Torrento Marble",
+      "categoryId": "marble",
+      "description": "A distinctive marble with flowing patterns for elegant feature walls and floors.",
+      "origin": "Rajasthan, India",
+      "finish": "Polished",
+      "thickness": "16–20mm",
+      "featured": false,
+      "sortOrder": 9,
+      "applications": [
+        "Flooring",
+        "Wall Cladding",
+        "Countertops",
+        "Staircases"
+      ],
+      "imageUrl": "/product-images/torrento-marble/main.jpg",
+      "gallery": [
+        "/product-images/torrento-marble/g1.jpg",
+        "/product-images/torrento-marble/g2.jpg"
+      ]
+    },
+    {
+      "slug": "green-forest-marble",
+      "name": "Green Forest Marble",
+      "categoryId": "marble",
+      "description": "A deep green marble with striking natural movement — perfect for accent surfaces.",
+      "origin": "Rajasthan, India",
+      "finish": "Polished",
+      "thickness": "16–20mm",
+      "featured": false,
+      "sortOrder": 10,
+      "applications": [
+        "Flooring",
+        "Wall Cladding",
+        "Countertops",
+        "Staircases"
+      ],
+      "imageUrl": "/product-images/green-forest-marble/main.jpg",
+      "gallery": [
+        "/product-images/green-forest-marble/g1.jpg"
+      ]
+    },
+    {
+      "slug": "wonder-green-marble",
+      "name": "Wonder Green Marble",
+      "categoryId": "marble",
+      "description": "Rich green marble with bold veining that brings character to interiors.",
+      "origin": "Rajasthan, India",
+      "finish": "Polished",
+      "thickness": "16–20mm",
+      "featured": false,
+      "sortOrder": 11,
+      "applications": [
+        "Flooring",
+        "Wall Cladding",
+        "Countertops",
+        "Staircases"
+      ],
+      "imageUrl": "/product-images/wonder-green-marble/main.jpg",
+      "gallery": [
+        "/product-images/wonder-green-marble/g1.jpg",
+        "/product-images/wonder-green-marble/g2.jpg"
+      ]
+    },
+    {
+      "slug": "wonder-katni-marble",
+      "name": "Wonder Katni Marble",
+      "categoryId": "marble",
+      "description": "A premium Katni variant with warm tones and elegant natural patterning.",
+      "origin": "Katni, India",
+      "finish": "Polished",
+      "thickness": "16–20mm",
+      "featured": false,
+      "sortOrder": 12,
+      "applications": [
+        "Flooring",
+        "Wall Cladding",
+        "Countertops",
+        "Staircases"
+      ],
+      "imageUrl": "/product-images/wonder-katni-marble/main.jpg",
+      "gallery": [
+        "/product-images/wonder-katni-marble/g1.jpg",
+        "/product-images/wonder-katni-marble/g2.jpg",
+        "/product-images/wonder-katni-marble/g3.jpg"
+      ]
+    },
+    {
+      "slug": "wood-marble",
+      "name": "Wood Marble",
+      "categoryId": "marble",
+      "description": "A characterful marble with wood-grain-like veining for distinctive designs.",
+      "origin": "Rajasthan, India",
+      "finish": "Polished",
+      "thickness": "16–20mm",
+      "featured": false,
+      "sortOrder": 13,
+      "applications": [
+        "Flooring",
+        "Wall Cladding",
+        "Countertops",
+        "Staircases"
+      ],
+      "imageUrl": "/product-images/wood-marble/main.jpg",
+      "gallery": [
+        "/product-images/wood-marble/g1.jpg",
+        "/product-images/wood-marble/g2.jpg",
+        "/product-images/wood-marble/g3.jpg"
+      ]
+    },
+    {
+      "slug": "vietnam-white-marble",
+      "name": "Vietnam White Marble",
+      "categoryId": "marble",
+      "description": "An imported pure-white marble with an exceptionally clean, bright surface.",
+      "origin": "Imported",
+      "finish": "Polished",
+      "thickness": "18–20mm",
+      "featured": false,
+      "sortOrder": 14,
+      "applications": [
+        "Flooring",
+        "Wall Cladding",
+        "Countertops",
+        "Staircases"
+      ],
+      "imageUrl": "/product-images/vietnam-white-marble/main.jpg",
+      "gallery": []
+    },
+    {
+      "slug": "black-galaxy-granite",
+      "name": "Black Galaxy Granite",
+      "categoryId": "granite",
+      "description": "Our highlight granite — a deep jet-black stone scattered with golden flecks like a starlit sky. Available on special request.",
+      "origin": "India",
+      "finish": "Polished",
+      "thickness": "18–30mm",
+      "featured": true,
+      "sortOrder": 15,
+      "applications": [
+        "Countertops",
+        "Flooring",
+        "Facades",
+        "Staircases"
+      ],
+      "imageUrl": "https://static.prod-images.emergentagent.com/jobs/d7be1953-c1b2-4391-b4cf-169457290853/images/f11360bcab07e833ac42c1125d6072727a090078e13e0c7262e777b9a23c9a3c.png",
+      "gallery": []
+    },
+    {
+      "slug": "aspore-white-granite",
+      "name": "Aspore White Granite",
+      "categoryId": "granite",
+      "description": "A light, elegant granite with a soft speckled pattern for durable surfaces.",
+      "origin": "Rajasthan, India",
+      "finish": "Polished",
+      "thickness": "18–30mm",
+      "featured": false,
+      "sortOrder": 16,
+      "applications": [
+        "Countertops",
+        "Flooring",
+        "Facades",
+        "Staircases"
+      ],
+      "imageUrl": "/product-images/aspore-white-granite/main.jpg",
+      "gallery": [
+        "/product-images/aspore-white-granite/g1.jpg",
+        "/product-images/aspore-white-granite/g2.jpg"
+      ]
+    },
+    {
+      "slug": "epothya-granite",
+      "name": "Epothya Granite",
+      "categoryId": "granite",
+      "description": "A refined granite with balanced tones, ideal for countertops and flooring.",
+      "origin": "Rajasthan, India",
+      "finish": "Polished",
+      "thickness": "18–30mm",
+      "featured": false,
+      "sortOrder": 17,
+      "applications": [
+        "Countertops",
+        "Flooring",
+        "Facades",
+        "Staircases"
+      ],
+      "imageUrl": "/product-images/epothya-granite/main.jpg",
+      "gallery": [
+        "/product-images/epothya-granite/g1.jpg"
+      ]
+    },
+    {
+      "slug": "alaska-granite",
+      "name": "Alaska Granite",
+      "categoryId": "granite",
+      "description": "A warm, patterned granite offering excellent durability for high-traffic surfaces.",
+      "origin": "Rajasthan, India",
+      "finish": "Polished",
+      "thickness": "18–30mm",
+      "featured": false,
+      "sortOrder": 18,
+      "applications": [
+        "Countertops",
+        "Flooring",
+        "Facades",
+        "Staircases"
+      ],
+      "imageUrl": "/product-images/alaska-granite/main.jpg",
+      "gallery": [
+        "/product-images/alaska-granite/g1.jpg",
+        "/product-images/alaska-granite/g2.jpg"
+      ]
+    },
+    {
+      "slug": "fish-black-granite",
+      "name": "Fish Black Granite",
+      "categoryId": "granite",
+      "description": "A dense black granite with fine detailing — a bold, hard-wearing choice.",
+      "origin": "Rajasthan, India",
+      "finish": "Polished",
+      "thickness": "18–30mm",
+      "featured": false,
+      "sortOrder": 19,
+      "applications": [
+        "Countertops",
+        "Flooring",
+        "Facades",
+        "Staircases"
+      ],
+      "imageUrl": "/product-images/fish-black-granite/main.jpg",
+      "gallery": [
+        "/product-images/fish-black-granite/g1.jpg"
+      ]
+    },
+    {
+      "slug": "markino-black-granite",
+      "name": "Markino Black Granite",
+      "categoryId": "granite",
+      "description": "Deep black granite with a uniform tone for sleek, modern surfaces.",
+      "origin": "Rajasthan, India",
+      "finish": "Polished",
+      "thickness": "18–30mm",
+      "featured": false,
+      "sortOrder": 20,
+      "applications": [
+        "Countertops",
+        "Flooring",
+        "Facades",
+        "Staircases"
+      ],
+      "imageUrl": "/product-images/markino-black-granite/main.jpg",
+      "gallery": []
+    },
+    {
+      "slug": "majestic-black-granite",
+      "name": "Majestic Black Granite",
+      "categoryId": "granite",
+      "description": "A striking dark granite that lends a premium, dramatic finish.",
+      "origin": "Rajasthan, India",
+      "finish": "Polished",
+      "thickness": "18–30mm",
+      "featured": false,
+      "sortOrder": 21,
+      "applications": [
+        "Countertops",
+        "Flooring",
+        "Facades",
+        "Staircases"
+      ],
+      "imageUrl": "/product-images/majestic-black-granite/main.jpg",
+      "gallery": []
+    },
+    {
+      "slug": "kottada-black-lapothra-granite",
+      "name": "Kottada Black Lapothra Granite",
+      "categoryId": "granite",
+      "description": "A black granite in a textured leather (lapotra) finish for a contemporary look.",
+      "origin": "Rajasthan, India",
+      "finish": "Lapotra / Leather",
+      "thickness": "18–30mm",
+      "featured": false,
+      "sortOrder": 22,
+      "applications": [
+        "Countertops",
+        "Flooring",
+        "Facades",
+        "Staircases"
+      ],
+      "imageUrl": "/product-images/kottada-black-lapothra-granite/main.jpg",
+      "gallery": []
+    },
+    {
+      "slug": "lakha-red-granite",
+      "name": "Lakha Red Granite",
+      "categoryId": "granite",
+      "description": "A classic deep-red Rajasthan granite, rich in colour and highly durable.",
+      "origin": "Rajasthan, India",
+      "finish": "Polished",
+      "thickness": "18–30mm",
+      "featured": false,
+      "sortOrder": 23,
+      "applications": [
+        "Countertops",
+        "Flooring",
+        "Facades",
+        "Staircases"
+      ],
+      "imageUrl": "/product-images/lakha-red-granite/main.jpg",
+      "gallery": []
+    },
+    {
+      "slug": "p-white-granite",
+      "name": "P White Granite",
+      "categoryId": "granite",
+      "description": "A popular light granite with a clean speckled surface, versatile for interiors.",
+      "origin": "Rajasthan, India",
+      "finish": "Polished",
+      "thickness": "18–30mm",
+      "featured": false,
+      "sortOrder": 24,
+      "applications": [
+        "Countertops",
+        "Flooring",
+        "Facades",
+        "Staircases"
+      ],
+      "imageUrl": "/product-images/p-white-granite/main.jpg",
+      "gallery": []
+    },
+    {
+      "slug": "river-black-granite",
+      "name": "River Black Granite",
+      "categoryId": "granite",
+      "description": "A dark, flowing granite pattern that adds depth to any surface.",
+      "origin": "Rajasthan, India",
+      "finish": "Polished",
+      "thickness": "18–30mm",
+      "featured": false,
+      "sortOrder": 25,
+      "applications": [
+        "Countertops",
+        "Flooring",
+        "Facades",
+        "Staircases"
+      ],
+      "imageUrl": "/product-images/river-black-granite/main.jpg",
+      "gallery": []
+    },
+    {
+      "slug": "river-brown-granite",
+      "name": "River Brown Granite",
+      "categoryId": "granite",
+      "description": "A warm brown granite with natural movement for elegant countertops.",
+      "origin": "Rajasthan, India",
+      "finish": "Polished",
+      "thickness": "18–30mm",
+      "featured": false,
+      "sortOrder": 26,
+      "applications": [
+        "Countertops",
+        "Flooring",
+        "Facades",
+        "Staircases"
+      ],
+      "imageUrl": "/product-images/river-brown-granite/main.jpg",
+      "gallery": []
+    },
+    {
+      "slug": "river-green-granite",
+      "name": "River Green Granite",
+      "categoryId": "granite",
+      "description": "A refined green-toned granite with subtle veining and excellent durability.",
+      "origin": "Rajasthan, India",
+      "finish": "Polished",
+      "thickness": "18–30mm",
+      "featured": false,
+      "sortOrder": 27,
+      "applications": [
+        "Countertops",
+        "Flooring",
+        "Facades",
+        "Staircases"
+      ],
+      "imageUrl": "/product-images/river-green-granite/main.jpg",
+      "gallery": [
+        "/product-images/river-green-granite/g1.jpg"
+      ]
+    },
+    {
+      "slug": "kota-stone",
+      "name": "Kota Stone",
+      "categoryId": "natural-stones",
+      "description": "A hard-wearing blue-green limestone ideal for flooring, paving and cladding — available honed or polished.",
+      "origin": "Kota, Rajasthan",
+      "finish": "Natural / Honed / Polished",
+      "thickness": "20–40mm",
+      "featured": true,
+      "sortOrder": 28,
+      "applications": [
+        "Paving",
+        "Landscaping",
+        "Wall Cladding"
+      ],
+      "imageUrl": "/product-images/kota-stone/main.jpg",
+      "gallery": [
+        "/product-images/kota-stone/g1.jpg",
+        "/product-images/kota-stone/g2.jpg",
+        "/product-images/kota-stone/g3.jpg"
+      ]
+    },
+    {
+      "slug": "tandoor-stone",
+      "name": "Tandoor Stone",
+      "categoryId": "natural-stones",
+      "description": "Authentic Tandoor (Tandur) stone — a versatile natural stone for paving and rustic wall cladding.",
+      "origin": "Telangana, India",
+      "finish": "Natural",
+      "thickness": "20–40mm",
+      "featured": false,
+      "sortOrder": 29,
+      "applications": [
+        "Paving",
+        "Landscaping",
+        "Wall Cladding"
+      ],
+      "imageUrl": "/product-images/tandoor-stone/main.jpg",
+      "gallery": [
+        "/product-images/tandoor-stone/g1.jpg",
+        "/product-images/tandoor-stone/g2.jpg"
+      ]
+    },
+    {
+      "slug": "kadappa-stone",
+      "name": "Kadappa Stone",
+      "categoryId": "natural-stones",
+      "description": "Durable black Kadappa stone, a dependable choice for flooring, steps and skirting.",
+      "origin": "India",
+      "finish": "Natural",
+      "thickness": "20–40mm",
+      "featured": false,
+      "sortOrder": 30,
+      "applications": [
+        "Paving",
+        "Landscaping",
+        "Wall Cladding"
+      ],
+      "imageUrl": "/product-images/kadappa-stone/main.jpg",
+      "gallery": [
+        "/product-images/kadappa-stone/g1.jpg"
+      ]
+    },
+    {
+      "slug": "bangalore-stone",
+      "name": "Bangalore Stone",
+      "categoryId": "natural-stones",
+      "description": "A tough natural paving stone laid beautifully for driveways, courtyards and pathways.",
+      "origin": "India",
+      "finish": "Natural",
+      "thickness": "20–40mm",
+      "featured": false,
+      "sortOrder": 31,
+      "applications": [
+        "Paving",
+        "Landscaping",
+        "Wall Cladding"
+      ],
+      "imageUrl": "/product-images/bangalore-stone/main.jpg",
+      "gallery": [
+        "/product-images/bangalore-stone/g1.jpg",
+        "/product-images/bangalore-stone/g2.jpg"
+      ]
+    },
+    {
+      "slug": "cobblestones",
+      "name": "Cobblestones",
+      "categoryId": "natural-stones",
+      "description": "Premium natural cobblestones for elegant driveways, courtyards and landscaped pathways.",
+      "origin": "Rajasthan, India",
+      "finish": "Natural / Tumbled",
+      "thickness": "40–60mm",
+      "featured": false,
+      "sortOrder": 32,
+      "applications": [
+        "Paving",
+        "Landscaping",
+        "Wall Cladding"
+      ],
+      "imageUrl": "/product-images/cobblestones/main.jpg",
+      "gallery": [
+        "/product-images/cobblestones/g1.jpg",
+        "/product-images/cobblestones/g2.jpg"
+      ]
+    },
+    {
+      "slug": "natural-stone-wall-cladding",
+      "name": "Natural Stone Wall Cladding",
+      "categoryId": "cladding",
+      "description": "Natural stone wall cladding that brings rich texture and warmth to façades and feature walls.",
+      "origin": "Rajasthan, India",
+      "finish": "Natural Split",
+      "thickness": "Varies",
+      "featured": true,
+      "sortOrder": 33,
+      "applications": [
+        "Facades",
+        "Feature Walls",
+        "Elevations",
+        "Interiors"
+      ],
+      "imageUrl": "/product-images/natural-stone-wall-cladding/main.jpg",
+      "gallery": [
+        "/product-images/natural-stone-wall-cladding/g1.jpg",
+        "/product-images/natural-stone-wall-cladding/g2.jpg",
+        "/product-images/natural-stone-wall-cladding/g3.jpg",
+        "/product-images/natural-stone-wall-cladding/g4.jpg",
+        "/product-images/natural-stone-wall-cladding/g5.jpg"
+      ]
+    },
+    {
+      "slug": "rustic-stone-cladding",
+      "name": "Rustic Stone Cladding",
+      "categoryId": "cladding",
+      "description": "Rustic split-face cladding for characterful exterior elevations and interior accents.",
+      "origin": "Rajasthan, India",
+      "finish": "Natural Split",
+      "thickness": "Varies",
+      "featured": false,
+      "sortOrder": 34,
+      "applications": [
+        "Facades",
+        "Feature Walls",
+        "Elevations",
+        "Interiors"
+      ],
+      "imageUrl": "/product-images/rustic-stone-cladding/main.jpg",
+      "gallery": [
+        "/product-images/rustic-stone-cladding/g1.jpg",
+        "/product-images/rustic-stone-cladding/g2.jpg",
+        "/product-images/rustic-stone-cladding/g3.jpg",
+        "/product-images/rustic-stone-cladding/g4.jpg",
+        "/product-images/rustic-stone-cladding/g5.jpg"
+      ]
+    },
+    {
+      "slug": "stacked-stone-cladding",
+      "name": "Stacked Stone Cladding",
+      "categoryId": "cladding",
+      "description": "Dry-stack style stone panels for a contemporary, textured stone finish.",
+      "origin": "Rajasthan, India",
+      "finish": "Natural Split",
+      "thickness": "Varies",
+      "featured": false,
+      "sortOrder": 35,
+      "applications": [
+        "Facades",
+        "Feature Walls",
+        "Elevations",
+        "Interiors"
+      ],
+      "imageUrl": "/product-images/stacked-stone-cladding/main.jpg",
+      "gallery": [
+        "/product-images/stacked-stone-cladding/g1.jpg",
+        "/product-images/stacked-stone-cladding/g2.jpg",
+        "/product-images/stacked-stone-cladding/g3.jpg",
+        "/product-images/stacked-stone-cladding/g4.jpg",
+        "/product-images/stacked-stone-cladding/g5.jpg"
+      ]
+    }
+  ]
+}

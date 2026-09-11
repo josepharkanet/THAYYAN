@@ -1,0 +1,37 @@
+# dependencies
+/node_modules
+/.pnp
+.pnp.*
+
+# next.js
+/.next/
+/out/
+next-env.d.ts
+
+# production
+/build
+
+# database (SQLite) & uploaded media — live on a persistent volume in prod
+/prisma/*.db
+/prisma/*.db-journal
+/data/
+/public/uploads/*
+!/public/uploads/.gitkeep
+
+# env
+.env
+.env*.local
+
+# client-provided source assets (too large / not needed in repo)
+/*.zip
+/*.pdf
+
+# misc
+.DS_Store
+*.pem
+/coverage
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.vscode/
+.idea/
