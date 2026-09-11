@@ -4,7 +4,7 @@ import WhatsAppFloat from "@/components/site/WhatsAppFloat";
 import { getSettings } from "@/lib/settings";
 import { prisma } from "@/lib/db";
 
-// Content is DB-backed and edited from the dashboard — always render fresh
+// Content is DB-backed and edited from the dashboard, always render fresh
 // so Shijo's changes appear immediately (and the build never touches the DB).
 export const dynamic = "force-dynamic";
 

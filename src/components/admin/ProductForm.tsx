@@ -180,7 +180,7 @@ export default function ProductForm({
               className={`${inputCls} mt-2 resize-y`}
               value={form.description}
               onChange={(e) => set("description", e.target.value)}
-              placeholder="Describe the stone — colour, veining, ideal uses…"
+              placeholder="Describe the stone: colour, veining, ideal uses…"
             />
           </div>
 

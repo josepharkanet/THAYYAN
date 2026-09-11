@@ -99,7 +99,7 @@ export default async function HomePage() {
           <Reveal className="flex flex-col justify-end lg:col-span-5 lg:col-start-8" delay={120}>
             <p className="text-base leading-relaxed text-ink-2">
               Direct from India&rsquo;s finest quarries to projects worldwide, {settings.siteName}{" "}
-              delivers marble, granite and natural stone with complete, end-to-end care —
+              delivers marble, granite and natural stone with complete, end-to-end care, 
               from handpicked sourcing and in-house finishing to global export.
             </p>
             <Link
@@ -134,7 +134,7 @@ export default async function HomePage() {
             <SectionHeading
               eyebrow="The Collection"
               title="Four collections, one standard"
-              description="A curated range of premium Indian stone — marble, granite, natural stones and cladding."
+              description="A curated range of premium Indian stone, marble, granite, natural stones and cladding."
             />
           </Reveal>
           <Reveal className="mt-14 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
@@ -191,7 +191,7 @@ export default async function HomePage() {
             <SectionHeading
               eyebrow="What We Do"
               title="More than a supplier"
-              description="Complete stone solutions — from quarry-direct sourcing and precision finishing to worldwide export."
+              description="Complete stone solutions, from quarry-direct sourcing and precision finishing to worldwide export."
             />
           </Reveal>
           <div className="mt-14 grid grid-cols-1 gap-6 md:grid-cols-3">
@@ -252,7 +252,7 @@ export default async function HomePage() {
               Ready to transform your space?
             </h2>
             <p className="mx-auto mt-6 max-w-xl text-base leading-relaxed text-paper/60">
-              Message us on WhatsApp for personalised assistance, pricing and samples —
+              Message us on WhatsApp for personalised assistance, pricing and samples, 
               we typically reply within the hour.
             </p>
             <div className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">

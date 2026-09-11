@@ -7,7 +7,7 @@ import Reveal from "@/components/site/Reveal";
 export const metadata: Metadata = {
   title: "Stone Guides & Insights",
   description:
-    "Guides on marble, granite and natural stone for Indian homes — prices, buying tips, flooring and cladding ideas, and how to buy quarry-direct with doorstep delivery across Kerala & India.",
+    "Guides on marble, granite and natural stone for Indian homes, prices, buying tips, flooring and cladding ideas, and how to buy quarry-direct with doorstep delivery across Kerala & India.",
 };
 
 function formatDate(d: Date) {
@@ -34,7 +34,7 @@ export default async function BlogPage() {
           </h1>
           <p className="mt-5 max-w-xl text-base leading-relaxed text-ink-2">
             Practical advice on marble, granite and natural stone for Indian homes
-            — prices, buying tips, and design ideas from the Stonic team.
+, prices, buying tips, and design ideas from the Stonic team.
           </p>
         </div>
       </section>

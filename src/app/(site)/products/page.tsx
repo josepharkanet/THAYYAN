@@ -40,7 +40,7 @@ export default async function ProductsPage({
           </h1>
           <p className="mt-5 max-w-xl text-base leading-relaxed text-ink-2">
             {active?.description ??
-              "Explore our full range of Indian marble, granite, natural stone and cladding — each finished to strict export standards."}
+              "Explore our full range of Indian marble, granite, natural stone and cladding, each finished to strict export standards."}
           </p>
         </div>
       </section>

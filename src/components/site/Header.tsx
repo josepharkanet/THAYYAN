@@ -67,7 +67,7 @@ export default function Header({
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             src="/logo.png"
-            alt="Stonic — Marble & Granite"
+            alt="Stonic Marble & Granite"
             className={cn(
               "h-8 w-auto transition-all sm:h-9",
               light && "brightness-0 invert",

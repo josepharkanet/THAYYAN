@@ -77,7 +77,7 @@ export default async function ContactPage() {
                 Send an enquiry
               </h2>
               <p className="mt-2 text-sm text-ink-2">
-                Fill this in and choose how to send it — WhatsApp or email.
+                Fill this in and choose how to send it, WhatsApp or email.
               </p>
               <div className="mt-8">
                 <ContactForm

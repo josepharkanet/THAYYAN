@@ -13,7 +13,7 @@ export const SETTING_DEFAULTS = {
   // Hero
   heroTitle: "Excellence in Indian Natural Stones",
   heroSubtitle:
-    "Direct from the quarries to the global market — uncompromising quality for over 12 years.",
+    "Direct from the quarries to the global market, uncompromising quality for over 12 years.",
   // Marketing hero uses polished stock imagery; real product photos live on the
   // product pages. Replaceable from the dashboard.
   heroImage: "https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?q=80&w=2000",
@@ -21,7 +21,7 @@ export const SETTING_DEFAULTS = {
   // About
   aboutHeading: "Built on trust, quality and rigorous selection",
   aboutParagraphs: [
-    "Under the visionary leadership of proprietor Shijo Thayyil, Stonic Marbles & Granites was built on a foundation of trust, quality and rigorous material selection. With over 12 years of hands-on experience, we have mastered the art of identifying top-tier natural stone directly from the source — eliminating middlemen to ensure premium quality and competitive pricing.",
+    "Under the visionary leadership of proprietor Shijo Thayyil, Stonic Marbles & Granites was built on a foundation of trust, quality and rigorous material selection. With over 12 years of hands-on experience, we have mastered the art of identifying top-tier natural stone directly from the source, eliminating middlemen to ensure premium quality and competitive pricing.",
     "We have established a strong, reliable export network across the Middle East, successfully supplying premium projects in Bahrain, Saudi Arabia, Kuwait and Qatar. Driven by a vision for global expansion, we are extending our operations to introduce our premium stone to markets in China and Canada.",
     "True quality control begins at the source. Based in India's key stone hubs, including Kishangarh, our team handpicks the finest raw blocks and finishes them in state-of-the-art factories to strict international export standards.",
   ].join("\n\n"),

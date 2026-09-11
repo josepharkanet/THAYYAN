@@ -12,7 +12,7 @@ import { WhatsAppIcon } from "@/components/site/icons";
 export const metadata: Metadata = {
   title: "Services",
   description:
-    "Complete stone solutions from Stonic Export — global cemetery works, professional installation & fitting, and worldwide shipping & forwarding.",
+    "Complete stone solutions from Stonic Export, global cemetery works, professional installation & fitting, and worldwide shipping & forwarding.",
 };
 
 const SERVICE_ICONS = { mountain: Mountain, factory: Factory, ship: Ship };
@@ -36,7 +36,7 @@ export default async function ServicesPage() {
             Our Services
           </h1>
           <p className="mx-auto mt-6 max-w-xl text-base leading-relaxed text-paper/60">
-            Complete stone solutions — from premium sourcing to professional
+            Complete stone solutions, from premium sourcing to professional
             installation and worldwide delivery.
           </p>
         </div>
@@ -172,7 +172,7 @@ export default async function ServicesPage() {
               Ready to start your project?
             </h2>
             <p className="mx-auto mt-6 max-w-xl text-base leading-relaxed text-paper/60">
-              Residential, commercial or large-scale — we combine precision,
+              Residential, commercial or large-scale, we combine precision,
               reliability and craftsmanship to bring your vision to life.
             </p>
             <div className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">

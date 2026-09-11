@@ -33,7 +33,7 @@ export default async function LoginPage({
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             src="/logo.png"
-            alt="Stonic — Marble & Granite"
+            alt="Stonic Marble & Granite"
             className="h-10 w-auto brightness-0 invert"
           />
           <div>
@@ -41,7 +41,7 @@ export default async function LoginPage({
               Content Studio
             </p>
             <p className="mt-3 max-w-sm text-sm text-white/60">
-              Manage products, categories and site content — everything on the
+              Manage products, categories and site content, everything on the
               website is editable from here.
             </p>
           </div>

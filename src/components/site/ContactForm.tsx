@@ -134,7 +134,7 @@ export default function ContactForm({
         </button>
       </div>
       <p className="text-xs leading-relaxed text-ink-3">
-        Your details open a pre-filled message in WhatsApp or your email app — nothing
+        Your details open a pre-filled message in WhatsApp or your email app, nothing
         is stored on this site.
       </p>
     </form>

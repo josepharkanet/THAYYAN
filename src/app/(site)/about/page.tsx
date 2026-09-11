@@ -9,7 +9,7 @@ import SectionHeading from "@/components/site/SectionHeading";
 export const metadata: Metadata = {
   title: "About Us",
   description:
-    "Stonic Export — years of excellence in natural stone exports. Founded by Shijo Thayyil, delivering premium Indian marble, granite and natural stone worldwide.",
+    "Stonic Export, years of excellence in natural stone exports. Founded by Shijo Thayyil, delivering premium Indian marble, granite and natural stone worldwide.",
 };
 
 const OFFERINGS = [
@@ -42,7 +42,7 @@ export default async function AboutPage() {
             {settings.siteName} is a premier source for premium Indian natural
             stone. With over 12 years of hands-on experience, we&rsquo;ve built a
             reputation for delivering exceptional marble, granite and natural stone
-            to clients across the Middle East — and, increasingly, worldwide.
+            to clients across the Middle East, and, increasingly, worldwide.
           </p>
         </div>
       </section>

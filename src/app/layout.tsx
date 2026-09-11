@@ -22,11 +22,11 @@ const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://www.stonicexport.co
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title: {
-    default: "Stonic Export — India's Finest Natural Stones",
-    template: "%s — Stonic Export",
+    default: "Stonic Export · India's Finest Natural Stones",
+    template: "%s · Stonic Export",
   },
   description:
-    "Stonic Export (Stonic Marbles & Granites) supplies premium Indian marble, granite, Kota, Tandoor and natural stone worldwide — 12+ years of quarry-direct export excellence.",
+    "Stonic Export (Stonic Marbles & Granites) supplies premium Indian marble, granite, Kota, Tandoor and natural stone worldwide, with 12+ years of quarry-direct export excellence.",
   keywords: [
     "Indian marble",
     "Kishangarh marble",
@@ -40,9 +40,9 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     siteName: "Stonic Export",
-    title: "Stonic Export — India's Finest Natural Stones",
+    title: "Stonic Export · India's Finest Natural Stones",
     description:
-      "Premium Indian marble, granite & natural stone — direct from the quarries to the global market.",
+      "Premium Indian marble, granite & natural stone, direct from the quarries to the global market.",
     url: siteUrl,
     images: ["/hero.jpg"],
   },

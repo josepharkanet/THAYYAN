@@ -21,7 +21,7 @@ export default function Footer({ settings, categories }: FooterProps) {
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
               src="/logo.png"
-              alt="Stonic — Marble & Granite"
+              alt="Stonic Marble & Granite"
               className="h-9 w-auto brightness-0 invert"
             />
             <p className="mt-5 max-w-xs text-sm leading-relaxed text-paper/55">

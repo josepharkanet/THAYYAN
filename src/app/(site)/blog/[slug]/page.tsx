@@ -133,7 +133,7 @@ export default async function BlogPostPage({
           <div>
             <p className="font-serif text-2xl text-paper">Have a project in mind?</p>
             <p className="mt-1 text-sm text-paper/60">
-              Quarry-direct stone, delivered across Kerala &amp; India — with laying and after-sales service.
+              Quarry-direct stone, delivered across Kerala &amp; India, with laying and after-sales service.
             </p>
           </div>
           <a
