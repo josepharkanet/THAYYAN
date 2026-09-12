@@ -239,8 +239,8 @@ export default async function HomePage() {
           </Reveal>
           <div className="mt-14 grid grid-cols-1 gap-6 md:grid-cols-3">
             {SERVICES.map((s, i) => (
-              <Reveal key={s.id} delay={i * 100}>
-                <Link href="/services" className="group block bg-paper">
+              <Reveal key={s.id} delay={i * 100} className="h-full">
+                <Link href="/services" className="group flex h-full flex-col bg-paper">
                   <div className="relative aspect-[4/3] overflow-hidden">
                     {/* eslint-disable-next-line @next/next/no-img-element */}
                     <img
@@ -253,11 +253,13 @@ export default async function HomePage() {
                       0{i + 1}
                     </span>
                   </div>
-                  <div className="p-6">
+                  <div className="flex flex-1 flex-col p-6">
                     <p className="text-[0.68rem] font-medium uppercase tracking-[0.2em] text-sage">
                       {s.subtitle}
                     </p>
-                    <h3 className="mt-2 font-serif text-2xl text-ink">{s.title}</h3>
+                    <h3 className="mt-2 line-clamp-2 min-h-[3.4rem] font-serif text-2xl leading-[1.15] text-ink">
+                      {s.title}
+                    </h3>
                     <p className="mt-2 line-clamp-2 text-sm leading-relaxed text-ink-2">
                       {s.description}
                     </p>
