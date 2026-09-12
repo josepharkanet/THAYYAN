@@ -143,27 +143,21 @@ export default function Footer({ settings, categories }: FooterProps) {
           </div>
         </div>
 
-        {/* Legal / compliance (GST integrated, not a line item) */}
-        <p className="mt-14 max-w-3xl border-t border-paper/10 pt-8 text-xs leading-relaxed text-paper/35">
-          Stonic Marbles &amp; Granites operates with complete transparency and full
-          international compliance; all company registration and GST details are
-          integrated into our official billing and export documentation.
-        </p>
-
-        <div className="mt-6 flex flex-col items-start justify-between gap-4 text-xs text-paper/40 sm:flex-row sm:items-center">
+        {/* Bottom credit bar */}
+        <div className="mt-14 flex flex-col items-start justify-between gap-4 border-t border-paper/10 pt-8 text-xs text-paper/40 sm:flex-row sm:items-center">
           <p>© {year} {settings.siteName} (Stonic Marbles &amp; Granites). All rights reserved.</p>
-          <div className="flex items-center gap-6">
-            <p>Proprietor: {settings.proprietorName}</p>
-            <a
-              href="https://arkanet.in"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-1 text-paper/40 transition-colors hover:text-paper/70"
-            >
-              Developed by : Arkanet Technologies <ArrowUpRight size={12} />
-            </a>
-          </div>
+          <a
+            href="https://arkanet.in"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-1 text-paper/40 transition-colors hover:text-paper/70"
+          >
+            Developed by : Arkanet Technologies <ArrowUpRight size={12} />
+          </a>
         </div>
+
+        {/* Narrow line below the footer credit */}
+        <div className="mt-8 border-t border-paper/10" />
       </div>
     </footer>
   );
