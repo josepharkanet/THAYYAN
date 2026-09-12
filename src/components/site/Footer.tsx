@@ -154,6 +154,14 @@ export default function Footer({ settings, categories }: FooterProps) {
           <p>© {year} {settings.siteName} (Stonic Marbles &amp; Granites). All rights reserved.</p>
           <div className="flex items-center gap-6">
             <p>Proprietor: {settings.proprietorName}</p>
+            <a
+              href="https://arkanet.in"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-1 text-paper/40 transition-colors hover:text-paper/70"
+            >
+              Dev Arkanet <ArrowUpRight size={12} />
+            </a>
             <Link
               href="/admin"
               className="inline-flex items-center gap-1 text-paper/30 transition-colors hover:text-paper/70"

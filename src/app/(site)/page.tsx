@@ -73,12 +73,6 @@ export default async function HomePage() {
                 Explore Collection
                 <ArrowRight size={17} className="transition-transform group-hover:translate-x-1" />
               </Link>
-              <Link
-                href="/contact"
-                className="inline-flex items-center gap-2.5 border border-white/50 px-8 py-4 text-[0.75rem] font-semibold uppercase tracking-[0.14em] text-white transition-colors hover:bg-white/10"
-              >
-                Request a Quote
-              </Link>
             </div>
           </div>
         </div>

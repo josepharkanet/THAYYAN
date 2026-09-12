@@ -8,11 +8,11 @@ import { cn, whatsappLink } from "@/lib/utils";
 
 const NAV = [
   { href: "/", label: "Home" },
+  { href: "/about", label: "About" },
   { href: "/products", label: "Products" },
   { href: "/services", label: "Services" },
   { href: "/works", label: "Works" },
   { href: "/blog", label: "Blog" },
-  { href: "/about", label: "About" },
   { href: "/contact", label: "Contact" },
 ];
 
@@ -51,10 +51,10 @@ export default function Header({
   return (
     <header
       className={cn(
-        "fixed inset-x-0 top-0 z-50 transition-all duration-500",
+        "fixed inset-x-0 top-0 z-50 border-b transition-all duration-500",
         light
-          ? "bg-transparent"
-          : "glass border-b border-line/70",
+          ? "border-white/15 bg-transparent"
+          : "glass border-line/70",
       )}
     >
       <div className="mx-auto flex h-20 max-w-7xl items-center justify-between px-5 sm:px-8 lg:px-12">

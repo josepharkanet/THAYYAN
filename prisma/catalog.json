@@ -1011,6 +1011,91 @@
         "/product-images/split-face-stone-cladding/g6.jpg",
         "/product-images/split-face-stone-cladding/g7.jpg"
       ]
+    },
+    {
+      "slug": "italian-ivory-marble",
+      "name": "Italian Ivory Marble",
+      "categoryId": "marble",
+      "description": "An imported Italian marble in a soft ivory tone with delicate, barely-there veining — a serene, light backdrop for luxury flooring, feature walls and countertops.",
+      "origin": "Italy",
+      "finish": "Polished",
+      "thickness": "16-18mm",
+      "featured": false,
+      "sortOrder": 18,
+      "applications": [
+        "Flooring",
+        "Wall Cladding",
+        "Countertops",
+        "Feature Walls"
+      ],
+      "imageUrl": "/product-images/italian-ivory-marble/main.jpg",
+      "gallery": [
+        "/product-images/italian-ivory-marble/g1.jpg"
+      ]
+    },
+    {
+      "slug": "italian-beige-marble",
+      "name": "Italian Beige Marble",
+      "categoryId": "marble",
+      "description": "A warm, creamy beige Italian marble with gentle taupe and brown veining — a timeless, inviting shade that suits both classic and contemporary interiors.",
+      "origin": "Italy",
+      "finish": "Polished",
+      "thickness": "16-18mm",
+      "featured": true,
+      "sortOrder": 19,
+      "applications": [
+        "Flooring",
+        "Wall Cladding",
+        "Countertops",
+        "Staircases"
+      ],
+      "imageUrl": "/product-images/italian-beige-marble/main.jpg",
+      "gallery": [
+        "/product-images/italian-beige-marble/g1.jpg",
+        "/product-images/italian-beige-marble/g2.jpg"
+      ]
+    },
+    {
+      "slug": "italian-gold-marble",
+      "name": "Italian Gold Marble",
+      "categoryId": "marble",
+      "description": "A refined cream Italian marble threaded with golden-brown veins — an elegant, warm-toned statement stone for lobbies, bathrooms and premium feature surfaces.",
+      "origin": "Italy",
+      "finish": "Polished",
+      "thickness": "16-18mm",
+      "featured": false,
+      "sortOrder": 20,
+      "applications": [
+        "Flooring",
+        "Wall Cladding",
+        "Countertops",
+        "Feature Walls"
+      ],
+      "imageUrl": "/product-images/italian-gold-marble/main.jpg",
+      "gallery": [
+        "/product-images/italian-gold-marble/g1.jpg"
+      ]
+    },
+    {
+      "slug": "italian-grey-marble",
+      "name": "Italian Grey Marble",
+      "categoryId": "marble",
+      "description": "A dramatic light-toned Italian marble with bold grey and smoky brown veining — a characterful shade that turns floors and walls into a natural centrepiece.",
+      "origin": "Italy",
+      "finish": "Polished",
+      "thickness": "16-18mm",
+      "featured": false,
+      "sortOrder": 21,
+      "applications": [
+        "Flooring",
+        "Wall Cladding",
+        "Feature Walls",
+        "Countertops"
+      ],
+      "imageUrl": "/product-images/italian-grey-marble/main.jpg",
+      "gallery": [
+        "/product-images/italian-grey-marble/g1.jpg"
+      ]
     }
   ]
 }
