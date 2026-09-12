@@ -9,12 +9,26 @@ import SectionHeading from "@/components/site/SectionHeading";
 import CategoryCard from "@/components/site/CategoryCard";
 import ProductCard from "@/components/site/ProductCard";
 import Marquee from "@/components/site/Marquee";
+import HexGallery from "@/components/site/HexGallery";
 import { WhatsAppIcon } from "@/components/site/icons";
 
 const VALUE_ICONS = { mountain: Mountain, globe: Globe2, gem: Gem, award: Award };
 
+// Varied textures for the honeycomb gallery.
+const GALLERY_SLUGS = [
+  "arna-white-marble",
+  "majestic-black-granite",
+  "cobblestones",
+  "lakha-red-granite",
+  "natural-stone-wall-cladding",
+  "kota-stone",
+  "river-green-granite",
+  "wood-marble",
+  "katni-marble",
+];
+
 export default async function HomePage() {
-  const [settings, categories, featured] = await Promise.all([
+  const [settings, categories, featured, galleryRows] = await Promise.all([
     getSettings(),
     prisma.category.findMany({ orderBy: { sortOrder: "asc" } }),
     prisma.product.findMany({
@@ -23,7 +37,17 @@ export default async function HomePage() {
       take: 3,
       include: { category: { select: { name: true } } },
     }),
+    prisma.product.findMany({
+      where: { slug: { in: GALLERY_SLUGS } },
+      select: { slug: true, imageUrl: true, name: true },
+    }),
   ]);
+
+  const galleryImages = GALLERY_SLUGS.map((slug) =>
+    galleryRows.find((p) => p.slug === slug),
+  )
+    .filter((p): p is NonNullable<typeof p> => Boolean(p))
+    .map((p) => ({ url: p.imageUrl, name: p.name }));
 
   return (
     <>
@@ -194,6 +218,24 @@ export default async function HomePage() {
                 />
               </Reveal>
             ))}
+          </div>
+        </section>
+      ) : null}
+
+      {/* ──────────────────── Stone Gallery ──────────────────── */}
+      {galleryImages.length >= 9 ? (
+        <section className="border-t border-line">
+          <div className="mx-auto max-w-7xl px-5 py-24 sm:px-8 sm:py-32 lg:px-12">
+            <Reveal>
+              <SectionHeading
+                eyebrow="Gallery"
+                title="Stone, up close"
+                description="A closer look at the marble, granite and natural stone we source, finish and deliver."
+              />
+            </Reveal>
+            <Reveal className="mt-16 flex justify-center">
+              <HexGallery images={galleryImages} />
+            </Reveal>
           </div>
         </section>
       ) : null}

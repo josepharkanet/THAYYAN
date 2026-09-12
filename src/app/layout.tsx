@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
-import { Jost, Manrope } from "next/font/google";
+import { Montserrat, Manrope } from "next/font/google";
 import "./globals.css";
 
-// Elegant geometric sans for headings (flat, modern, architectural).
-const display = Jost({
+// Geometric sans for headings (matches the brand collage; flat & modern).
+const display = Montserrat({
   subsets: ["latin"],
   weight: ["300", "400", "500", "600", "700"],
   variable: "--font-display",
