@@ -69,7 +69,7 @@ export default async function HomePage() {
               <span className="h-px w-8 bg-white/30" />
               <span>Kishangarh · India</span>
             </div>
-            <h1 className="mt-6 font-serif text-[3.3rem] font-light leading-[0.94] text-white sm:text-[5rem] lg:text-[6.4rem]">
+            <h1 className="mt-6 font-serif text-[2.6rem] font-light leading-[0.98] text-white sm:text-[3.7rem] lg:text-[4.6rem]">
               {settings.heroTitle}
             </h1>
             <p className="mt-8 max-w-lg text-base leading-relaxed text-white/80 sm:text-lg">
@@ -125,7 +125,7 @@ export default async function HomePage() {
               <span className="h-px w-8 bg-sage/50" />
               <p className="eyebrow">Since {settings.foundedYear}</p>
             </div>
-            <h2 className="mt-6 font-serif text-[2.6rem] font-light leading-[1.02] text-ink sm:text-[4rem]">
+            <h2 className="mt-6 font-serif text-[2.1rem] font-light leading-[1.05] text-ink sm:text-[3rem]">
               We bring the timeless beauty of India&rsquo;s natural stone to the world.
             </h2>
           </Reveal>
@@ -193,7 +193,7 @@ export default async function HomePage() {
                 <span className="h-px w-8 bg-sage/50" />
                 <p className="eyebrow">Featured</p>
               </div>
-              <h2 className="mt-5 font-serif text-[2.3rem] font-light leading-tight text-ink sm:text-[3.4rem]">
+              <h2 className="mt-5 font-serif text-[1.9rem] font-light leading-tight text-ink sm:text-[2.6rem]">
                 Signature selections
               </h2>
             </div>
@@ -308,7 +308,7 @@ export default async function HomePage() {
             <p className="text-[0.72rem] font-medium uppercase tracking-[0.3em] text-sage">
               Let&rsquo;s Work Together
             </p>
-            <h2 className="mx-auto mt-5 max-w-2xl font-serif text-[2.6rem] font-light leading-[1.02] text-paper sm:text-[3.8rem]">
+            <h2 className="mx-auto mt-5 max-w-2xl font-serif text-[2.1rem] font-light leading-[1.05] text-paper sm:text-[2.9rem]">
               Ready to transform your space?
             </h2>
             <p className="mx-auto mt-6 max-w-xl text-base leading-relaxed text-paper/60">

@@ -90,7 +90,7 @@ export default async function ProductDetailPage({
             <p className="text-[0.7rem] font-medium uppercase tracking-[0.2em] text-sage">
               {product.category.name}
             </p>
-            <h1 className="mt-3 font-serif text-[2.4rem] font-light leading-[1.05] text-ink sm:text-[3.2rem]">
+            <h1 className="mt-3 font-serif text-[2rem] font-light leading-[1.08] text-ink sm:text-[2.7rem]">
               {product.name}
             </h1>
             {product.description ? (

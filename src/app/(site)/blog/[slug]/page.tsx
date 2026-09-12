@@ -96,7 +96,7 @@ export default async function BlogPostPage({
         <p className="mt-8 text-[0.7rem] font-medium uppercase tracking-[0.2em] text-sage">
           {formatDate(post.publishedAt)}
         </p>
-        <h1 className="mt-4 font-serif text-[2.3rem] font-light leading-[1.08] text-ink sm:text-[3.1rem]">
+        <h1 className="mt-4 font-serif text-[2rem] font-light leading-[1.1] text-ink sm:text-[2.6rem]">
           {post.title}
         </h1>
         {post.excerpt ? (

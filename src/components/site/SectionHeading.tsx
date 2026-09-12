@@ -34,7 +34,7 @@ export default function SectionHeading({
         <span className="h-px w-8 bg-sage/50" />
         {eyebrow ? <p className="eyebrow">{eyebrow}</p> : null}
       </div>
-      <h2 className="mt-5 font-serif text-[2.3rem] font-light leading-[1.04] text-ink sm:text-[3.4rem]">
+      <h2 className="mt-5 font-serif text-[1.9rem] font-light leading-[1.05] text-ink sm:text-[2.6rem]">
         {title}
       </h2>
       {description ? (

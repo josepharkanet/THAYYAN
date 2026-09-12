@@ -32,7 +32,7 @@ export default async function ServicesPage() {
           <p className="text-[0.72rem] font-medium uppercase tracking-[0.3em] text-sage">
             What We Offer
           </p>
-          <h1 className="mt-5 font-serif text-[2.8rem] font-light leading-[1.02] text-paper sm:text-[4.2rem]">
+          <h1 className="mt-5 font-serif text-[2.3rem] font-light leading-[1.04] text-paper sm:text-[3.2rem]">
             Our Services
           </h1>
           <p className="mx-auto mt-6 max-w-xl text-base leading-relaxed text-paper/60">
@@ -83,7 +83,7 @@ export default async function ServicesPage() {
                       {s.subtitle}
                     </p>
                   </div>
-                  <h3 className="mt-5 font-serif text-[2.2rem] leading-tight text-ink sm:text-[3rem]">
+                  <h3 className="mt-5 font-serif text-[1.9rem] leading-tight text-ink sm:text-[2.5rem]">
                     {s.title}
                   </h3>
                   <p className="mt-5 text-base leading-relaxed text-ink-2">{s.description}</p>

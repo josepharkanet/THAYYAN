@@ -35,7 +35,7 @@ export default async function AboutPage() {
       <section className="border-b border-line bg-paper-2/40 px-5 pb-16 pt-32 sm:px-8 sm:pt-40 lg:px-12">
         <div className="mx-auto max-w-7xl">
           <p className="eyebrow">About Us</p>
-          <h1 className="mt-5 max-w-4xl font-serif text-[2.6rem] font-light leading-[1.02] text-ink sm:text-[4.2rem]">
+          <h1 className="mt-5 max-w-4xl font-serif text-[2.2rem] font-light leading-[1.04] text-ink sm:text-[3.1rem]">
             Crafting excellence since {settings.foundedYear}
           </h1>
           <p className="mt-6 max-w-2xl text-base leading-relaxed text-ink-2 sm:text-lg">
