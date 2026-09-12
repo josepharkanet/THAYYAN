@@ -36,7 +36,7 @@ export const SETTING_DEFAULTS = {
     "We have established a strong, reliable export network across the Middle East, successfully supplying premium projects in Bahrain, Saudi Arabia, Kuwait and Qatar. Driven by a vision for global expansion, we are extending our operations to introduce our premium stone to markets in China and Canada.",
     "True quality control begins at the source. Based in India's key stone hubs, including Kishangarh, our team handpicks the finest raw blocks and finishes them in state-of-the-art factories to strict international export standards.",
   ].join("\n\n"),
-  aboutImage: "https://images.unsplash.com/photo-1694378061058-bb6532de3bba?q=80&w=1200",
+  aboutImage: "/about/shijo-thayyil.jpg",
 
   proprietorName: "Shijo Thayyil",
   proprietorRole: "Proprietor",
