@@ -1,34 +1,19 @@
 import Link from "next/link";
-import { ArrowRight, ArrowDown, Award, Globe2, Gem, Mountain } from "lucide-react";
+import { ArrowRight, ArrowUpRight, ArrowDown, Award, Globe2, Gem, Mountain } from "lucide-react";
 import { prisma } from "@/lib/db";
 import { getSettings } from "@/lib/settings";
 import { SERVICES, VALUES } from "@/lib/content";
 import { whatsappLink } from "@/lib/utils";
 import Reveal from "@/components/site/Reveal";
 import SectionHeading from "@/components/site/SectionHeading";
-import CategoryCard from "@/components/site/CategoryCard";
 import ProductCard from "@/components/site/ProductCard";
 import Marquee from "@/components/site/Marquee";
-import HexGallery from "@/components/site/HexGallery";
 import { WhatsAppIcon } from "@/components/site/icons";
 
 const VALUE_ICONS = { mountain: Mountain, globe: Globe2, gem: Gem, award: Award };
 
-// Varied textures for the honeycomb gallery.
-const GALLERY_SLUGS = [
-  "arna-white-marble",
-  "majestic-black-granite",
-  "cobblestones",
-  "lakha-red-granite",
-  "natural-stone-wall-cladding",
-  "kota-stone",
-  "river-green-granite",
-  "wood-marble",
-  "katni-marble",
-];
-
 export default async function HomePage() {
-  const [settings, categories, featured, galleryRows] = await Promise.all([
+  const [settings, categories, featured] = await Promise.all([
     getSettings(),
     prisma.category.findMany({ orderBy: { sortOrder: "asc" } }),
     prisma.product.findMany({
@@ -37,28 +22,23 @@ export default async function HomePage() {
       take: 3,
       include: { category: { select: { name: true } } },
     }),
-    prisma.product.findMany({
-      where: { slug: { in: GALLERY_SLUGS } },
-      select: { slug: true, imageUrl: true, name: true },
-    }),
   ]);
-
-  const galleryImages = GALLERY_SLUGS.map((slug) =>
-    galleryRows.find((p) => p.slug === slug),
-  )
-    .filter((p): p is NonNullable<typeof p> => Boolean(p))
-    .map((p) => ({ url: p.imageUrl, name: p.name }));
 
   return (
     <>
       {/* ───────────────────────── Hero ───────────────────────── */}
       <section className="relative flex min-h-[100svh] items-center overflow-hidden">
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
-          src={settings.heroImage}
-          alt="Premium natural stone"
+        <video
           className="absolute inset-0 h-full w-full object-cover"
-        />
+          autoPlay
+          muted
+          loop
+          playsInline
+          preload="auto"
+          poster="/hero-poster.jpg"
+        >
+          <source src="/hero.mp4" type="video/mp4" />
+        </video>
         <div className="absolute inset-0 bg-gradient-to-b from-ink/55 via-ink/25 to-ink/80" />
         <div className="absolute inset-0 bg-gradient-to-r from-ink/75 via-ink/10 to-transparent" />
 
@@ -171,14 +151,38 @@ export default async function HomePage() {
               description="A curated range of premium Indian stone: marble, granite, natural stones and cladding."
             />
           </Reveal>
-          <Reveal className="mt-14 grid grid-cols-1 gap-4 sm:grid-cols-2">
+          <Reveal className="mt-12 border-t border-line-2">
             {categories.map((c, i) => (
-              <CategoryCard
+              <Link
                 key={c.id}
-                category={c}
-                index={String(i + 1).padStart(2, "0")}
-                className="h-[420px] lg:h-[520px]"
-              />
+                href={`/products?category=${c.id}`}
+                className="group flex items-center gap-5 border-b border-line-2 py-6 sm:gap-8 sm:py-8"
+              >
+                <span className="index-numeral w-9 shrink-0 text-2xl text-ink-3 transition-colors group-hover:text-sage sm:w-16 sm:text-3xl">
+                  0{i + 1}
+                </span>
+                <div className="min-w-0 flex-1">
+                  <h3 className="font-serif text-[1.7rem] font-light leading-none text-ink transition-colors group-hover:text-sage sm:text-[3rem]">
+                    {c.name}
+                  </h3>
+                  <p className="mt-2 hidden max-w-md text-sm leading-relaxed text-ink-2 sm:block">
+                    {c.description}
+                  </p>
+                </div>
+                <div className="relative h-16 w-24 shrink-0 overflow-hidden bg-paper-2 sm:h-24 sm:w-40">
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
+                    src={c.imageUrl ?? ""}
+                    alt={c.name}
+                    loading="lazy"
+                    className="h-full w-full object-cover grayscale transition-all duration-700 group-hover:scale-105 group-hover:grayscale-0"
+                  />
+                </div>
+                <ArrowUpRight
+                  size={26}
+                  className="hidden shrink-0 text-ink-3 transition-all group-hover:-translate-y-1 group-hover:translate-x-1 group-hover:text-sage sm:block"
+                />
+              </Link>
             ))}
           </Reveal>
         </div>
@@ -218,24 +222,6 @@ export default async function HomePage() {
                 />
               </Reveal>
             ))}
-          </div>
-        </section>
-      ) : null}
-
-      {/* ──────────────────── Stone Gallery ──────────────────── */}
-      {galleryImages.length >= 9 ? (
-        <section className="border-t border-line">
-          <div className="mx-auto max-w-7xl px-5 py-24 sm:px-8 sm:py-32 lg:px-12">
-            <Reveal>
-              <SectionHeading
-                eyebrow="Gallery"
-                title="Stone, up close"
-                description="A closer look at the marble, granite and natural stone we source, finish and deliver."
-              />
-            </Reveal>
-            <Reveal className="mt-16 flex justify-center">
-              <HexGallery images={galleryImages} />
-            </Reveal>
           </div>
         </section>
       ) : null}

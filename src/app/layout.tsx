@@ -44,7 +44,7 @@ export const metadata: Metadata = {
     description:
       "Premium Indian marble, granite & natural stone, direct from the quarries to the global market.",
     url: siteUrl,
-    images: ["/hero.jpg"],
+    images: ["/hero-poster.jpg"],
   },
   robots: { index: true, follow: true },
 };
