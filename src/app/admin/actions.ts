@@ -336,3 +336,58 @@ export async function deleteValue(id: string) {
   revalidateSite();
   return { ok: true };
 }
+
+/* ────────────────────────────── Works ─────────────────────────────── */
+
+const workSchema = z.object({
+  id: z.string().optional(),
+  title: z.string().min(1, "Title is required"),
+  slug: z.string().optional(),
+  category: z.string().optional().default(""),
+  location: z.string().optional().default(""),
+  year: z.string().optional().default(""),
+  description: z.string().optional().default(""),
+  imageUrl: z.string().min(1, "A cover image is required"),
+  gallery: z.array(z.string()).optional().default([]),
+  featured: z.boolean().optional().default(false),
+  sortOrder: z.number().optional().default(0),
+});
+export type WorkInput = z.input<typeof workSchema>;
+
+async function uniqueWorkSlug(base: string, ignoreId?: string) {
+  let slug = slugify(base) || "project";
+  const existing = await prisma.work.findUnique({ where: { slug } });
+  if (existing && existing.id !== ignoreId) {
+    slug = `${slug}-${Math.random().toString(36).slice(2, 6)}`;
+  }
+  return slug;
+}
+
+export async function upsertWork(input: WorkInput) {
+  await requireAdmin();
+  const d = workSchema.parse(input);
+  const slug = await uniqueWorkSlug(d.slug || d.title, d.id);
+  const data = {
+    title: d.title,
+    slug,
+    category: d.category || "",
+    location: d.location || null,
+    year: d.year || null,
+    description: d.description || null,
+    imageUrl: d.imageUrl,
+    gallery: JSON.stringify((d.gallery ?? []).filter(Boolean)),
+    featured: d.featured,
+    sortOrder: d.sortOrder ?? 0,
+  };
+  if (d.id) await prisma.work.update({ where: { id: d.id }, data });
+  else await prisma.work.create({ data });
+  revalidateSite();
+  return { ok: true };
+}
+
+export async function deleteWork(id: string) {
+  await requireAdmin();
+  await prisma.work.delete({ where: { id } });
+  revalidateSite();
+  return { ok: true };
+}

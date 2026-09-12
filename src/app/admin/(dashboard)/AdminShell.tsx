@@ -10,6 +10,7 @@ import {
   Newspaper,
   Wrench,
   Sparkles,
+  Hammer,
   Settings,
   ExternalLink,
   LogOut,
@@ -25,6 +26,7 @@ const NAV = [
   { href: "/admin/categories", label: "Categories", icon: Layers },
   { href: "/admin/blog", label: "Blog", icon: Newspaper },
   { href: "/admin/services", label: "Services", icon: Wrench },
+  { href: "/admin/works", label: "Works", icon: Hammer },
   { href: "/admin/values", label: "Values", icon: Sparkles },
   { href: "/admin/settings", label: "Site Content", icon: Settings },
 ];

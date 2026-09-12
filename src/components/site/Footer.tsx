@@ -74,6 +74,7 @@ export default function Footer({ settings, categories }: FooterProps) {
               {[
                 { href: "/products", label: "Products" },
                 { href: "/services", label: "Services" },
+                { href: "/works", label: "Works" },
                 { href: "/blog", label: "Blog" },
                 { href: "/about", label: "About Us" },
                 { href: "/contact", label: "Contact" },

@@ -110,6 +110,28 @@ model Value {
   @@index([sortOrder])
 }
 
+/// Completed projects / installations shown on the "Works" page.
+model Work {
+  id          String   @id @default(cuid())
+  slug        String   @unique
+  title       String
+  /// e.g. "Flooring", "Landscaping", "Cladding", "Paving".
+  category    String   @default("")
+  location    String?
+  year        String?
+  description String?
+  imageUrl    String
+  /// JSON-encoded string array of extra gallery image URLs.
+  gallery     String?
+  featured    Boolean  @default(false)
+  sortOrder   Int      @default(0)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@index([sortOrder])
+  @@index([featured])
+}
+
 /// Blog / journal articles (SEO content), managed from the dashboard.
 model Post {
   id          String   @id @default(cuid())

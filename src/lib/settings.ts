@@ -4,8 +4,10 @@ import { parseApplications } from "./utils";
 import {
   SERVICE_DEFAULTS,
   VALUE_DEFAULTS,
+  WORK_DEFAULTS,
   type ServiceItem,
   type ValueItem,
+  type WorkItem,
 } from "./content";
 
 /**
@@ -105,5 +107,25 @@ export async function getValues(): Promise<ValueItem[]> {
     icon: r.icon,
     title: r.title,
     description: r.description,
+  }));
+}
+
+/** Completed projects for /works, from the DB (falls back to defaults). */
+export async function getWorks(): Promise<WorkItem[]> {
+  const rows = await prisma.work
+    .findMany({ orderBy: [{ sortOrder: "asc" }, { createdAt: "desc" }] })
+    .catch(() => []);
+  if (rows.length === 0) return WORK_DEFAULTS;
+  return rows.map((r) => ({
+    id: r.id,
+    slug: r.slug,
+    title: r.title,
+    category: r.category,
+    location: r.location ?? "",
+    year: r.year ?? "",
+    description: r.description ?? "",
+    imageUrl: r.imageUrl,
+    gallery: parseApplications(r.gallery),
+    featured: r.featured,
   }));
 }
