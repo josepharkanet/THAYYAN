@@ -34,9 +34,9 @@ export default async function LoginPage({
           <img
             src="/logo.png"
             alt="Stonic Marble & Granite"
-            className="h-8 w-auto brightness-0 invert"
+            className="absolute left-12 top-12 h-8 w-auto brightness-0 invert lg:left-16 lg:top-16"
           />
-          <p className="mt-12 font-serif text-4xl font-light leading-tight text-white">
+          <p className="font-serif text-4xl font-light leading-tight text-white">
             Content Studio
           </p>
           <p className="mt-3 max-w-sm text-sm leading-relaxed text-white/60">

@@ -160,14 +160,8 @@ export default function Footer({ settings, categories }: FooterProps) {
               rel="noopener noreferrer"
               className="inline-flex items-center gap-1 text-paper/40 transition-colors hover:text-paper/70"
             >
-              Dev Arkanet <ArrowUpRight size={12} />
+              Developed by : Arkanet Technologies <ArrowUpRight size={12} />
             </a>
-            <Link
-              href="/admin"
-              className="inline-flex items-center gap-1 text-paper/30 transition-colors hover:text-paper/70"
-            >
-              Admin <ArrowUpRight size={12} />
-            </Link>
           </div>
         </div>
       </div>
