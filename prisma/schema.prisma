@@ -80,6 +80,36 @@ model Setting {
   updatedAt DateTime @updatedAt
 }
 
+/// Homepage "Services" cards, managed from the dashboard.
+model Service {
+  id          String   @id @default(cuid())
+  icon        String   @default("mountain")
+  subtitle    String
+  title       String
+  description String
+  imageUrl    String
+  /// JSON string array of highlight bullets.
+  highlights  String?
+  sortOrder   Int      @default(0)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@index([sortOrder])
+}
+
+/// "Why choose us" value props, managed from the dashboard.
+model Value {
+  id          String   @id @default(cuid())
+  icon        String   @default("gem")
+  title       String
+  description String
+  sortOrder   Int      @default(0)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@index([sortOrder])
+}
+
 /// Blog / journal articles (SEO content), managed from the dashboard.
 model Post {
   id          String   @id @default(cuid())

@@ -264,3 +264,75 @@ export async function deletePost(id: string) {
   revalidateSite();
   return { ok: true };
 }
+
+/* ───────────────────────────── Services ───────────────────────────── */
+
+const serviceSchema = z.object({
+  id: z.string().optional(),
+  icon: z.string().default("mountain"),
+  subtitle: z.string().min(1, "Subtitle is required"),
+  title: z.string().min(1, "Title is required"),
+  description: z.string().min(1, "Description is required"),
+  imageUrl: z.string().min(1, "An image is required"),
+  highlights: z.array(z.string()).optional().default([]),
+  sortOrder: z.number().optional().default(0),
+});
+export type ServiceInput = z.input<typeof serviceSchema>;
+
+export async function upsertService(input: ServiceInput) {
+  await requireAdmin();
+  const d = serviceSchema.parse(input);
+  const data = {
+    icon: d.icon,
+    subtitle: d.subtitle,
+    title: d.title,
+    description: d.description,
+    imageUrl: d.imageUrl,
+    highlights: JSON.stringify(d.highlights ?? []),
+    sortOrder: d.sortOrder ?? 0,
+  };
+  if (d.id) await prisma.service.update({ where: { id: d.id }, data });
+  else await prisma.service.create({ data });
+  revalidateSite();
+  return { ok: true };
+}
+
+export async function deleteService(id: string) {
+  await requireAdmin();
+  await prisma.service.delete({ where: { id } });
+  revalidateSite();
+  return { ok: true };
+}
+
+/* ────────────────────────────── Values ────────────────────────────── */
+
+const valueSchema = z.object({
+  id: z.string().optional(),
+  icon: z.string().default("gem"),
+  title: z.string().min(1, "Title is required"),
+  description: z.string().min(1, "Description is required"),
+  sortOrder: z.number().optional().default(0),
+});
+export type ValueInput = z.input<typeof valueSchema>;
+
+export async function upsertValue(input: ValueInput) {
+  await requireAdmin();
+  const d = valueSchema.parse(input);
+  const data = {
+    icon: d.icon,
+    title: d.title,
+    description: d.description,
+    sortOrder: d.sortOrder ?? 0,
+  };
+  if (d.id) await prisma.value.update({ where: { id: d.id }, data });
+  else await prisma.value.create({ data });
+  revalidateSite();
+  return { ok: true };
+}
+
+export async function deleteValue(id: string) {
+  await requireAdmin();
+  await prisma.value.delete({ where: { id } });
+  revalidateSite();
+  return { ok: true };
+}

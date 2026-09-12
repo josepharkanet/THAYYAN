@@ -1,5 +1,12 @@
 import "server-only";
 import { prisma } from "./db";
+import { parseApplications } from "./utils";
+import {
+  SERVICE_DEFAULTS,
+  VALUE_DEFAULTS,
+  type ServiceItem,
+  type ValueItem,
+} from "./content";
 
 /**
  * Editable site content. Every value here can be overridden by Shijo from the
@@ -14,8 +21,10 @@ export const SETTING_DEFAULTS = {
   heroTitle: "Excellence in Indian Natural Stones",
   heroSubtitle:
     "Direct from the quarries to the global market, uncompromising quality for over 12 years.",
-  // Marketing hero uses polished stock imagery; real product photos live on the
-  // product pages. Replaceable from the dashboard.
+  // Marketing hero. If heroVideo is set it plays as the background; otherwise
+  // heroImage shows. heroPoster is the still shown before the video loads.
+  heroVideo: "/hero.mp4",
+  heroPoster: "/hero-poster.jpg",
   heroImage: "https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?q=80&w=2000",
 
   // About
@@ -66,4 +75,35 @@ export async function getSettings(): Promise<SiteSettings> {
         : String(SETTING_DEFAULTS[key]);
   }
   return result;
+}
+
+/** Homepage/Services "Services", from the DB (falls back to defaults). */
+export async function getServices(): Promise<ServiceItem[]> {
+  const rows = await prisma.service
+    .findMany({ orderBy: { sortOrder: "asc" } })
+    .catch(() => []);
+  if (rows.length === 0) return SERVICE_DEFAULTS;
+  return rows.map((r) => ({
+    id: r.id,
+    icon: r.icon,
+    subtitle: r.subtitle,
+    title: r.title,
+    description: r.description,
+    imageUrl: r.imageUrl,
+    highlights: parseApplications(r.highlights),
+  }));
+}
+
+/** "Why choose us" value props, from the DB (falls back to defaults). */
+export async function getValues(): Promise<ValueItem[]> {
+  const rows = await prisma.value
+    .findMany({ orderBy: { sortOrder: "asc" } })
+    .catch(() => []);
+  if (rows.length === 0) return VALUE_DEFAULTS;
+  return rows.map((r) => ({
+    id: r.id,
+    icon: r.icon,
+    title: r.title,
+    description: r.description,
+  }));
 }

@@ -6,14 +6,21 @@ import { getSession } from "@/lib/auth";
 
 export const runtime = "nodejs";
 
-const MAX_BYTES = 8 * 1024 * 1024; // 8 MB
-const EXT: Record<string, string> = {
+const MAX_IMAGE = 8 * 1024 * 1024; // 8 MB
+const MAX_VIDEO = 64 * 1024 * 1024; // 64 MB
+const IMAGE_EXT: Record<string, string> = {
   "image/jpeg": "jpg",
   "image/png": "png",
   "image/webp": "webp",
   "image/avif": "avif",
   "image/gif": "gif",
 };
+const VIDEO_EXT: Record<string, string> = {
+  "video/mp4": "mp4",
+  "video/webm": "webm",
+  "video/quicktime": "mov",
+};
+const EXT: Record<string, string> = { ...IMAGE_EXT, ...VIDEO_EXT };
 
 function uploadDir() {
   return path.resolve(process.cwd(), process.env.UPLOAD_DIR || "./public/uploads");
@@ -33,13 +40,15 @@ export async function POST(req: NextRequest) {
   const ext = EXT[file.type];
   if (!ext) {
     return NextResponse.json(
-      { error: "Unsupported file type. Use JPG, PNG, WEBP, AVIF or GIF." },
+      { error: "Unsupported file type. Use an image (JPG/PNG/WEBP) or video (MP4/WEBM)." },
       { status: 415 },
     );
   }
-  if (file.size > MAX_BYTES) {
+  const isVideo = file.type.startsWith("video/");
+  const limit = isVideo ? MAX_VIDEO : MAX_IMAGE;
+  if (file.size > limit) {
     return NextResponse.json(
-      { error: "File too large (max 8 MB)." },
+      { error: `File too large (max ${isVideo ? "64" : "8"} MB).` },
       { status: 413 },
     );
   }

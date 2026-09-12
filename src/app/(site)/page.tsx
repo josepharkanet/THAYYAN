@@ -1,8 +1,8 @@
 import Link from "next/link";
-import { ArrowRight, ArrowUpRight, ArrowDown, Award, Globe2, Gem, Mountain } from "lucide-react";
+import { ArrowRight, ArrowUpRight, ArrowDown } from "lucide-react";
 import { prisma } from "@/lib/db";
-import { getSettings } from "@/lib/settings";
-import { SERVICES, VALUES } from "@/lib/content";
+import { getSettings, getServices, getValues } from "@/lib/settings";
+import { ICONS } from "@/lib/content";
 import { whatsappLink } from "@/lib/utils";
 import Reveal from "@/components/site/Reveal";
 import SectionHeading from "@/components/site/SectionHeading";
@@ -10,10 +10,8 @@ import ProductCard from "@/components/site/ProductCard";
 import Marquee from "@/components/site/Marquee";
 import { WhatsAppIcon } from "@/components/site/icons";
 
-const VALUE_ICONS = { mountain: Mountain, globe: Globe2, gem: Gem, award: Award };
-
 export default async function HomePage() {
-  const [settings, categories, featured] = await Promise.all([
+  const [settings, categories, featured, services, values] = await Promise.all([
     getSettings(),
     prisma.category.findMany({ orderBy: { sortOrder: "asc" } }),
     prisma.product.findMany({
@@ -22,23 +20,34 @@ export default async function HomePage() {
       take: 3,
       include: { category: { select: { name: true } } },
     }),
+    getServices(),
+    getValues(),
   ]);
 
   return (
     <>
       {/* ───────────────────────── Hero ───────────────────────── */}
       <section className="relative flex min-h-[100svh] items-center overflow-hidden">
-        <video
-          className="absolute inset-0 h-full w-full object-cover"
-          autoPlay
-          muted
-          loop
-          playsInline
-          preload="auto"
-          poster="/hero-poster.jpg"
-        >
-          <source src="/hero.mp4" type="video/mp4" />
-        </video>
+        {settings.heroVideo ? (
+          <video
+            className="absolute inset-0 h-full w-full object-cover"
+            autoPlay
+            muted
+            loop
+            playsInline
+            preload="auto"
+            poster={settings.heroPoster || settings.heroImage}
+          >
+            <source src={settings.heroVideo} type="video/mp4" />
+          </video>
+        ) : (
+          /* eslint-disable-next-line @next/next/no-img-element */
+          <img
+            src={settings.heroImage}
+            alt="Premium natural stone"
+            className="absolute inset-0 h-full w-full object-cover"
+          />
+        )}
         <div className="absolute inset-0 bg-gradient-to-b from-ink/55 via-ink/25 to-ink/80" />
         <div className="absolute inset-0 bg-gradient-to-r from-ink/75 via-ink/10 to-transparent" />
 
@@ -238,13 +247,13 @@ export default async function HomePage() {
             />
           </Reveal>
           <div className="mt-14 grid grid-cols-1 gap-6 md:grid-cols-3">
-            {SERVICES.map((s, i) => (
-              <Reveal key={s.id} delay={i * 100} className="h-full">
+            {services.map((s, i) => (
+              <Reveal key={s.id ?? i} delay={i * 100} className="h-full">
                 <Link href="/services" className="group flex h-full flex-col bg-paper">
                   <div className="relative aspect-[4/3] overflow-hidden">
                     {/* eslint-disable-next-line @next/next/no-img-element */}
                     <img
-                      src={s.image}
+                      src={s.imageUrl}
                       alt={s.title}
                       loading="lazy"
                       className="h-full w-full object-cover transition-transform duration-[1.1s] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-105"
@@ -274,10 +283,10 @@ export default async function HomePage() {
       {/* ───────────────────────── Values ───────────────────────── */}
       <section className="mx-auto max-w-7xl px-5 py-24 sm:px-8 sm:py-32 lg:px-12">
         <div className="grid grid-cols-1 gap-y-12 sm:grid-cols-2 lg:grid-cols-4 lg:gap-8">
-          {VALUES.map((v, i) => {
-            const Icon = VALUE_ICONS[v.icon];
+          {values.map((v, i) => {
+            const Icon = ICONS[v.icon as keyof typeof ICONS] ?? ICONS.gem;
             return (
-              <Reveal key={v.title} delay={i * 90} className="text-center lg:text-left">
+              <Reveal key={v.id ?? v.title} delay={i * 90} className="text-center lg:text-left">
                 <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-full bg-sage-soft text-sage lg:mx-0">
                   <Icon size={24} strokeWidth={1.4} />
                 </div>

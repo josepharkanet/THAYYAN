@@ -4,12 +4,12 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { Loader2, Check } from "lucide-react";
 import { saveSettings } from "@/app/admin/actions";
-import { ImageUpload } from "./ImageUpload";
+import { ImageUpload, VideoUpload } from "./ImageUpload";
 
 type Field = {
   key: string;
   label: string;
-  type?: "text" | "textarea" | "image";
+  type?: "text" | "textarea" | "image" | "video";
   hint?: string;
   full?: boolean;
 };
@@ -28,7 +28,9 @@ const GROUPS: { title: string; note?: string; fields: Field[] }[] = [
     fields: [
       { key: "heroTitle", label: "Headline", full: true },
       { key: "heroSubtitle", label: "Sub-headline", type: "textarea", full: true },
-      { key: "heroImage", label: "Background image", type: "image", full: true },
+      { key: "heroVideo", label: "Background video (optional)", type: "video", full: true },
+      { key: "heroPoster", label: "Video poster image", type: "image", full: true },
+      { key: "heroImage", label: "Fallback image (used when no video)", type: "image", full: true },
     ],
   },
   {
@@ -123,9 +125,13 @@ export default function SettingsForm({ settings }: { settings: Record<string, st
             {group.note ? <p className="mt-1 text-sm text-ink-3">{group.note}</p> : null}
             <div className="mt-5 grid grid-cols-1 gap-5 sm:grid-cols-2">
               {group.fields.map((f) => (
-                <div key={f.key} className={f.full || f.type === "textarea" || f.type === "image" ? "sm:col-span-2" : ""}>
+                <div key={f.key} className={f.full || f.type === "textarea" || f.type === "image" || f.type === "video" ? "sm:col-span-2" : ""}>
                   <label className={labelCls} htmlFor={`s-${f.key}`}>{f.label}</label>
-                  {f.type === "image" ? (
+                  {f.type === "video" ? (
+                    <div className="mt-2">
+                      <VideoUpload value={values[f.key] ?? ""} onChange={(url) => set(f.key, url)} />
+                    </div>
+                  ) : f.type === "image" ? (
                     <div className="mt-2">
                       <ImageUpload value={values[f.key] ?? ""} onChange={(url) => set(f.key, url)} />
                     </div>

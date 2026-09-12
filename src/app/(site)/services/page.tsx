@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { Mountain, Factory, Ship, Check, ArrowRight, Globe2, Gem, Award } from "lucide-react";
+import { Check, ArrowRight } from "lucide-react";
 import { prisma } from "@/lib/db";
-import { getSettings } from "@/lib/settings";
-import { SERVICES, VALUES } from "@/lib/content";
+import { getSettings, getServices, getValues } from "@/lib/settings";
+import { ICONS } from "@/lib/content";
 import { whatsappLink } from "@/lib/utils";
 import Reveal from "@/components/site/Reveal";
 import SectionHeading from "@/components/site/SectionHeading";
@@ -12,16 +12,15 @@ import { WhatsAppIcon } from "@/components/site/icons";
 export const metadata: Metadata = {
   title: "Services",
   description:
-    "Complete stone solutions from Stonic Export, global cemetery works, professional installation & fitting, and worldwide shipping & forwarding.",
+    "Complete stone solutions from Stonic Export: quarry-direct sourcing, precision processing & finishing, and worldwide export & logistics.",
 };
 
-const SERVICE_ICONS = { mountain: Mountain, factory: Factory, ship: Ship };
-const VALUE_ICONS = { mountain: Mountain, globe: Globe2, gem: Gem, award: Award };
-
 export default async function ServicesPage() {
-  const [settings, categories] = await Promise.all([
+  const [settings, categories, services, values] = await Promise.all([
     getSettings(),
     prisma.category.findMany({ orderBy: { sortOrder: "asc" } }),
+    getServices(),
+    getValues(),
   ]);
 
   return (
@@ -52,19 +51,19 @@ export default async function ServicesPage() {
         </Reveal>
 
         <div className="mt-16 space-y-20 sm:space-y-28">
-          {SERVICES.map((s, index) => {
-            const Icon = SERVICE_ICONS[s.icon];
+          {services.map((s, index) => {
+            const Icon = ICONS[s.icon as keyof typeof ICONS] ?? ICONS.gem;
             const flipped = index % 2 === 1;
             return (
               <Reveal
-                key={s.id}
+                key={s.id ?? index}
                 className="grid items-center gap-10 lg:grid-cols-2 lg:gap-16"
               >
                 <div className={flipped ? "lg:order-2" : ""}>
                   <div className="relative aspect-[4/3] overflow-hidden">
                     {/* eslint-disable-next-line @next/next/no-img-element */}
                     <img
-                      src={s.image}
+                      src={s.imageUrl}
                       alt={s.title}
                       loading="lazy"
                       className="h-full w-full object-cover"
@@ -152,10 +151,10 @@ export default async function ServicesPage() {
           <SectionHeading eyebrow="Why Stonic Export" title="Your trusted stone partner" />
         </Reveal>
         <div className="mt-14 grid grid-cols-1 gap-y-12 sm:grid-cols-2 lg:grid-cols-4 lg:gap-8">
-          {VALUES.map((v, i) => {
-            const Icon = VALUE_ICONS[v.icon];
+          {values.map((v, i) => {
+            const Icon = ICONS[v.icon as keyof typeof ICONS] ?? ICONS.gem;
             return (
-              <Reveal key={v.title} delay={i * 90} className="text-center">
+              <Reveal key={v.id ?? v.title} delay={i * 90} className="text-center">
                 <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-full bg-sage-soft text-sage">
                   <Icon size={24} strokeWidth={1.4} />
                 </div>
