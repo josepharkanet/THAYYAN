@@ -65,15 +65,6 @@ export default async function HomePage() {
             <p className="mt-8 max-w-lg text-base leading-relaxed text-white/80 sm:text-lg">
               {settings.heroSubtitle}
             </p>
-            <div className="mt-10 flex flex-wrap items-center gap-4">
-              <Link
-                href="/products"
-                className="group inline-flex items-center gap-2.5 bg-white px-8 py-4 text-[0.75rem] font-semibold uppercase tracking-[0.14em] text-ink transition-colors hover:bg-sage hover:text-white"
-              >
-                Explore Collection
-                <ArrowRight size={17} className="transition-transform group-hover:translate-x-1" />
-              </Link>
-            </div>
           </div>
         </div>
 
