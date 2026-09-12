@@ -155,9 +155,6 @@ export default function Footer({ settings, categories }: FooterProps) {
             Developed by : Arkanet Technologies <ArrowUpRight size={12} />
           </a>
         </div>
-
-        {/* Narrow line below the footer credit */}
-        <div className="mt-8 border-t border-paper/10" />
       </div>
     </footer>
   );
