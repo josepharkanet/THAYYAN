@@ -235,7 +235,7 @@
       "slug": "morchana-white-marble",
       "name": "Morchana White Marble",
       "categoryId": "marble",
-      "description": "Elegant white marble with a smooth finish for sophisticated interiors.",
+      "description": "Elegant white Morchana marble with a smooth finish for sophisticated interiors.",
       "origin": "India",
       "finish": "Polished",
       "thickness": "16-18mm",
@@ -253,9 +253,27 @@
         "/product-images/morchana-white-marble/g2.jpg",
         "/product-images/morchana-white-marble/g3.jpg",
         "/product-images/morchana-white-marble/g4.jpg",
-        "/product-images/morchana-white-marble/g5.jpg",
-        "/product-images/morchana-white-marble/g6.jpg"
+        "/product-images/morchana-white-marble/g5.jpg"
       ]
+    },
+    {
+      "slug": "morchana-gold-marble",
+      "name": "Morchana Gold Marble",
+      "categoryId": "marble",
+      "description": "A warm, golden-toned Morchana marble with soft veining for luxurious interiors.",
+      "origin": "India",
+      "finish": "Polished",
+      "thickness": "16-18mm",
+      "featured": false,
+      "sortOrder": 7,
+      "applications": [
+        "Flooring",
+        "Wall Cladding",
+        "Countertops",
+        "Staircases"
+      ],
+      "imageUrl": "/product-images/morchana-gold-marble/main.jpg",
+      "gallery": []
     },
     {
       "slug": "gt-marble",
@@ -266,7 +284,7 @@
       "finish": "Polished",
       "thickness": "16-20mm",
       "featured": false,
-      "sortOrder": 7,
+      "sortOrder": 8,
       "applications": [
         "Flooring",
         "Wall Cladding",
@@ -292,7 +310,7 @@
       "finish": "Polished",
       "thickness": "18-20mm",
       "featured": true,
-      "sortOrder": 8,
+      "sortOrder": 9,
       "applications": [
         "Flooring",
         "Wall Cladding",
@@ -316,9 +334,27 @@
         "/product-images/italian-marble/g13.jpg",
         "/product-images/italian-marble/g14.jpg",
         "/product-images/italian-marble/g15.jpg",
-        "/product-images/italian-marble/g16.jpg",
-        "/product-images/italian-marble/g17.jpg"
+        "/product-images/italian-marble/g16.jpg"
       ]
+    },
+    {
+      "slug": "italian-sathwarya-marble",
+      "name": "Italian Sathwarya Marble",
+      "categoryId": "marble",
+      "description": "A premium Italian Sathwarya marble with refined veining and remarkable depth.",
+      "origin": "Italy",
+      "finish": "Polished",
+      "thickness": "18-20mm",
+      "featured": false,
+      "sortOrder": 10,
+      "applications": [
+        "Flooring",
+        "Wall Cladding",
+        "Countertops",
+        "Staircases"
+      ],
+      "imageUrl": "/product-images/italian-sathwarya-marble/main.jpg",
+      "gallery": []
     },
     {
       "slug": "torrento-marble",
@@ -329,7 +365,7 @@
       "finish": "Polished",
       "thickness": "16-20mm",
       "featured": false,
-      "sortOrder": 9,
+      "sortOrder": 11,
       "applications": [
         "Flooring",
         "Wall Cladding",
@@ -352,7 +388,7 @@
       "finish": "Polished",
       "thickness": "16-20mm",
       "featured": false,
-      "sortOrder": 10,
+      "sortOrder": 12,
       "applications": [
         "Flooring",
         "Wall Cladding",
@@ -373,7 +409,7 @@
       "finish": "Polished",
       "thickness": "16-20mm",
       "featured": false,
-      "sortOrder": 11,
+      "sortOrder": 13,
       "applications": [
         "Flooring",
         "Wall Cladding",
@@ -396,7 +432,7 @@
       "finish": "Polished",
       "thickness": "16-20mm",
       "featured": false,
-      "sortOrder": 12,
+      "sortOrder": 14,
       "applications": [
         "Flooring",
         "Wall Cladding",
@@ -422,7 +458,7 @@
       "finish": "Polished",
       "thickness": "16-20mm",
       "featured": false,
-      "sortOrder": 13,
+      "sortOrder": 15,
       "applications": [
         "Flooring",
         "Wall Cladding",
@@ -445,7 +481,7 @@
       "finish": "Polished",
       "thickness": "18-20mm",
       "featured": false,
-      "sortOrder": 14,
+      "sortOrder": 16,
       "applications": [
         "Flooring",
         "Wall Cladding",
@@ -464,7 +500,7 @@
       "finish": "Polished",
       "thickness": "18-30mm",
       "featured": true,
-      "sortOrder": 15,
+      "sortOrder": 17,
       "applications": [
         "Countertops",
         "Flooring",
@@ -483,7 +519,7 @@
       "finish": "Polished",
       "thickness": "18-30mm",
       "featured": false,
-      "sortOrder": 16,
+      "sortOrder": 18,
       "applications": [
         "Countertops",
         "Flooring",
@@ -505,7 +541,7 @@
       "finish": "Polished",
       "thickness": "18-30mm",
       "featured": false,
-      "sortOrder": 17,
+      "sortOrder": 19,
       "applications": [
         "Countertops",
         "Flooring",
@@ -526,7 +562,7 @@
       "finish": "Polished",
       "thickness": "18-30mm",
       "featured": false,
-      "sortOrder": 18,
+      "sortOrder": 20,
       "applications": [
         "Countertops",
         "Flooring",
@@ -548,7 +584,7 @@
       "finish": "Polished",
       "thickness": "18-30mm",
       "featured": false,
-      "sortOrder": 19,
+      "sortOrder": 21,
       "applications": [
         "Countertops",
         "Flooring",
@@ -569,7 +605,7 @@
       "finish": "Polished",
       "thickness": "18-30mm",
       "featured": false,
-      "sortOrder": 20,
+      "sortOrder": 22,
       "applications": [
         "Countertops",
         "Flooring",
@@ -588,7 +624,7 @@
       "finish": "Polished",
       "thickness": "18-30mm",
       "featured": false,
-      "sortOrder": 21,
+      "sortOrder": 23,
       "applications": [
         "Countertops",
         "Flooring",
@@ -607,7 +643,7 @@
       "finish": "Lapotra / Leather",
       "thickness": "18-30mm",
       "featured": false,
-      "sortOrder": 22,
+      "sortOrder": 24,
       "applications": [
         "Countertops",
         "Flooring",
@@ -626,7 +662,7 @@
       "finish": "Polished",
       "thickness": "18-30mm",
       "featured": false,
-      "sortOrder": 23,
+      "sortOrder": 25,
       "applications": [
         "Countertops",
         "Flooring",
@@ -647,7 +683,7 @@
       "finish": "Polished",
       "thickness": "18-30mm",
       "featured": false,
-      "sortOrder": 24,
+      "sortOrder": 26,
       "applications": [
         "Countertops",
         "Flooring",
@@ -666,7 +702,7 @@
       "finish": "Polished",
       "thickness": "18-30mm",
       "featured": false,
-      "sortOrder": 25,
+      "sortOrder": 27,
       "applications": [
         "Countertops",
         "Flooring",
@@ -685,7 +721,7 @@
       "finish": "Polished",
       "thickness": "18-30mm",
       "featured": false,
-      "sortOrder": 26,
+      "sortOrder": 28,
       "applications": [
         "Countertops",
         "Flooring",
@@ -704,7 +740,7 @@
       "finish": "Polished",
       "thickness": "18-30mm",
       "featured": false,
-      "sortOrder": 27,
+      "sortOrder": 29,
       "applications": [
         "Countertops",
         "Flooring",
@@ -720,12 +756,12 @@
       "slug": "kota-stone",
       "name": "Kota Stone",
       "categoryId": "natural-stones",
-      "description": "A hard-wearing blue-green limestone ideal for flooring, paving and cladding, available honed or polished.",
+      "description": "A hard-wearing blue-green limestone ideal for flooring, paving and cladding.",
       "origin": "Kota, India",
-      "finish": "Natural / Honed / Polished",
+      "finish": "Natural / Honed",
       "thickness": "20-40mm",
       "featured": true,
-      "sortOrder": 28,
+      "sortOrder": 30,
       "applications": [
         "Paving",
         "Landscaping",
@@ -733,10 +769,44 @@
       ],
       "imageUrl": "/product-images/kota-stone/main.jpg",
       "gallery": [
-        "/product-images/kota-stone/g1.jpg",
-        "/product-images/kota-stone/g2.jpg",
-        "/product-images/kota-stone/g3.jpg"
+        "/product-images/kota-stone/g1.jpg"
       ]
+    },
+    {
+      "slug": "kota-heavy-polish",
+      "name": "Kota Heavy Polish",
+      "categoryId": "natural-stones",
+      "description": "Kota stone in a heavy mirror polish, a glossy, upmarket finish for premium interior floors.",
+      "origin": "Kota, India",
+      "finish": "Mirror Polish",
+      "thickness": "20-40mm",
+      "featured": false,
+      "sortOrder": 31,
+      "applications": [
+        "Paving",
+        "Landscaping",
+        "Wall Cladding"
+      ],
+      "imageUrl": "/product-images/kota-heavy-polish/main.jpg",
+      "gallery": []
+    },
+    {
+      "slug": "kota-lapotra-stone",
+      "name": "Kota Lapotra Stone",
+      "categoryId": "natural-stones",
+      "description": "Kota stone in a textured lapotra (leather) finish, elegant and naturally slip-resistant.",
+      "origin": "Kota, India",
+      "finish": "Lapotra / Leather",
+      "thickness": "20-40mm",
+      "featured": false,
+      "sortOrder": 32,
+      "applications": [
+        "Paving",
+        "Landscaping",
+        "Wall Cladding"
+      ],
+      "imageUrl": "/product-images/kota-lapotra-stone/main.jpg",
+      "gallery": []
     },
     {
       "slug": "tandoor-stone",
@@ -747,7 +817,7 @@
       "finish": "Natural",
       "thickness": "20-40mm",
       "featured": false,
-      "sortOrder": 29,
+      "sortOrder": 33,
       "applications": [
         "Paving",
         "Landscaping",
@@ -768,7 +838,7 @@
       "finish": "Natural",
       "thickness": "20-40mm",
       "featured": false,
-      "sortOrder": 30,
+      "sortOrder": 34,
       "applications": [
         "Paving",
         "Landscaping",
@@ -788,7 +858,7 @@
       "finish": "Natural",
       "thickness": "20-40mm",
       "featured": false,
-      "sortOrder": 31,
+      "sortOrder": 35,
       "applications": [
         "Paving",
         "Landscaping",
@@ -812,7 +882,7 @@
       "finish": "Natural / Tumbled",
       "thickness": "40-60mm",
       "featured": false,
-      "sortOrder": 32,
+      "sortOrder": 36,
       "applications": [
         "Paving",
         "Landscaping",
@@ -834,7 +904,7 @@
       "finish": "Natural Split",
       "thickness": "Varies",
       "featured": true,
-      "sortOrder": 33,
+      "sortOrder": 37,
       "applications": [
         "Facades",
         "Feature Walls",
@@ -864,7 +934,7 @@
       "finish": "Natural Split",
       "thickness": "Varies",
       "featured": false,
-      "sortOrder": 34,
+      "sortOrder": 38,
       "applications": [
         "Facades",
         "Feature Walls",
@@ -894,7 +964,7 @@
       "finish": "Natural Split",
       "thickness": "Varies",
       "featured": false,
-      "sortOrder": 35,
+      "sortOrder": 39,
       "applications": [
         "Facades",
         "Feature Walls",
@@ -924,7 +994,7 @@
       "finish": "Natural Split",
       "thickness": "Varies",
       "featured": false,
-      "sortOrder": 36,
+      "sortOrder": 40,
       "applications": [
         "Facades",
         "Feature Walls",
