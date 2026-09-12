@@ -5,21 +5,21 @@
       "name": "Marble",
       "description": "Premium Indian marble, from pure whites to intricate patterns, chosen for durability and aesthetic brilliance.",
       "sortOrder": 1,
-      "imageUrl": "/product-images/arna-white-marble/main.jpg"
+      "imageUrl": "/collections/marble.jpg"
     },
     {
       "id": "granite",
       "name": "Granite",
       "description": "Durable Indian granites and specialty stones, including the sought-after Black Galaxy on special request.",
       "sortOrder": 2,
-      "imageUrl": "/product-images/alaska-granite/main.jpg"
+      "imageUrl": "/collections/granite.jpg"
     },
     {
       "id": "natural-stones",
       "name": "Natural Stones",
       "description": "Architectural stones, Tandoor, Kadappa and Kota, with cobbles and pebbles for premium landscaping.",
       "sortOrder": 3,
-      "imageUrl": "/product-images/kota-stone/main.jpg"
+      "imageUrl": "/collections/natural-stones.jpg"
     },
     {
       "id": "cladding",

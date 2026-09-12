@@ -1,11 +1,12 @@
 import Link from "next/link";
-import { ArrowRight, ArrowUpRight, ArrowDown } from "lucide-react";
+import { ArrowRight, ArrowDown } from "lucide-react";
 import { prisma } from "@/lib/db";
 import { getSettings, getServices, getValues } from "@/lib/settings";
 import { ICONS } from "@/lib/content";
 import { whatsappLink } from "@/lib/utils";
 import Reveal from "@/components/site/Reveal";
 import SectionHeading from "@/components/site/SectionHeading";
+import CategoryCard from "@/components/site/CategoryCard";
 import ProductCard from "@/components/site/ProductCard";
 import Marquee from "@/components/site/Marquee";
 import { WhatsAppIcon } from "@/components/site/icons";
@@ -160,38 +161,14 @@ export default async function HomePage() {
               description="A curated range of premium Indian stone: marble, granite, natural stones and cladding."
             />
           </Reveal>
-          <Reveal className="mt-12 border-t border-line-2">
+          <Reveal className="mt-14 grid grid-cols-1 gap-4 sm:grid-cols-2">
             {categories.map((c, i) => (
-              <Link
+              <CategoryCard
                 key={c.id}
-                href={`/products?category=${c.id}`}
-                className="group flex items-center gap-5 border-b border-line-2 py-6 sm:gap-8 sm:py-8"
-              >
-                <span className="index-numeral w-9 shrink-0 text-2xl text-ink-3 transition-colors group-hover:text-sage sm:w-16 sm:text-3xl">
-                  0{i + 1}
-                </span>
-                <div className="min-w-0 flex-1">
-                  <h3 className="font-serif text-[1.7rem] font-light leading-none text-ink transition-colors group-hover:text-sage sm:text-[3rem]">
-                    {c.name}
-                  </h3>
-                  <p className="mt-2 hidden max-w-md text-sm leading-relaxed text-ink-2 sm:block">
-                    {c.description}
-                  </p>
-                </div>
-                <div className="relative h-16 w-24 shrink-0 overflow-hidden bg-paper-2 sm:h-24 sm:w-40">
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img
-                    src={c.imageUrl ?? ""}
-                    alt={c.name}
-                    loading="lazy"
-                    className="h-full w-full object-cover grayscale transition-all duration-700 group-hover:scale-105 group-hover:grayscale-0"
-                  />
-                </div>
-                <ArrowUpRight
-                  size={26}
-                  className="hidden shrink-0 text-ink-3 transition-all group-hover:-translate-y-1 group-hover:translate-x-1 group-hover:text-sage sm:block"
-                />
-              </Link>
+                category={c}
+                index={String(i + 1).padStart(2, "0")}
+                className="h-[440px] lg:h-[520px]"
+              />
             ))}
           </Reveal>
         </div>
