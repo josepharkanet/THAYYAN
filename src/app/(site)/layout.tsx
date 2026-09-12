@@ -1,6 +1,5 @@
 import Header from "@/components/site/Header";
 import Footer from "@/components/site/Footer";
-import WhatsAppFloat from "@/components/site/WhatsAppFloat";
 import { getSettings } from "@/lib/settings";
 import { prisma } from "@/lib/db";
 
@@ -25,7 +24,6 @@ export default async function SiteLayout({
       <Header siteName={settings.siteName} whatsappNumber={settings.whatsappNumber} />
       <main className="min-h-screen">{children}</main>
       <Footer settings={settings} categories={categories} />
-      <WhatsAppFloat number={settings.whatsappNumber} />
     </>
   );
 }

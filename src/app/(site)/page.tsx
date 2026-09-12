@@ -81,9 +81,9 @@ export default async function HomePage() {
               { k: `${settings.statCountries}`, v: "Export Markets" },
               { k: "Worldwide", v: "Shipping & Forwarding" },
             ].map((s, i) => (
-              <div key={i} className="flex items-baseline gap-3 py-5 pl-0 first:pl-0 sm:gap-4 sm:py-6 [&:not(:first-child)]:pl-6 sm:[&:not(:first-child)]:pl-10">
-                <span className="font-serif text-2xl text-white sm:text-3xl">{s.k}</span>
-                <span className="text-[0.72rem] uppercase tracking-[0.16em] text-white/60">{s.v}</span>
+              <div key={i} className="flex flex-col justify-center gap-1.5 py-6 pl-6 first:pl-0 sm:py-7 sm:[&:not(:first-child)]:pl-10">
+                <span className="font-serif text-2xl leading-none text-white sm:text-[1.7rem]">{s.k}</span>
+                <span className="text-[0.68rem] uppercase leading-tight tracking-[0.16em] text-white/55">{s.v}</span>
               </div>
             ))}
           </div>
