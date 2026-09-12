@@ -13,7 +13,7 @@ export default function Footer({ settings, categories }: FooterProps) {
   const year = new Date().getFullYear();
 
   return (
-    <footer className="bg-ink text-paper">
+    <footer className="border-t border-paper/10 bg-ink text-paper">
       <div className="mx-auto max-w-7xl px-5 pb-10 pt-20 sm:px-8 sm:pt-24 lg:px-12">
         <div className="grid grid-cols-2 gap-x-8 gap-y-12 md:grid-cols-4 lg:grid-cols-12 lg:gap-12">
           {/* Brand */}

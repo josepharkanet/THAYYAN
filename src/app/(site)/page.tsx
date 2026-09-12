@@ -267,8 +267,8 @@ export default async function HomePage() {
                 <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-full bg-sage-soft text-sage lg:mx-0">
                   <Icon size={24} strokeWidth={1.4} />
                 </div>
-                <h3 className="mt-6 font-serif text-2xl text-ink">{v.title}</h3>
-                <p className="mt-2 text-sm leading-relaxed text-ink-2">{v.description}</p>
+                <h3 className="mt-6 font-serif text-2xl leading-[1.2] text-ink sm:min-h-[3.6rem]">{v.title}</h3>
+                <p className="mt-2 line-clamp-2 text-sm leading-relaxed text-ink-2 sm:min-h-[2.8rem]">{v.description}</p>
               </Reveal>
             );
           })}
@@ -283,7 +283,8 @@ export default async function HomePage() {
               Let&rsquo;s Work Together
             </p>
             <h2 className="mx-auto mt-5 max-w-2xl font-serif text-[2.1rem] font-light leading-[1.05] text-paper sm:text-[2.9rem]">
-              Ready to transform your space?
+              Ready to transform{" "}
+              <span className="whitespace-nowrap">your space?</span>
             </h2>
             <p className="mx-auto mt-6 max-w-xl text-base leading-relaxed text-paper/60">
               Message us on WhatsApp for personalised assistance, pricing and samples.

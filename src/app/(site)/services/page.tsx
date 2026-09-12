@@ -158,8 +158,8 @@ export default async function ServicesPage() {
                 <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-full bg-sage-soft text-sage">
                   <Icon size={24} strokeWidth={1.4} />
                 </div>
-                <h3 className="mt-6 font-serif text-2xl text-ink">{v.title}</h3>
-                <p className="mt-2 text-sm leading-relaxed text-ink-2">{v.description}</p>
+                <h3 className="mt-6 font-serif text-2xl leading-[1.2] text-ink sm:min-h-[3.6rem]">{v.title}</h3>
+                <p className="mt-2 line-clamp-2 text-sm leading-relaxed text-ink-2 sm:min-h-[2.8rem]">{v.description}</p>
               </Reveal>
             );
           })}
