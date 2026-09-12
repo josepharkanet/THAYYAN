@@ -29,22 +29,20 @@ export default async function LoginPage({
           className="absolute inset-0 h-full w-full object-cover opacity-40"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-ink via-ink/40 to-transparent" />
-        <div className="relative flex h-full flex-col justify-between p-12">
+        <div className="relative flex h-full flex-col justify-center p-12 lg:p-16">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             src="/logo.png"
             alt="Stonic Marble & Granite"
-            className="h-10 w-auto brightness-0 invert"
+            className="h-8 w-auto brightness-0 invert"
           />
-          <div>
-            <p className="font-serif text-4xl font-light leading-tight text-white">
-              Content Studio
-            </p>
-            <p className="mt-3 max-w-sm text-sm text-white/60">
-              Manage products, categories and site content, everything on the
-              website is editable from here.
-            </p>
-          </div>
+          <p className="mt-12 font-serif text-4xl font-light leading-tight text-white">
+            Content Studio
+          </p>
+          <p className="mt-3 max-w-sm text-sm leading-relaxed text-white/60">
+            Manage products, categories and site content, everything on the
+            website is editable from here.
+          </p>
         </div>
       </div>
 
