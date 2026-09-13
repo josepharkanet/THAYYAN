@@ -116,6 +116,35 @@ export default async function AboutPage() {
         </div>
       </section>
 
+      {/* Video showcase */}
+      <section className="border-t border-line">
+        <div className="mx-auto max-w-7xl px-5 py-24 sm:px-8 sm:py-32 lg:px-12">
+          <Reveal>
+            <SectionHeading
+              eyebrow="Watch"
+              title="Stonic in motion"
+              description="A closer look at our stone, our processing and our work in the field."
+            />
+          </Reveal>
+          <div className="mt-14 grid grid-cols-1 gap-6 lg:grid-cols-2 lg:gap-8">
+            {["0wqOCSAaQl0", "brfPGtosAlk"].map((id) => (
+              <Reveal key={id}>
+                <div className="relative aspect-video overflow-hidden rounded-md bg-black ring-1 ring-line">
+                  <iframe
+                    src={`https://www.youtube.com/embed/${id}?autoplay=1&mute=1&controls=1&rel=0&playsinline=1`}
+                    title="Stonic Export video"
+                    className="absolute inset-0 h-full w-full"
+                    allow="autoplay; encrypted-media; picture-in-picture; fullscreen"
+                    allowFullScreen
+                    loading="lazy"
+                  />
+                </div>
+              </Reveal>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* Contact band */}
       <section className="mx-auto max-w-7xl px-5 py-20 sm:px-8 sm:py-24 lg:px-12">
         <div className="bg-ink p-8 sm:p-12 lg:p-16">
