@@ -241,9 +241,7 @@ export default function ProductForm({
           <div className="border border-line bg-surface p-5">
             <label className={labelCls}>Gallery &amp; ready stock</label>
             <p className="mt-1 mb-3 text-xs text-ink-3">
-              Add a photo for each shade / block. Tick <strong>Available in ready stock</strong> and
-              give it a block number &amp; quantity to show it to customers as available now. The
-              product appears in the Ready Stock filter automatically.
+              Tick a photo as ready stock, then add its block no. &amp; quantity.
             </p>
             <GalleryBlocks values={form.gallery} onChange={(items) => set("gallery", items)} />
           </div>

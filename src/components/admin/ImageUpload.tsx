@@ -476,12 +476,10 @@ export function GalleryBlocks({
 
   return (
     <div className="space-y-3">
-      {values.length > 0 ? (
+      {readyCount > 0 ? (
         <p className="flex items-center gap-1.5 text-xs text-ink-2">
           <PackageCheck size={14} className="text-sage" />
-          {readyCount > 0
-            ? `${readyCount} block${readyCount > 1 ? "s" : ""} marked available in ready stock`
-            : "Tick “Available” on a photo to list it as a ready-stock block."}
+          {readyCount} block{readyCount > 1 ? "s" : ""} in ready stock
         </p>
       ) : null}
 
@@ -502,7 +500,7 @@ export function GalleryBlocks({
                 onChange={(e) => update(i, { readyStock: e.target.checked })}
                 className="h-4 w-4 accent-sage"
               />
-              Available in ready stock
+              Ready stock
             </label>
             {it.readyStock ? (
               <div className="grid grid-cols-2 gap-2">
@@ -519,11 +517,7 @@ export function GalleryBlocks({
                   className={fieldCls}
                 />
               </div>
-            ) : (
-              <p className="text-xs text-ink-3">
-                Extra photo. Tick “Available” to show it as a ready-stock block with a number &amp; quantity.
-              </p>
-            )}
+            ) : null}
           </div>
           <button
             type="button"
