@@ -27,10 +27,15 @@ export default async function ProductsPage({
     prisma.product.findMany({
       where: {
         ...(category ? { categoryId: category } : {}),
-        ...(readyMode ? { readyStock: true } : {}),
+        // Base the Ready Stock filter on actual available blocks, not the
+        // derived product flag, so it stays correct no matter what.
+        ...(readyMode ? { gallery: { some: { readyStock: true } } } : {}),
       },
       orderBy: [{ featured: "desc" }, { sortOrder: "asc" }],
-      include: { category: { select: { name: true } } },
+      include: {
+        category: { select: { name: true } },
+        gallery: { where: { readyStock: true }, select: { id: true } },
+      },
     }),
   ]);
 
@@ -107,7 +112,7 @@ export default async function ProductsPage({
                       imageUrl: p.imageUrl,
                       description: p.description,
                       categoryName: p.category.name,
-                      readyStock: p.readyStock,
+                      readyStock: p.gallery.length > 0,
                     }}
                   />
                 </Reveal>
