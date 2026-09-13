@@ -1,6 +1,5 @@
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
-import AddToEnquiry from "./AddToEnquiry";
 
 export type ProductCardData = {
   slug: string;
@@ -37,11 +36,6 @@ export default function ProductCard({ product }: { product: ProductCardData }) {
         <div className="pointer-events-none absolute right-4 top-4 flex h-10 w-10 translate-y-1 items-center justify-center rounded-full bg-paper/90 text-ink opacity-0 transition-all duration-500 group-hover:translate-y-0 group-hover:opacity-100">
           <ArrowUpRight size={18} strokeWidth={1.5} />
         </div>
-        {product.readyStock ? (
-          <div className="absolute bottom-3 left-3 z-10">
-            <AddToEnquiry slug={product.slug} name={product.name} imageUrl={product.imageUrl} />
-          </div>
-        ) : null}
       </div>
       <Link href={href} className="block pt-5">
         {product.categoryName ? (

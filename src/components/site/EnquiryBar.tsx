@@ -41,7 +41,9 @@ export default function EnquiryBar({ whatsappNumber }: { whatsappNumber: string 
     setSaving(true);
     try {
       await createEnquiry({ ...form, items });
-      const lines = items.map((i, idx) => `${idx + 1}. ${i.name} x${i.qty}`).join("\n");
+      const lines = items
+        .map((i, idx) => `${idx + 1}. ${i.name}${i.label ? ` (${i.label})` : ""} x${i.qty}`)
+        .join("\n");
       const msg = `Hello Stonic Export! I'd like a price for these ready-stock items:\n${lines}\n\nName: ${form.name}${form.note ? `\nNote: ${form.note}` : ""}`;
       clearEnquiry();
       setForm({ name: "", phone: "", email: "", note: "" });
@@ -105,18 +107,19 @@ export default function EnquiryBar({ whatsappNumber }: { whatsappNumber: string 
                   ) : (
                     <ul className="space-y-4">
                       {items.map((it) => (
-                        <li key={it.slug} className="flex items-center gap-3">
+                        <li key={it.key} className="flex items-center gap-3">
                           {/* eslint-disable-next-line @next/next/no-img-element */}
                           <img src={it.imageUrl} alt="" className="h-14 w-14 shrink-0 rounded-sm object-cover" />
                           <div className="min-w-0 flex-1">
                             <p className="truncate text-sm font-medium text-ink">{it.name}</p>
+                            {it.label ? <p className="text-xs font-semibold text-sage">{it.label}</p> : null}
                             <div className="mt-1.5 inline-flex items-center rounded-full border border-line">
-                              <button type="button" onClick={() => setEnquiryQty(it.slug, it.qty - 1)} className="px-2 py-1 text-ink-3 hover:text-ink" aria-label="Decrease"><Minus size={13} /></button>
+                              <button type="button" onClick={() => setEnquiryQty(it.key, it.qty - 1)} className="px-2 py-1 text-ink-3 hover:text-ink" aria-label="Decrease"><Minus size={13} /></button>
                               <span className="min-w-6 text-center text-sm text-ink">{it.qty}</span>
-                              <button type="button" onClick={() => setEnquiryQty(it.slug, it.qty + 1)} className="px-2 py-1 text-ink-3 hover:text-ink" aria-label="Increase"><Plus size={13} /></button>
+                              <button type="button" onClick={() => setEnquiryQty(it.key, it.qty + 1)} className="px-2 py-1 text-ink-3 hover:text-ink" aria-label="Increase"><Plus size={13} /></button>
                             </div>
                           </div>
-                          <button type="button" onClick={() => removeFromEnquiry(it.slug)} aria-label="Remove" className="text-ink-3 hover:text-red-600"><Trash2 size={16} /></button>
+                          <button type="button" onClick={() => removeFromEnquiry(it.key)} aria-label="Remove" className="text-ink-3 hover:text-red-600"><Trash2 size={16} /></button>
                         </li>
                       ))}
                     </ul>

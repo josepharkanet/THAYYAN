@@ -4,13 +4,17 @@
 // and shared across components via a custom window event (no state library needed).
 
 export type EnquiryItem = {
+  /** Unique per slab/block (e.g. `${slug}-${blockId}`). */
+  key: string;
   slug: string;
   name: string;
+  /** Short slab descriptor shown in the list, e.g. "1200 Sqft". */
+  label?: string;
   imageUrl: string;
   qty: number;
 };
 
-const KEY = "stonic_enquiry_v1";
+const KEY = "stonic_enquiry_v2";
 const EVT = "stonic-enquiry-change";
 
 export function getEnquiry(): EnquiryItem[] {
@@ -34,26 +38,26 @@ function save(items: EnquiryItem[]) {
 
 export function addToEnquiry(item: EnquiryItem) {
   const items = getEnquiry();
-  if (!items.some((i) => i.slug === item.slug)) {
+  if (!items.some((i) => i.key === item.key)) {
     items.push({ ...item, qty: item.qty || 1 });
     save(items);
   }
 }
 
-export function removeFromEnquiry(slug: string) {
-  save(getEnquiry().filter((i) => i.slug !== slug));
+export function removeFromEnquiry(key: string) {
+  save(getEnquiry().filter((i) => i.key !== key));
 }
 
-export function setEnquiryQty(slug: string, qty: number) {
-  save(getEnquiry().map((i) => (i.slug === slug ? { ...i, qty: Math.max(1, qty) } : i)));
+export function setEnquiryQty(key: string, qty: number) {
+  save(getEnquiry().map((i) => (i.key === key ? { ...i, qty: Math.max(1, qty) } : i)));
 }
 
 export function clearEnquiry() {
   save([]);
 }
 
-export function inEnquiry(slug: string): boolean {
-  return getEnquiry().some((i) => i.slug === slug);
+export function inEnquiry(key: string): boolean {
+  return getEnquiry().some((i) => i.key === key);
 }
 
 export function onEnquiryChange(cb: () => void): () => void {

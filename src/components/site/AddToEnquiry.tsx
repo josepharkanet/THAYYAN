@@ -10,29 +10,47 @@ import {
 } from "@/lib/enquiry-store";
 
 export default function AddToEnquiry({
+  itemKey,
   slug,
   name,
   imageUrl,
+  label,
   variant = "chip",
 }: {
+  itemKey: string;
   slug: string;
   name: string;
   imageUrl: string;
-  variant?: "chip" | "button";
+  label?: string;
+  variant?: "chip" | "button" | "block";
 }) {
   const [added, setAdded] = useState(false);
 
   useEffect(() => {
-    const sync = () => setAdded(inEnquiry(slug));
+    const sync = () => setAdded(inEnquiry(itemKey));
     sync();
     return onEnquiryChange(sync);
-  }, [slug]);
+  }, [itemKey]);
 
   function toggle(e: React.MouseEvent) {
     e.preventDefault();
     e.stopPropagation();
-    if (added) removeFromEnquiry(slug);
-    else addToEnquiry({ slug, name, imageUrl, qty: 1 });
+    if (added) removeFromEnquiry(itemKey);
+    else addToEnquiry({ key: itemKey, slug, name, imageUrl, label, qty: 1 });
+  }
+
+  if (variant === "block") {
+    return (
+      <button
+        type="button"
+        onClick={toggle}
+        className={`inline-flex w-full items-center justify-center gap-2 border px-4 py-2.5 text-[0.7rem] font-semibold uppercase tracking-[0.12em] transition-colors ${
+          added ? "border-sage bg-sage-soft text-sage" : "border-ink text-ink hover:bg-ink hover:text-paper"
+        }`}
+      >
+        {added ? <><Check size={15} /> Added to list</> : <><Plus size={15} /> Add to list</>}
+      </button>
+    );
   }
 
   if (variant === "button") {

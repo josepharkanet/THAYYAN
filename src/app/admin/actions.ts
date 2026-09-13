@@ -420,8 +420,10 @@ export async function deleteWork(id: string) {
 /* ───────────────────────────── Enquiries ──────────────────────────────── */
 
 const enquiryItemSchema = z.object({
+  key: z.string().optional(),
   slug: z.string(),
   name: z.string(),
+  label: z.string().optional().default(""),
   imageUrl: z.string().optional().default(""),
   qty: z.number().optional().default(1),
 });
