@@ -182,8 +182,7 @@ export default async function ProductDetailPage({
               {product.name} — blocks available
             </h2>
             <p className="mt-3 max-w-xl text-sm leading-relaxed text-ink-2">
-              These specific blocks are in stock right now. Quote the block number when you enquire and
-              we&rsquo;ll confirm price &amp; dispatch.
+              These slabs are in stock right now — tap enquire and we&rsquo;ll confirm price &amp; dispatch.
             </p>
             <div className="mt-9 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
               {readyBlocks.map((b) => (
