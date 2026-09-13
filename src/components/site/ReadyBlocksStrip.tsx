@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { createPortal } from "react-dom";
 import { X, ZoomIn } from "lucide-react";
 
 /** Side-by-side ready-stock block thumbnails with Sqft + click/lens zoom. */
@@ -55,30 +56,33 @@ export default function ReadyBlocksStrip({
         ))}
       </div>
 
-      {zoom ? (
-        <div
-          role="dialog"
-          aria-modal="true"
-          className="fixed inset-0 z-[70] flex items-center justify-center bg-ink/90 p-4"
-          onClick={() => setZoom(null)}
-        >
-          <button
-            type="button"
-            onClick={() => setZoom(null)}
-            aria-label="Close"
-            className="absolute right-4 top-4 flex h-11 w-11 items-center justify-center rounded-full bg-white/10 text-white transition-colors hover:bg-white/20"
-          >
-            <X size={24} />
-          </button>
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
-            src={zoom}
-            alt=""
-            className="max-h-[92vh] max-w-[96vw] object-contain shadow-2xl"
-            onClick={(e) => e.stopPropagation()}
-          />
-        </div>
-      ) : null}
+      {zoom && typeof document !== "undefined"
+        ? createPortal(
+            <div
+              role="dialog"
+              aria-modal="true"
+              className="fixed inset-0 z-[100] flex items-center justify-center bg-ink/90 p-4"
+              onClick={() => setZoom(null)}
+            >
+              <button
+                type="button"
+                onClick={() => setZoom(null)}
+                aria-label="Close"
+                className="absolute right-4 top-4 flex h-11 w-11 items-center justify-center rounded-full bg-white/10 text-white transition-colors hover:bg-white/20"
+              >
+                <X size={24} />
+              </button>
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src={zoom}
+                alt=""
+                className="max-h-[92vh] max-w-[96vw] object-contain shadow-2xl"
+                onClick={(e) => e.stopPropagation()}
+              />
+            </div>,
+            document.body,
+          )
+        : null}
     </>
   );
 }
