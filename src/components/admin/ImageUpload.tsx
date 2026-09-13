@@ -471,8 +471,6 @@ export function GalleryBlocks({
   }
 
   const readyCount = values.filter((v) => v.readyStock).length;
-  const fieldCls =
-    "w-full border border-line bg-surface px-2.5 py-1.5 text-sm text-ink outline-none focus:border-sage";
 
   return (
     <div className="space-y-3">
@@ -486,45 +484,52 @@ export function GalleryBlocks({
       {values.map((it, i) => (
         <div
           key={it.url + i}
-          className={`flex gap-3 rounded-md border p-3 transition-colors ${
+          className={`relative space-y-3 rounded-md border p-3 transition-colors ${
             it.readyStock ? "border-sage/60 bg-sage-soft/40" : "border-line bg-paper-2/40"
           }`}
         >
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src={it.url} alt="" className="h-20 w-20 shrink-0 rounded-sm object-cover" />
-          <div className="min-w-0 flex-1 space-y-2">
+          <button
+            type="button"
+            onClick={() => remove(i)}
+            aria-label="Remove photo"
+            className="absolute right-2 top-2 flex h-6 w-6 items-center justify-center rounded-full bg-ink/10 text-ink-3 hover:bg-ink/20 hover:text-ink"
+          >
+            <X size={13} />
+          </button>
+          <div className="flex items-center gap-3 pr-6">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src={it.url} alt="" className="h-16 w-16 shrink-0 rounded-sm object-cover" />
             <label className="flex cursor-pointer items-center gap-2 text-sm font-medium text-ink">
               <input
                 type="checkbox"
                 checked={it.readyStock}
                 onChange={(e) => update(i, { readyStock: e.target.checked })}
-                className="h-4 w-4 accent-sage"
+                className="h-4 w-4 shrink-0 accent-sage"
               />
               Ready stock
             </label>
-            {it.readyStock ? (
-              <div className="flex items-center gap-2">
+          </div>
+          {it.readyStock ? (
+            <div>
+              <label className="mb-1 block text-[0.7rem] uppercase tracking-[0.1em] text-ink-3">
+                Available quantity
+              </label>
+              <div className="relative">
                 <input
                   type="number"
                   inputMode="numeric"
                   min="0"
                   value={it.qty}
                   onChange={(e) => update(i, { qty: e.target.value })}
-                  placeholder="0"
-                  className={`${fieldCls} w-24`}
+                  placeholder="e.g. 1200"
+                  className="w-full border border-line bg-surface py-2 pl-3 pr-14 text-sm text-ink outline-none focus:border-sage"
                 />
-                <span className="text-sm font-medium text-ink-2">Sqft available</span>
+                <span className="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 text-xs font-medium text-ink-3">
+                  Sqft
+                </span>
               </div>
-            ) : null}
-          </div>
-          <button
-            type="button"
-            onClick={() => remove(i)}
-            aria-label="Remove photo"
-            className="flex h-7 w-7 shrink-0 items-center justify-center self-start rounded-full bg-ink/10 text-ink-3 hover:bg-ink/20 hover:text-ink"
-          >
-            <X size={14} />
-          </button>
+            </div>
+          ) : null}
         </div>
       ))}
 
