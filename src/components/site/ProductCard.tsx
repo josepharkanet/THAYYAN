@@ -8,12 +8,17 @@ export type ProductCardData = {
   description?: string | null;
   categoryName?: string;
   readyStock?: boolean;
-  /** When set (Ready Stock view), the available slabs/blocks with their Sqft. */
-  readyBlocks?: { qty: string | null }[];
+  /** Ready Stock view: available slabs with their Sqft + thumbnail. */
+  readyBlocks?: { qty: string | null; url: string }[];
+  /** Total gallery images (designs) — powers the "more collections" link. */
+  galleryCount?: number;
 };
 
 export default function ProductCard({ product }: { product: ProductCardData }) {
   const href = `/products/${product.slug}`;
+  const readyCount = product.readyBlocks?.length ?? 0;
+  const moreCount = Math.max(0, (product.galleryCount ?? 0) - readyCount);
+
   return (
     <div className="group relative">
       <div className="relative aspect-square overflow-hidden bg-paper-2">
@@ -37,37 +42,57 @@ export default function ProductCard({ product }: { product: ProductCardData }) {
           <ArrowUpRight size={18} strokeWidth={1.5} />
         </div>
       </div>
-      <Link href={href} className="block pt-5">
-        {product.categoryName ? (
-          <p className="text-[0.68rem] font-medium uppercase tracking-[0.2em] text-sage">
-            {product.categoryName}
-          </p>
-        ) : null}
-        <h3 className="mt-2 font-serif text-2xl text-ink transition-colors group-hover:text-sage">
-          {product.name}
-        </h3>
+
+      <div className="pt-5">
+        <Link href={href} className="block">
+          {product.categoryName ? (
+            <p className="text-[0.68rem] font-medium uppercase tracking-[0.2em] text-sage">
+              {product.categoryName}
+            </p>
+          ) : null}
+          <h3 className="mt-2 font-serif text-2xl text-ink transition-colors group-hover:text-sage">
+            {product.name}
+          </h3>
+        </Link>
+
         {product.readyBlocks && product.readyBlocks.length > 0 ? (
           <div className="mt-3">
             <p className="text-[0.7rem] font-medium uppercase tracking-[0.14em] text-ink-3">
               {product.readyBlocks.length} {product.readyBlocks.length === 1 ? "block" : "blocks"} available
             </p>
-            <ol className="mt-1.5 space-y-0.5 text-sm text-ink-2">
+            <ul className="mt-2 space-y-1.5">
               {product.readyBlocks.map((b, i) => (
-                <li key={i}>
-                  {i + 1}.{" "}
-                  <span className="font-semibold text-sage">
+                <li key={i} className="flex items-center gap-2.5">
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
+                    src={b.url}
+                    alt=""
+                    loading="lazy"
+                    className="h-9 w-9 shrink-0 rounded-sm border border-line object-cover"
+                  />
+                  <span className="text-sm text-ink-3">{i + 1}.</span>
+                  <span className="text-sm font-semibold text-sage">
                     {b.qty ? `${b.qty} Sqft` : "Available"}
                   </span>
                 </li>
               ))}
-            </ol>
+            </ul>
           </div>
         ) : product.description ? (
           <p className="mt-2 line-clamp-2 text-sm leading-relaxed text-ink-2">
             {product.description}
           </p>
         ) : null}
-      </Link>
+
+        {moreCount > 0 ? (
+          <Link
+            href={href}
+            className="mt-3 inline-flex items-center gap-1 text-[0.72rem] font-semibold uppercase tracking-[0.12em] text-ink transition-colors hover:text-sage"
+          >
+            +{moreCount} more design{moreCount > 1 ? "s" : ""} <ArrowUpRight size={13} />
+          </Link>
+        ) : null}
+      </div>
     </div>
   );
 }

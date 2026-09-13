@@ -8,6 +8,7 @@ import { parseApplications, whatsappLink } from "@/lib/utils";
 import ProductGallery from "@/components/site/ProductGallery";
 import ProductCard from "@/components/site/ProductCard";
 import AddToEnquiry from "@/components/site/AddToEnquiry";
+import SlabImage from "@/components/site/SlabImage";
 import Reveal from "@/components/site/Reveal";
 import { WhatsAppIcon } from "@/components/site/icons";
 
@@ -112,13 +113,7 @@ export default async function ProductDetailPage({
               <div className="mt-7 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
                 {readyBlocks.map((b) => (
                   <div key={b.id} className="overflow-hidden rounded-md border border-line bg-paper">
-                    <div className="relative aspect-[4/3] overflow-hidden bg-paper-2">
-                      {/* eslint-disable-next-line @next/next/no-img-element */}
-                      <img src={b.url} alt={product.name} loading="lazy" className="h-full w-full object-cover" />
-                      <span className="absolute left-3 top-3 rounded-full bg-sage px-2.5 py-1 text-[0.6rem] font-semibold uppercase tracking-[0.14em] text-white">
-                        Available
-                      </span>
-                    </div>
+                    <SlabImage src={b.url} alt={`${product.name} slab`} />
                     <div className="p-4">
                       <p className="font-serif text-xl text-ink">{b.qty ? `${b.qty} Sqft` : "Available"}</p>
                       <div className="mt-4 space-y-2">

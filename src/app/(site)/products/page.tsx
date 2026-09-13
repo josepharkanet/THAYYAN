@@ -36,9 +36,10 @@ export default async function ProductsPage({
         category: { select: { name: true } },
         gallery: {
           where: { readyStock: true },
-          select: { id: true, qty: true },
+          select: { id: true, qty: true, url: true },
           orderBy: { sortOrder: "asc" },
         },
+        _count: { select: { gallery: true } },
       },
     }),
   ]);
@@ -117,7 +118,8 @@ export default async function ProductsPage({
                       description: p.description,
                       categoryName: p.category.name,
                       readyStock: p.gallery.length > 0,
-                      readyBlocks: p.gallery.map((g) => ({ qty: g.qty })),
+                      readyBlocks: p.gallery.map((g) => ({ qty: g.qty, url: g.url })),
+                      galleryCount: p._count.gallery,
                     }}
                   />
                 </Reveal>
