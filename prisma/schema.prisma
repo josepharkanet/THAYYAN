@@ -53,13 +53,56 @@ model Product {
   imageUrl     String
   gallery      ProductImage[]
   featured     Boolean        @default(false)
+  /// Marked as available "ready stock" — surfaced in the shareable ready-stock catalogue.
+  readyStock   Boolean        @default(false)
   sortOrder    Int            @default(0)
   createdAt    DateTime       @default(now())
   updatedAt    DateTime       @updatedAt
 
   @@index([categoryId])
   @@index([featured])
+  @@index([readyStock])
   @@index([sortOrder])
+}
+
+/// A customer enquiry: a selected list of ready-stock products awaiting an admin price reply.
+model Enquiry {
+  id        String   @id @default(cuid())
+  name      String
+  phone     String
+  email     String?
+  note      String?
+  /// JSON array of items: [{ slug, name, imageUrl, qty }].
+  items     String
+  status    String   @default("new") // new | quoted | closed
+  /// Admin's reply / notes (e.g. itemised prices).
+  reply     String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([status])
+  @@index([createdAt])
+}
+
+/// Customer feedback / testimonial (text, image or video), moderated from the dashboard.
+model Feedback {
+  id        String   @id @default(cuid())
+  name      String
+  location  String?
+  /// "text" | "image" | "video"
+  type      String   @default("text")
+  message   String?
+  mediaUrl  String?
+  rating    Int?
+  approved  Boolean  @default(false)
+  featured  Boolean  @default(false)
+  sortOrder Int      @default(0)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([approved])
+  @@index([sortOrder])
+  @@index([createdAt])
 }
 
 /// Extra gallery images attached to a product.

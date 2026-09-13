@@ -63,7 +63,7 @@ export default function Footer({ settings, categories }: FooterProps) {
             </div>
           </div>
 
-          <div className="lg:col-span-1" />
+          <div className="hidden lg:block lg:col-span-1" />
 
           {/* Explore */}
           <div className="lg:col-span-2">
@@ -76,6 +76,7 @@ export default function Footer({ settings, categories }: FooterProps) {
                 { href: "/services", label: "Services" },
                 { href: "/works", label: "Works" },
                 { href: "/blog", label: "Blog" },
+                { href: "/feedback", label: "Reviews" },
                 { href: "/about", label: "About Us" },
                 { href: "/contact", label: "Contact" },
               ].map((l) => (

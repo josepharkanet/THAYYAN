@@ -19,6 +19,7 @@ export type ProductFormData = {
   thickness: string;
   imageUrl: string;
   featured: boolean;
+  readyStock: boolean;
   sortOrder: number;
   applications: string[];
   gallery: string[];
@@ -48,6 +49,7 @@ export default function ProductForm({
       thickness: "",
       imageUrl: "",
       featured: false,
+      readyStock: false,
       sortOrder: 0,
       applications: [],
       gallery: [],
@@ -254,6 +256,18 @@ export default function ProductForm({
                 type="checkbox"
                 checked={form.featured}
                 onChange={(e) => set("featured", e.target.checked)}
+                className="h-5 w-5 accent-sage"
+              />
+            </label>
+            <label className="mt-4 flex cursor-pointer items-center justify-between border-t border-line pt-4">
+              <span>
+                <span className="block font-medium text-ink">Ready stock</span>
+                <span className="text-xs text-ink-3">Show in the shareable Ready Stock catalogue</span>
+              </span>
+              <input
+                type="checkbox"
+                checked={form.readyStock}
+                onChange={(e) => set("readyStock", e.target.checked)}
                 className="h-5 w-5 accent-sage"
               />
             </label>

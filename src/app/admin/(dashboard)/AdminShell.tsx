@@ -12,6 +12,8 @@ import {
   Sparkles,
   Hammer,
   Settings,
+  ClipboardList,
+  Star,
   ExternalLink,
   LogOut,
   Menu,
@@ -23,10 +25,12 @@ import { logout } from "../actions";
 const NAV = [
   { href: "/admin", label: "Dashboard", icon: LayoutDashboard, exact: true },
   { href: "/admin/products", label: "Products", icon: Package },
+  { href: "/admin/enquiries", label: "Enquiries", icon: ClipboardList },
   { href: "/admin/categories", label: "Categories", icon: Layers },
   { href: "/admin/blog", label: "Blog", icon: Newspaper },
   { href: "/admin/services", label: "Services", icon: Wrench },
   { href: "/admin/works", label: "Works", icon: Hammer },
+  { href: "/admin/feedback", label: "Feedback", icon: Star },
   { href: "/admin/values", label: "Values", icon: Sparkles },
   { href: "/admin/settings", label: "Site Content", icon: Settings },
 ];

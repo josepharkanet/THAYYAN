@@ -1,7 +1,7 @@
 "use client";
 
-import { useRef, useState } from "react";
-import { UploadCloud, X, Film, Loader2, Link2 } from "lucide-react";
+import { useEffect, useRef, useState } from "react";
+import { UploadCloud, X, Film, Loader2, Link2, Images, Search } from "lucide-react";
 
 async function uploadFile(file: File): Promise<string> {
   const fd = new FormData();
@@ -21,6 +21,74 @@ async function uploadFile(file: File): Promise<string> {
   return data.url;
 }
 
+/* ─────────────── Media library picker (existing images) ─────────────── */
+function MediaLibrary({
+  onPick,
+  onClose,
+}: {
+  onPick: (url: string) => void;
+  onClose: () => void;
+}) {
+  const [images, setImages] = useState<string[] | null>(null);
+  const [q, setQ] = useState("");
+  const [error, setError] = useState("");
+
+  useEffect(() => {
+    (async () => {
+      try {
+        const res = await fetch("/api/admin/media", { credentials: "same-origin" });
+        const data = await res.json();
+        if (!res.ok) throw new Error(data.error || "Could not load library");
+        setImages(data.images ?? []);
+      } catch (e) {
+        setError(e instanceof Error ? e.message : "Could not load library");
+        setImages([]);
+      }
+    })();
+  }, []);
+
+  const shown = (images ?? []).filter((u) => u.toLowerCase().includes(q.toLowerCase()));
+
+  return (
+    <div className="fixed inset-0 z-[60] flex items-center justify-center p-4" role="dialog">
+      <div className="absolute inset-0 bg-ink/60" onClick={onClose} />
+      <div className="relative flex max-h-[85vh] w-full max-w-3xl flex-col overflow-hidden rounded-md bg-paper shadow-2xl">
+        <div className="flex items-center justify-between gap-4 border-b border-line px-5 py-4">
+          <h3 className="font-serif text-xl text-ink">Image library</h3>
+          <div className="relative hidden flex-1 sm:block">
+            <Search size={15} className="absolute left-3 top-1/2 -translate-y-1/2 text-ink-3" />
+            <input value={q} onChange={(e) => setQ(e.target.value)} placeholder="Search…" className="w-full border border-line bg-surface py-2 pl-9 pr-3 text-sm text-ink outline-none focus:border-sage" />
+          </div>
+          <button onClick={onClose} aria-label="Close" className="text-ink-3 hover:text-ink"><X size={22} /></button>
+        </div>
+        <div className="flex-1 overflow-y-auto p-5">
+          {images === null ? (
+            <div className="flex h-40 items-center justify-center text-ink-3"><Loader2 className="animate-spin" /></div>
+          ) : error ? (
+            <p className="py-10 text-center text-sm text-red-600">{error}</p>
+          ) : shown.length === 0 ? (
+            <p className="py-10 text-center text-sm text-ink-2">No images yet — upload one to start your library.</p>
+          ) : (
+            <div className="grid grid-cols-3 gap-3 sm:grid-cols-4 md:grid-cols-5">
+              {shown.map((url) => (
+                <button
+                  key={url}
+                  type="button"
+                  onClick={() => { onPick(url); onClose(); }}
+                  className="group relative aspect-square overflow-hidden rounded-sm border border-line bg-paper-2 transition-all hover:ring-2 hover:ring-sage"
+                >
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img src={url} alt="" loading="lazy" className="h-full w-full object-cover" />
+                </button>
+              ))}
+            </div>
+          )}
+        </div>
+      </div>
+    </div>
+  );
+}
+
 /* ─────────────────────── Single image ─────────────────────── */
 export function ImageUpload({
   value,
@@ -34,6 +102,7 @@ export function ImageUpload({
   const [error, setError] = useState("");
   const [drag, setDrag] = useState(false);
   const [showUrl, setShowUrl] = useState(false);
+  const [lib, setLib] = useState(false);
 
   async function handleFile(file?: File | null) {
     if (!file) return;
@@ -108,14 +177,23 @@ export function ImageUpload({
 
       {error ? <p className="mt-2 text-sm text-red-600">{error}</p> : null}
 
-      <div className="mt-2">
+      {lib ? <MediaLibrary onPick={(url) => onChange(url)} onClose={() => setLib(false)} /> : null}
+
+      <div className="mt-2 flex flex-wrap items-center gap-x-4 gap-y-2">
+        <button
+          type="button"
+          onClick={() => setLib(true)}
+          className="inline-flex items-center gap-1.5 text-xs font-semibold text-sage transition-colors hover:text-ink"
+        >
+          <Images size={14} /> Choose from library
+        </button>
         {showUrl ? (
           <input
             type="url"
             value={value}
             onChange={(e) => onChange(e.target.value)}
             placeholder="https://…image-url"
-            className="w-full border border-line bg-surface px-3 py-2 text-sm text-ink outline-none focus:border-sage"
+            className="w-full flex-1 border border-line bg-surface px-3 py-2 text-sm text-ink outline-none focus:border-sage"
           />
         ) : (
           <button
@@ -123,7 +201,7 @@ export function ImageUpload({
             onClick={() => setShowUrl(true)}
             className="inline-flex items-center gap-1.5 text-xs text-ink-3 transition-colors hover:text-ink"
           >
-            <Link2 size={13} /> or paste an image URL
+            <Link2 size={13} /> or paste a URL
           </button>
         )}
       </div>
@@ -212,6 +290,7 @@ export function GalleryUpload({
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState("");
   const [drag, setDrag] = useState(false);
+  const [lib, setLib] = useState(false);
 
   async function handleFiles(files: FileList | null) {
     if (!files || files.length === 0) return;
@@ -269,8 +348,14 @@ export function GalleryUpload({
         className="hidden"
         onChange={(e) => handleFiles(e.target.files)}
       />
-      <p className="mt-2 text-xs text-ink-3">Tap “Add” to upload from your device (or drag &amp; drop). You can select multiple.</p>
+      <div className="mt-2 flex flex-wrap items-center gap-x-4 gap-y-1">
+        <button type="button" onClick={() => setLib(true)} className="inline-flex items-center gap-1.5 text-xs font-semibold text-sage transition-colors hover:text-ink">
+          <Images size={14} /> Choose from library
+        </button>
+        <p className="text-xs text-ink-3">…or tap “Add” to upload from your device (multiple allowed).</p>
+      </div>
       {error ? <p className="mt-2 text-sm text-red-600">{error}</p> : null}
+      {lib ? <MediaLibrary onPick={(url) => onChange([...values, url])} onClose={() => setLib(false)} /> : null}
     </div>
   );
 }

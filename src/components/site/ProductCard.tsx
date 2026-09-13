@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
+import AddToEnquiry from "./AddToEnquiry";
 
 export type ProductCardData = {
   slug: string;
@@ -7,14 +8,13 @@ export type ProductCardData = {
   imageUrl: string;
   description?: string | null;
   categoryName?: string;
+  readyStock?: boolean;
 };
 
 export default function ProductCard({ product }: { product: ProductCardData }) {
+  const href = `/products/${product.slug}`;
   return (
-    <Link
-      href={`/products/${product.slug}`}
-      className="group block"
-    >
+    <div className="group relative">
       <div className="relative aspect-square overflow-hidden bg-paper-2">
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
@@ -25,11 +25,23 @@ export default function ProductCard({ product }: { product: ProductCardData }) {
           className="h-full w-full object-cover transition-transform duration-[1.1s] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.06]"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-ink/25 to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
-        <div className="absolute right-4 top-4 flex h-10 w-10 translate-y-1 items-center justify-center rounded-full bg-paper/90 text-ink opacity-0 transition-all duration-500 group-hover:translate-y-0 group-hover:opacity-100">
+        {/* Navigation overlay */}
+        <Link href={href} className="absolute inset-0" aria-label={product.name} />
+        {product.readyStock ? (
+          <span className="pointer-events-none absolute left-3 top-3 z-10 rounded-full bg-sage px-2.5 py-1 text-[0.6rem] font-semibold uppercase tracking-[0.14em] text-white">
+            Ready Stock
+          </span>
+        ) : null}
+        <div className="pointer-events-none absolute right-4 top-4 flex h-10 w-10 translate-y-1 items-center justify-center rounded-full bg-paper/90 text-ink opacity-0 transition-all duration-500 group-hover:translate-y-0 group-hover:opacity-100">
           <ArrowUpRight size={18} strokeWidth={1.5} />
         </div>
+        {product.readyStock ? (
+          <div className="absolute bottom-3 left-3 z-10">
+            <AddToEnquiry slug={product.slug} name={product.name} imageUrl={product.imageUrl} />
+          </div>
+        ) : null}
       </div>
-      <div className="pt-5">
+      <Link href={href} className="block pt-5">
         {product.categoryName ? (
           <p className="text-[0.68rem] font-medium uppercase tracking-[0.2em] text-sage">
             {product.categoryName}
@@ -43,7 +55,7 @@ export default function ProductCard({ product }: { product: ProductCardData }) {
             {product.description}
           </p>
         ) : null}
-      </div>
-    </Link>
+      </Link>
+    </div>
   );
 }

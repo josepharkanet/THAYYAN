@@ -35,6 +35,7 @@ export default async function EditProductPage({
         thickness: product.thickness ?? "",
         imageUrl: product.imageUrl,
         featured: product.featured,
+        readyStock: product.readyStock,
         sortOrder: product.sortOrder,
         applications: parseApplications(product.applications),
         gallery: product.gallery.map((g) => g.url),

@@ -13,6 +13,7 @@ import {
 } from "@/lib/auth";
 import { slugify } from "@/lib/utils";
 import { SETTING_DEFAULTS, type SettingKey } from "@/lib/settings";
+import { sendMail } from "@/lib/mail";
 
 async function requireAdmin() {
   const session = await getSession();
@@ -67,6 +68,7 @@ const productSchema = z.object({
   thickness: z.string().optional().default(""),
   imageUrl: z.string().min(1, "A main image is required"),
   featured: z.boolean().optional().default(false),
+  readyStock: z.boolean().optional().default(false),
   sortOrder: z.number().optional().default(0),
   applications: z.array(z.string()).optional().default([]),
   gallery: z.array(z.string()).optional().default([]),
@@ -98,6 +100,7 @@ export async function upsertProduct(input: ProductInput) {
     thickness: data.thickness || null,
     imageUrl: data.imageUrl,
     featured: data.featured,
+    readyStock: data.readyStock,
     sortOrder: data.sortOrder,
     applications: JSON.stringify(data.applications ?? []),
   };
@@ -390,4 +393,174 @@ export async function deleteWork(id: string) {
   await prisma.work.delete({ where: { id } });
   revalidateSite();
   return { ok: true };
+}
+
+/* ───────────────────────────── Enquiries ──────────────────────────────── */
+
+const enquiryItemSchema = z.object({
+  slug: z.string(),
+  name: z.string(),
+  imageUrl: z.string().optional().default(""),
+  qty: z.number().optional().default(1),
+});
+const enquirySchema = z.object({
+  name: z.string().min(1, "Name is required"),
+  phone: z.string().min(3, "Phone is required"),
+  email: z.string().optional().default(""),
+  note: z.string().optional().default(""),
+  items: z.array(enquiryItemSchema).min(1, "Add at least one product"),
+});
+export type EnquiryInput = z.input<typeof enquirySchema>;
+
+/** Public: submit a ready-stock enquiry (selected list). */
+export async function createEnquiry(input: EnquiryInput) {
+  const d = enquirySchema.parse(input);
+  await prisma.enquiry.create({
+    data: {
+      name: d.name,
+      phone: d.phone,
+      email: d.email || null,
+      note: d.note || null,
+      items: JSON.stringify(d.items),
+    },
+  });
+  // Best-effort admin notification (never blocks the enquiry).
+  try {
+    const list = d.items.map((i, n) => `${n + 1}. ${i.name} x${i.qty}`).join("\n");
+    await sendMail({
+      subject: `Ready-stock enquiry — ${d.name}`,
+      text: `New ready-stock enquiry from the website:\n\nName: ${d.name}\nPhone: ${d.phone}${d.email ? `\nEmail: ${d.email}` : ""}${d.note ? `\nNote: ${d.note}` : ""}\n\nItems:\n${list}`,
+      replyTo: d.email || undefined,
+    });
+  } catch {
+    /* email is optional */
+  }
+  revalidatePath("/admin/enquiries");
+  return { ok: true };
+}
+
+export async function updateEnquiry(
+  id: string,
+  values: { status?: string; reply?: string },
+) {
+  await requireAdmin();
+  await prisma.enquiry.update({ where: { id }, data: values });
+  revalidatePath("/admin/enquiries");
+  return { ok: true };
+}
+
+export async function deleteEnquiry(id: string) {
+  await requireAdmin();
+  await prisma.enquiry.delete({ where: { id } });
+  revalidatePath("/admin/enquiries");
+  return { ok: true };
+}
+
+/* ───────────────────────────── Feedback ───────────────────────────────── */
+
+const feedbackSchema = z.object({
+  id: z.string().optional(),
+  name: z.string().min(1, "Name is required"),
+  location: z.string().optional().default(""),
+  type: z.enum(["text", "image", "video"]).default("text"),
+  message: z.string().optional().default(""),
+  mediaUrl: z.string().optional().default(""),
+  rating: z.number().min(1).max(5).optional(),
+  approved: z.boolean().optional().default(false),
+  featured: z.boolean().optional().default(false),
+  sortOrder: z.number().optional().default(0),
+});
+export type FeedbackInput = z.input<typeof feedbackSchema>;
+
+/** Public: submit feedback (held for admin approval). */
+export async function createFeedback(input: FeedbackInput) {
+  const d = feedbackSchema.parse(input);
+  if (d.type === "text" && !d.message?.trim()) throw new Error("Please write your feedback.");
+  if (d.type !== "text" && !d.mediaUrl) throw new Error("Please add your image or video.");
+  await prisma.feedback.create({
+    data: {
+      name: d.name,
+      location: d.location || null,
+      type: d.type,
+      message: d.message || null,
+      mediaUrl: d.mediaUrl || null,
+      rating: d.rating ?? null,
+      approved: false,
+    },
+  });
+  revalidateSite();
+  return { ok: true };
+}
+
+/** Admin: create or edit a feedback entry. */
+export async function upsertFeedback(input: FeedbackInput) {
+  await requireAdmin();
+  const d = feedbackSchema.parse(input);
+  const data = {
+    name: d.name,
+    location: d.location || null,
+    type: d.type,
+    message: d.message || null,
+    mediaUrl: d.mediaUrl || null,
+    rating: d.rating ?? null,
+    approved: d.approved,
+    featured: d.featured,
+    sortOrder: d.sortOrder ?? 0,
+  };
+  if (d.id) await prisma.feedback.update({ where: { id: d.id }, data });
+  else await prisma.feedback.create({ data });
+  revalidateSite();
+  return { ok: true };
+}
+
+export async function setFeedbackApproved(id: string, approved: boolean) {
+  await requireAdmin();
+  await prisma.feedback.update({ where: { id }, data: { approved } });
+  revalidateSite();
+  return { ok: true };
+}
+
+export async function deleteFeedback(id: string) {
+  await requireAdmin();
+  await prisma.feedback.delete({ where: { id } });
+  revalidateSite();
+  return { ok: true };
+}
+
+/* ────────────────────────── Contact email ─────────────────────────────── */
+
+const contactSchema = z.object({
+  name: z.string().min(1, "Name is required"),
+  email: z.string().optional().default(""),
+  country: z.string().optional().default(""),
+  material: z.string().optional().default("General Enquiry"),
+  message: z.string().optional().default(""),
+});
+export type ContactInput = z.input<typeof contactSchema>;
+
+/** Public: send the contact form as an email to the business inbox (info@). */
+export async function sendContactEmail(input: ContactInput) {
+  const d = contactSchema.parse(input);
+  const lines = [
+    `Name: ${d.name}`,
+    d.email ? `Email: ${d.email}` : null,
+    d.country ? `Country: ${d.country}` : null,
+    `Material requirement: ${d.material}`,
+    d.message ? `\nMessage:\n${d.message}` : null,
+  ]
+    .filter(Boolean)
+    .join("\n");
+  try {
+    await sendMail({
+      subject: `Website enquiry: ${d.material} — ${d.name}`,
+      text: `New enquiry from the Stonic Export website:\n\n${lines}`,
+      replyTo: d.email || undefined,
+    });
+  } catch (e) {
+    if (e instanceof Error && e.message === "EMAIL_NOT_CONFIGURED") {
+      return { ok: false, error: "not_configured" as const };
+    }
+    return { ok: false, error: "send_failed" as const };
+  }
+  return { ok: true as const };
 }
