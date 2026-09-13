@@ -1,12 +1,14 @@
 import Link from "next/link";
-import { Plus, Star, Pencil } from "lucide-react";
+import { Plus, Star, Pencil, PackageCheck } from "lucide-react";
 import { prisma } from "@/lib/db";
-import ReadyStockToggle from "@/components/admin/ReadyStockToggle";
 
 export default async function AdminProductsPage() {
   const products = await prisma.product.findMany({
     orderBy: [{ sortOrder: "asc" }, { name: "asc" }],
-    include: { category: { select: { name: true } } },
+    include: {
+      category: { select: { name: true } },
+      gallery: { where: { readyStock: true }, select: { id: true } },
+    },
   });
 
   return (
@@ -42,7 +44,11 @@ export default async function AdminProductsPage() {
                 <p className="text-xs uppercase tracking-[0.1em] text-ink-3">{p.category.name}</p>
               </div>
             </Link>
-            <ReadyStockToggle id={p.id} initial={p.readyStock} />
+            {p.gallery.length > 0 ? (
+              <span className="inline-flex shrink-0 items-center gap-1.5 rounded-full border border-sage/50 bg-sage-soft px-3 py-1.5 text-[0.68rem] font-semibold uppercase tracking-[0.1em] text-sage">
+                <PackageCheck size={13} /> {p.gallery.length} in stock
+              </span>
+            ) : null}
             <Link
               href={`/admin/products/${p.id}`}
               className="hidden items-center gap-1.5 text-[0.72rem] uppercase tracking-[0.12em] text-ink-3 transition-colors hover:text-ink sm:inline-flex"

@@ -68,10 +68,23 @@ const productSchema = z.object({
   thickness: z.string().optional().default(""),
   imageUrl: z.string().min(1, "A main image is required"),
   featured: z.boolean().optional().default(false),
-  readyStock: z.boolean().optional().default(false),
   sortOrder: z.number().optional().default(0),
   applications: z.array(z.string()).optional().default([]),
-  gallery: z.array(z.string()).optional().default([]),
+  // Gallery blocks. Accepts plain URL strings (legacy) or block objects.
+  gallery: z
+    .array(
+      z.union([
+        z.string(),
+        z.object({
+          url: z.string().min(1),
+          refNo: z.string().optional().default(""),
+          readyStock: z.boolean().optional().default(false),
+          qty: z.string().optional().default(""),
+        }),
+      ]),
+    )
+    .optional()
+    .default([]),
 });
 
 export type ProductInput = z.input<typeof productSchema>;
@@ -90,6 +103,16 @@ export async function upsertProduct(input: ProductInput) {
   const data = productSchema.parse(input);
 
   const slug = await uniqueSlug(data.slug || data.name, data.id);
+
+  // Normalise gallery blocks (accept legacy plain-URL strings too).
+  const blocks = (data.gallery ?? [])
+    .map((g) =>
+      typeof g === "string"
+        ? { url: g, refNo: "", readyStock: false, qty: "" }
+        : g,
+    )
+    .filter((g) => g.url);
+
   const base = {
     name: data.name,
     slug,
@@ -100,32 +123,31 @@ export async function upsertProduct(input: ProductInput) {
     thickness: data.thickness || null,
     imageUrl: data.imageUrl,
     featured: data.featured,
-    readyStock: data.readyStock,
+    // Derived: the product is "ready stock" when any block is available.
+    readyStock: blocks.some((b) => b.readyStock),
     sortOrder: data.sortOrder,
     applications: JSON.stringify(data.applications ?? []),
   };
 
-  const gallery = (data.gallery ?? []).filter(Boolean);
+  const galleryCreate = blocks.map((b, i) => ({
+    url: b.url,
+    refNo: b.refNo?.trim() || null,
+    readyStock: Boolean(b.readyStock),
+    qty: b.qty?.trim() || null,
+    sortOrder: i,
+  }));
 
   if (data.id) {
     await prisma.$transaction([
       prisma.productImage.deleteMany({ where: { productId: data.id } }),
       prisma.product.update({
         where: { id: data.id },
-        data: {
-          ...base,
-          gallery: {
-            create: gallery.map((url, i) => ({ url, sortOrder: i })),
-          },
-        },
+        data: { ...base, gallery: { create: galleryCreate } },
       }),
     ]);
   } else {
     await prisma.product.create({
-      data: {
-        ...base,
-        gallery: { create: gallery.map((url, i) => ({ url, sortOrder: i })) },
-      },
+      data: { ...base, gallery: { create: galleryCreate } },
     });
   }
 
@@ -138,15 +160,6 @@ export async function deleteProduct(id: string) {
   await prisma.product.delete({ where: { id } });
   revalidateSite();
   return { ok: true };
-}
-
-/** Quick toggle used by the products list — flip Ready Stock without opening the product. */
-export async function setProductReadyStock(id: string, readyStock: boolean) {
-  await requireAdmin();
-  await prisma.product.update({ where: { id }, data: { readyStock } });
-  revalidateSite();
-  revalidatePath("/admin/products");
-  return { ok: true, readyStock };
 }
 
 /* ──────────────────────────── Categories ──────────────────────────── */

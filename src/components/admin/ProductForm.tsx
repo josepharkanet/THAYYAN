@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { ArrowLeft, Trash2, X, Loader2 } from "lucide-react";
 import { upsertProduct, deleteProduct } from "@/app/admin/actions";
-import { ImageUpload, GalleryUpload } from "./ImageUpload";
+import { ImageUpload, GalleryBlocks, type GalleryBlock } from "./ImageUpload";
 
 type Category = { id: string; name: string };
 
@@ -19,10 +19,9 @@ export type ProductFormData = {
   thickness: string;
   imageUrl: string;
   featured: boolean;
-  readyStock: boolean;
   sortOrder: number;
   applications: string[];
-  gallery: string[];
+  gallery: GalleryBlock[];
 };
 
 const inputCls =
@@ -49,7 +48,6 @@ export default function ProductForm({
       thickness: "",
       imageUrl: "",
       featured: false,
-      readyStock: false,
       sortOrder: 0,
       applications: [],
       gallery: [],
@@ -241,9 +239,13 @@ export default function ProductForm({
           </div>
 
           <div className="border border-line bg-surface p-5">
-            <label className={labelCls}>Gallery images</label>
-            <p className="mt-1 mb-3 text-xs text-ink-3">Optional extra photos.</p>
-            <GalleryUpload values={form.gallery} onChange={(urls) => set("gallery", urls)} />
+            <label className={labelCls}>Gallery &amp; ready stock</label>
+            <p className="mt-1 mb-3 text-xs text-ink-3">
+              Add a photo for each shade / block. Tick <strong>Available in ready stock</strong> and
+              give it a block number &amp; quantity to show it to customers as available now. The
+              product appears in the Ready Stock filter automatically.
+            </p>
+            <GalleryBlocks values={form.gallery} onChange={(items) => set("gallery", items)} />
           </div>
 
           <div className="border border-line bg-surface p-5">
@@ -259,19 +261,7 @@ export default function ProductForm({
                 className="h-5 w-5 accent-sage"
               />
             </label>
-            <label className="mt-4 flex cursor-pointer items-center justify-between border-t border-line pt-4">
-              <span>
-                <span className="block font-medium text-ink">Ready stock</span>
-                <span className="text-xs text-ink-3">Show in the shareable Ready Stock catalogue</span>
-              </span>
-              <input
-                type="checkbox"
-                checked={form.readyStock}
-                onChange={(e) => set("readyStock", e.target.checked)}
-                className="h-5 w-5 accent-sage"
-              />
-            </label>
-            <div className="mt-5">
+            <div className="mt-5 border-t border-line pt-5">
               <label className={labelCls} htmlFor="p-sort">Sort order</label>
               <input
                 id="p-sort"

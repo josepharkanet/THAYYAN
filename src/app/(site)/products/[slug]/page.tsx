@@ -50,6 +50,15 @@ export default async function ProductDetailPage({
 
   const applications = parseApplications(product.applications);
   const images = [product.imageUrl, ...product.gallery.map((g) => g.url)].filter(Boolean);
+  const readyBlocks = product.gallery.filter((g) => g.readyStock);
+
+  const blockWaLink = (refNo?: string | null, qty?: string | null) =>
+    whatsappLink(
+      settings.whatsappNumber,
+      `Hello Stonic Export! I'm interested in ready-stock ${
+        refNo ? `block ${refNo}` : "block"
+      } of "${product.name}"${qty ? ` (${qty} available)` : ""}. Please share the price and details.`,
+    );
 
   const related = await prisma.product.findMany({
     where: { categoryId: product.categoryId, NOT: { id: product.id } },
@@ -93,6 +102,15 @@ export default async function ProductDetailPage({
             <h1 className="mt-3 font-serif text-[2rem] font-light leading-[1.08] text-ink sm:text-[2.7rem]">
               {product.name}
             </h1>
+            {readyBlocks.length > 0 ? (
+              <a
+                href="#ready-stock"
+                className="mt-4 inline-flex items-center gap-2 rounded-full bg-sage-soft px-3.5 py-1.5 text-[0.7rem] font-semibold uppercase tracking-[0.14em] text-sage transition-colors hover:bg-sage hover:text-white"
+              >
+                <span className="h-1.5 w-1.5 rounded-full bg-current" />
+                {readyBlocks.length} block{readyBlocks.length > 1 ? "s" : ""} in ready stock
+              </a>
+            ) : null}
             {product.description ? (
               <p className="mt-6 text-base leading-relaxed text-ink-2">{product.description}</p>
             ) : null}
@@ -149,6 +167,61 @@ export default async function ProductDetailPage({
           </div>
         </div>
       </section>
+
+      {/* Ready stock — available blocks */}
+      {readyBlocks.length > 0 ? (
+        <section id="ready-stock" className="scroll-mt-24 border-t border-line bg-sage-soft/30">
+          <div className="mx-auto max-w-7xl px-5 py-16 sm:px-8 sm:py-20 lg:px-12">
+            <div className="flex items-center gap-2.5">
+              <span className="h-2 w-2 rounded-full bg-sage" />
+              <p className="text-[0.7rem] font-semibold uppercase tracking-[0.2em] text-sage">
+                Ready stock — available now
+              </p>
+            </div>
+            <h2 className="mt-3 font-serif text-[1.8rem] font-light leading-tight text-ink sm:text-[2.3rem]">
+              {product.name} — blocks available
+            </h2>
+            <p className="mt-3 max-w-xl text-sm leading-relaxed text-ink-2">
+              These specific blocks are in stock right now. Quote the block number when you enquire and
+              we&rsquo;ll confirm price &amp; dispatch.
+            </p>
+            <div className="mt-9 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+              {readyBlocks.map((b) => (
+                <div key={b.id} className="overflow-hidden rounded-md border border-line bg-paper">
+                  <div className="relative aspect-[4/3] overflow-hidden bg-paper-2">
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img
+                      src={b.url}
+                      alt={b.refNo ? `${product.name} block ${b.refNo}` : product.name}
+                      loading="lazy"
+                      className="h-full w-full object-cover"
+                    />
+                    <span className="absolute left-3 top-3 rounded-full bg-sage px-2.5 py-1 text-[0.6rem] font-semibold uppercase tracking-[0.14em] text-white">
+                      Available
+                    </span>
+                  </div>
+                  <div className="p-4">
+                    <div className="flex items-baseline justify-between gap-2">
+                      <p className="font-serif text-xl text-ink">
+                        {b.refNo ? `Block ${b.refNo}` : "Block"}
+                      </p>
+                      {b.qty ? <p className="text-sm font-semibold text-sage">{b.qty}</p> : null}
+                    </div>
+                    <a
+                      href={blockWaLink(b.refNo, b.qty)}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="mt-4 inline-flex w-full items-center justify-center gap-2 bg-ink px-4 py-2.5 text-[0.7rem] font-semibold uppercase tracking-[0.12em] text-paper transition-colors hover:bg-sage"
+                    >
+                      <WhatsAppIcon size={15} /> Enquire this block
+                    </a>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+      ) : null}
 
       {/* Related */}
       {related.length > 0 ? (

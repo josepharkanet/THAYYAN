@@ -53,7 +53,8 @@ model Product {
   imageUrl     String
   gallery      ProductImage[]
   featured     Boolean        @default(false)
-  /// Marked as available "ready stock" — surfaced in the shareable ready-stock catalogue.
+  /// Auto-derived: true when any gallery block is marked as available ready stock.
+  /// Surfaces the product in the Ready Stock filter/catalogue.
   readyStock   Boolean        @default(false)
   sortOrder    Int            @default(0)
   createdAt    DateTime       @default(now())
@@ -105,15 +106,24 @@ model Feedback {
   @@index([createdAt])
 }
 
-/// Extra gallery images attached to a product.
+/// A gallery image for a product. Doubles as a "ready-stock block": when
+/// readyStock is on, it represents a specific slab/block currently available,
+/// identified by refNo (block number) with an available quantity (qty).
 model ProductImage {
-  id        Int     @id @default(autoincrement())
-  productId String
-  product   Product @relation(fields: [productId], references: [id], onDelete: Cascade)
-  url       String
-  sortOrder Int     @default(0)
+  id         Int     @id @default(autoincrement())
+  productId  String
+  product    Product @relation(fields: [productId], references: [id], onDelete: Cascade)
+  url        String
+  /// Unique block / slab number shown to customers (e.g. "AW-101").
+  refNo      String?
+  /// This specific block is available right now.
+  readyStock Boolean @default(false)
+  /// Available quantity, free text (e.g. "8 slabs", "450 sq.ft").
+  qty        String?
+  sortOrder  Int     @default(0)
 
   @@index([productId])
+  @@index([readyStock])
 }
 
 /// Editable site content & contact details (key/value), managed from Settings.

@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { UploadCloud, X, Film, Loader2, Link2, Images, Search, Trash2, Play } from "lucide-react";
+import { UploadCloud, X, Film, Loader2, Link2, Images, Search, Trash2, Play, PackageCheck } from "lucide-react";
 
 async function uploadFile(file: File): Promise<string> {
   const fd = new FormData();
@@ -418,6 +418,153 @@ export function GalleryUpload({
       </div>
       {error ? <p className="mt-2 text-sm text-red-600">{error}</p> : null}
       {lib ? <MediaLibrary onPick={(url) => onChange([...values, url])} onClose={() => setLib(false)} /> : null}
+    </div>
+  );
+}
+
+/* ───────────── Gallery blocks (shades / ready-stock slabs) ───────────── */
+export type GalleryBlock = {
+  url: string;
+  refNo: string;
+  readyStock: boolean;
+  qty: string;
+};
+
+export function GalleryBlocks({
+  values,
+  onChange,
+}: {
+  values: GalleryBlock[];
+  onChange: (items: GalleryBlock[]) => void;
+}) {
+  const inputRef = useRef<HTMLInputElement>(null);
+  const [busy, setBusy] = useState(false);
+  const [error, setError] = useState("");
+  const [lib, setLib] = useState(false);
+
+  function update(i: number, patch: Partial<GalleryBlock>) {
+    onChange(values.map((v, idx) => (idx === i ? { ...v, ...patch } : v)));
+  }
+  function remove(i: number) {
+    onChange(values.filter((_, idx) => idx !== i));
+  }
+  function add(url: string) {
+    onChange([...values, { url, refNo: "", readyStock: false, qty: "" }]);
+  }
+
+  async function handleFiles(files: FileList | null) {
+    if (!files || files.length === 0) return;
+    setBusy(true);
+    setError("");
+    try {
+      const added: GalleryBlock[] = [];
+      for (const file of Array.from(files)) {
+        added.push({ url: await uploadFile(file), refNo: "", readyStock: false, qty: "" });
+      }
+      onChange([...values, ...added]);
+    } catch (e) {
+      setError(e instanceof Error ? e.message : "Upload failed");
+    } finally {
+      setBusy(false);
+      if (inputRef.current) inputRef.current.value = "";
+    }
+  }
+
+  const readyCount = values.filter((v) => v.readyStock).length;
+  const fieldCls =
+    "w-full border border-line bg-surface px-2.5 py-1.5 text-sm text-ink outline-none focus:border-sage";
+
+  return (
+    <div className="space-y-3">
+      {values.length > 0 ? (
+        <p className="flex items-center gap-1.5 text-xs text-ink-2">
+          <PackageCheck size={14} className="text-sage" />
+          {readyCount > 0
+            ? `${readyCount} block${readyCount > 1 ? "s" : ""} marked available in ready stock`
+            : "Tick “Available” on a photo to list it as a ready-stock block."}
+        </p>
+      ) : null}
+
+      {values.map((it, i) => (
+        <div
+          key={it.url + i}
+          className={`flex gap-3 rounded-md border p-3 transition-colors ${
+            it.readyStock ? "border-sage/60 bg-sage-soft/40" : "border-line bg-paper-2/40"
+          }`}
+        >
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img src={it.url} alt="" className="h-20 w-20 shrink-0 rounded-sm object-cover" />
+          <div className="min-w-0 flex-1 space-y-2">
+            <label className="flex cursor-pointer items-center gap-2 text-sm font-medium text-ink">
+              <input
+                type="checkbox"
+                checked={it.readyStock}
+                onChange={(e) => update(i, { readyStock: e.target.checked })}
+                className="h-4 w-4 accent-sage"
+              />
+              Available in ready stock
+            </label>
+            {it.readyStock ? (
+              <div className="grid grid-cols-2 gap-2">
+                <input
+                  value={it.refNo}
+                  onChange={(e) => update(i, { refNo: e.target.value })}
+                  placeholder="Block / slab no."
+                  className={fieldCls}
+                />
+                <input
+                  value={it.qty}
+                  onChange={(e) => update(i, { qty: e.target.value })}
+                  placeholder="Qty (e.g. 8 slabs)"
+                  className={fieldCls}
+                />
+              </div>
+            ) : (
+              <p className="text-xs text-ink-3">
+                Extra photo. Tick “Available” to show it as a ready-stock block with a number &amp; quantity.
+              </p>
+            )}
+          </div>
+          <button
+            type="button"
+            onClick={() => remove(i)}
+            aria-label="Remove photo"
+            className="flex h-7 w-7 shrink-0 items-center justify-center self-start rounded-full bg-ink/10 text-ink-3 hover:bg-ink/20 hover:text-ink"
+          >
+            <X size={14} />
+          </button>
+        </div>
+      ))}
+
+      <div className="flex flex-wrap items-center gap-x-4 gap-y-2">
+        <button
+          type="button"
+          onClick={() => inputRef.current?.click()}
+          disabled={busy}
+          className="inline-flex items-center gap-1.5 border border-ink px-4 py-2 text-[0.7rem] font-semibold uppercase tracking-[0.1em] text-ink transition-colors hover:bg-ink hover:text-paper disabled:opacity-60"
+        >
+          {busy ? <Loader2 size={13} className="animate-spin" /> : <UploadCloud size={13} />}
+          {busy ? "Uploading…" : "Add photo"}
+        </button>
+        <button
+          type="button"
+          onClick={() => setLib(true)}
+          className="inline-flex items-center gap-1.5 text-xs font-semibold text-sage transition-colors hover:text-ink"
+        >
+          <Images size={14} /> Choose from library
+        </button>
+      </div>
+
+      <input
+        ref={inputRef}
+        type="file"
+        accept="image/*"
+        multiple
+        className="hidden"
+        onChange={(e) => handleFiles(e.target.files)}
+      />
+      {error ? <p className="text-sm text-red-600">{error}</p> : null}
+      {lib ? <MediaLibrary onPick={(url) => add(url)} onClose={() => setLib(false)} /> : null}
     </div>
   );
 }
