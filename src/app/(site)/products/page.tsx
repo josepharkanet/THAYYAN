@@ -8,11 +8,50 @@ import ShareCatalog from "@/components/site/ShareCatalog";
 
 export const dynamic = "force-dynamic";
 
-export const metadata: Metadata = {
-  title: "Products",
-  description:
-    "Browse our collection of premium Indian marble, granite (including Black Galaxy), Kota & Tandoor natural stone, and stone cladding.",
-};
+export async function generateMetadata({
+  searchParams,
+}: {
+  searchParams: Promise<{ category?: string; ready?: string }>;
+}): Promise<Metadata> {
+  const { ready } = await searchParams;
+  const base = process.env.NEXT_PUBLIC_SITE_URL || "https://stonicexport.com";
+  const abs = (u?: string | null) =>
+    u ? (u.startsWith("http") ? u : `${base}${u}`) : undefined;
+
+  if (ready === "1") {
+    // Preview the first available ready-stock product's image when the link is shared.
+    const first = await prisma.product.findFirst({
+      where: { gallery: { some: { readyStock: true } } },
+      orderBy: [{ featured: "desc" }, { sortOrder: "asc" }],
+      select: { imageUrl: true },
+    });
+    const image = abs(first?.imageUrl);
+    const title = "Ready Stock — Available Now | Stonic Export";
+    const description =
+      "In-stock marble, granite & natural stone slabs ready for immediate dispatch. See available sizes and enquire for the best price.";
+    return {
+      title,
+      description,
+      openGraph: {
+        title,
+        description,
+        images: image ? [{ url: image }] : undefined,
+      },
+      twitter: {
+        card: "summary_large_image",
+        title,
+        description,
+        images: image ? [image] : undefined,
+      },
+    };
+  }
+
+  return {
+    title: "Products",
+    description:
+      "Browse our collection of premium Indian marble, granite (including Black Galaxy), Kota & Tandoor natural stone, and stone cladding.",
+  };
+}
 
 export default async function ProductsPage({
   searchParams,
