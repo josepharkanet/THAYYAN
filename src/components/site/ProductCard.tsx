@@ -49,18 +49,18 @@ export default function ProductCard({ product }: { product: ProductCardData }) {
         {product.readyBlocks && product.readyBlocks.length > 0 ? (
           <div className="mt-3">
             <p className="text-[0.7rem] font-medium uppercase tracking-[0.14em] text-ink-3">
-              {product.readyBlocks.length} {product.readyBlocks.length === 1 ? "slab" : "slabs"} available
+              {product.readyBlocks.length} {product.readyBlocks.length === 1 ? "block" : "blocks"} available
             </p>
-            <div className="mt-2 flex flex-wrap gap-1.5">
+            <ol className="mt-1.5 space-y-0.5 text-sm text-ink-2">
               {product.readyBlocks.map((b, i) => (
-                <span
-                  key={i}
-                  className="rounded-full bg-sage-soft px-2.5 py-1 text-[0.72rem] font-semibold text-sage"
-                >
-                  {b.qty ? `${b.qty} Sqft` : "Available"}
-                </span>
+                <li key={i}>
+                  {i + 1}.{" "}
+                  <span className="font-semibold text-sage">
+                    {b.qty ? `${b.qty} Sqft` : "Available"}
+                  </span>
+                </li>
               ))}
-            </div>
+            </ol>
           </div>
         ) : product.description ? (
           <p className="mt-2 line-clamp-2 text-sm leading-relaxed text-ink-2">

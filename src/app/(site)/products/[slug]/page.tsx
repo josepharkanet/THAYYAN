@@ -104,7 +104,7 @@ export default async function ProductDetailPage({
                 </p>
               </div>
               <h2 className="mt-3 font-serif text-[1.6rem] font-light leading-tight text-ink sm:text-[2rem]">
-                {product.name} — {readyBlocks.length} slab{readyBlocks.length > 1 ? "s" : ""} available
+                {product.name} — {readyBlocks.length} block{readyBlocks.length > 1 ? "s" : ""} available
               </h2>
               <p className="mt-2 max-w-xl text-sm leading-relaxed text-ink-2">
                 Add the slabs you want to your list, or enquire on WhatsApp — we&rsquo;ll confirm price &amp; dispatch.
