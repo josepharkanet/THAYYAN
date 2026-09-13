@@ -52,12 +52,12 @@ export default async function ProductDetailPage({
   const images = [product.imageUrl, ...product.gallery.map((g) => g.url)].filter(Boolean);
   const readyBlocks = product.gallery.filter((g) => g.readyStock);
 
-  const blockWaLink = (refNo?: string | null, qty?: string | null) =>
+  const blockWaLink = (qty?: string | null) =>
     whatsappLink(
       settings.whatsappNumber,
-      `Hello Stonic Export! I'm interested in ready-stock ${
-        refNo ? `block ${refNo}` : "block"
-      } of "${product.name}"${qty ? ` (${qty} available)` : ""}. Please share the price and details.`,
+      `Hello Stonic Export! I'm interested in this ready-stock slab of "${product.name}"${
+        qty ? ` (${qty} Sqft available)` : ""
+      }. Please share the price and details.`,
     );
 
   const related = await prisma.product.findMany({
@@ -201,14 +201,11 @@ export default async function ProductDetailPage({
                     </span>
                   </div>
                   <div className="p-4">
-                    <div className="flex items-baseline justify-between gap-2">
-                      <p className="font-serif text-xl text-ink">
-                        {b.refNo ? `Block ${b.refNo}` : "Block"}
-                      </p>
-                      {b.qty ? <p className="text-sm font-semibold text-sage">{b.qty}</p> : null}
-                    </div>
+                    <p className="font-serif text-xl text-ink">
+                      {b.qty ? `${b.qty} Sqft` : "Available"}
+                    </p>
                     <a
-                      href={blockWaLink(b.refNo, b.qty)}
+                      href={blockWaLink(b.qty)}
                       target="_blank"
                       rel="noopener noreferrer"
                       className="mt-4 inline-flex w-full items-center justify-center gap-2 bg-ink px-4 py-2.5 text-[0.7rem] font-semibold uppercase tracking-[0.12em] text-paper transition-colors hover:bg-sage"

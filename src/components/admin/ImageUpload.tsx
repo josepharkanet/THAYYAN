@@ -503,19 +503,17 @@ export function GalleryBlocks({
               Ready stock
             </label>
             {it.readyStock ? (
-              <div className="grid grid-cols-2 gap-2">
+              <div className="flex items-center gap-2">
                 <input
-                  value={it.refNo}
-                  onChange={(e) => update(i, { refNo: e.target.value })}
-                  placeholder="Block / slab no."
-                  className={fieldCls}
-                />
-                <input
+                  type="number"
+                  inputMode="numeric"
+                  min="0"
                   value={it.qty}
                   onChange={(e) => update(i, { qty: e.target.value })}
-                  placeholder="Qty (e.g. 8 slabs)"
-                  className={fieldCls}
+                  placeholder="0"
+                  className={`${fieldCls} w-24`}
                 />
+                <span className="text-sm font-medium text-ink-2">Sqft available</span>
               </div>
             ) : null}
           </div>
