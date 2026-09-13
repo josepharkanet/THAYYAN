@@ -5,6 +5,7 @@ import { cn } from "@/lib/utils";
 import Reveal from "@/components/site/Reveal";
 import ProductCard from "@/components/site/ProductCard";
 import ShareCatalog from "@/components/site/ShareCatalog";
+import { getSettings } from "@/lib/settings";
 
 export const dynamic = "force-dynamic";
 
@@ -19,13 +20,16 @@ export async function generateMetadata({
     u ? (u.startsWith("http") ? u : `${base}${u}`) : undefined;
 
   if (ready === "1") {
-    // Preview the first available ready-stock product's image when the link is shared.
-    const first = await prisma.product.findFirst({
-      where: { gallery: { some: { readyStock: true } } },
-      orderBy: [{ featured: "desc" }, { sortOrder: "asc" }],
-      select: { imageUrl: true },
-    });
-    const image = abs(first?.imageUrl);
+    // Preview the admin-set share image if any, else the first available product.
+    const [first, settings] = await Promise.all([
+      prisma.product.findFirst({
+        where: { gallery: { some: { readyStock: true } } },
+        orderBy: [{ featured: "desc" }, { sortOrder: "asc" }],
+        select: { imageUrl: true },
+      }),
+      getSettings(),
+    ]);
+    const image = abs(settings.ogImage || first?.imageUrl);
     const title = "Ready Stock — Available Now | Stonic Export";
     const description =
       "In-stock marble, granite & natural stone slabs ready for immediate dispatch. See available sizes and enquire for the best price.";

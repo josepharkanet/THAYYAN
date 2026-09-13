@@ -58,6 +58,10 @@ export const SETTING_DEFAULTS = {
   // Social
   instagramUrl: "",
   facebookUrl: "",
+
+  // Social sharing — preview image used when links are shared (Open Graph).
+  // Empty = fall back to the built-in default (/hero-poster.jpg).
+  ogImage: "",
 } as const;
 
 export type SettingKey = keyof typeof SETTING_DEFAULTS;

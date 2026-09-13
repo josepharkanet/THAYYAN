@@ -71,6 +71,19 @@ const GROUPS: { title: string; note?: string; fields: Field[] }[] = [
       { key: "facebookUrl", label: "Facebook URL" },
     ],
   },
+  {
+    title: "Social sharing",
+    note: "The preview image shown when your links are shared on WhatsApp, Facebook, etc.",
+    fields: [
+      {
+        key: "ogImage",
+        label: "Share image (Open Graph)",
+        type: "image",
+        hint: "Best at 1200×630px. Leave empty to use the default site image.",
+        full: true,
+      },
+    ],
+  },
 ];
 
 const inputCls =

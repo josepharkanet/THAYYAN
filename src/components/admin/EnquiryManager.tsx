@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { Loader2, Trash2, Check, Phone, Mail } from "lucide-react";
 import { updateEnquiry, deleteEnquiry } from "@/app/admin/actions";
+import { whatsappLink } from "@/lib/utils";
 import { WhatsAppIcon } from "@/components/site/icons";
 
 type Item = { slug: string; name: string; imageUrl: string; qty: number };
@@ -68,8 +69,7 @@ function EnquiryRow({ e }: { e: AdminEnquiry }) {
   }
 
   function whatsapp() {
-    const phone = e.phone.replace(/\D/g, "");
-    window.open(`https://wa.me/${phone}?text=${encodeURIComponent(reply)}`, "_blank");
+    window.open(whatsappLink(e.phone, reply), "_blank");
     if (status === "new") save("quoted");
   }
 

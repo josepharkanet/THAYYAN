@@ -32,9 +32,24 @@ export function parseApplications(value: string | null | undefined): string[] {
   return [];
 }
 
+/**
+ * Normalise a phone number to digits with a country code for wa.me.
+ * A bare 10-digit number (or 0-prefixed 11-digit) is assumed to be an Indian
+ * mobile and gets the default country code, so WhatsApp doesn't guess the wrong
+ * country (e.g. "6238493485" being read as +62 Indonesia).
+ */
+export function normalizePhone(raw: string, defaultCc = "91"): string {
+  let d = (raw || "").replace(/\D/g, "");
+  if (!d) return "";
+  if (d.startsWith("00")) d = d.slice(2); // 00<cc>… international prefix
+  if (d.length === 10) d = defaultCc + d; // bare 10-digit mobile
+  else if (d.length === 11 && d.startsWith("0")) d = defaultCc + d.slice(1); // 0XXXXXXXXXX
+  return d;
+}
+
 /** Build a wa.me link with an optional pre-filled message. */
 export function whatsappLink(number: string, text?: string): string {
-  const digits = number.replace(/\D/g, "");
+  const digits = normalizePhone(number);
   const base = `https://wa.me/${digits}`;
   return text ? `${base}?text=${encodeURIComponent(text)}` : base;
 }
