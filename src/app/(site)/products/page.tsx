@@ -104,9 +104,6 @@ export default async function ProductsPage({
           </div>
         ) : (
           <>
-            <p className="mb-10 text-[0.72rem] uppercase tracking-[0.16em] text-ink-3">
-              {products.length} {products.length === 1 ? "item" : "items"}
-            </p>
             <div className="grid grid-cols-1 gap-x-8 gap-y-12 sm:grid-cols-2 lg:grid-cols-3">
               {products.map((p, i) => (
                 <Reveal key={p.id} delay={(i % 3) * 90}>
