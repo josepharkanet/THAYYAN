@@ -117,7 +117,7 @@ export default async function ProductsPage({
                       description: p.description,
                       categoryName: p.category.name,
                       readyStock: p.gallery.length > 0,
-                      readyBlocks: readyMode ? p.gallery.map((g) => ({ qty: g.qty })) : undefined,
+                      readyBlocks: p.gallery.map((g) => ({ qty: g.qty })),
                     }}
                   />
                 </Reveal>
