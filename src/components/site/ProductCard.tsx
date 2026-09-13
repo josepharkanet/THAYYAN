@@ -9,6 +9,8 @@ export type ProductCardData = {
   description?: string | null;
   categoryName?: string;
   readyStock?: boolean;
+  /** When set (Ready Stock view), the available slabs/blocks with their Sqft. */
+  readyBlocks?: { qty: string | null }[];
 };
 
 export default function ProductCard({ product }: { product: ProductCardData }) {
@@ -50,7 +52,23 @@ export default function ProductCard({ product }: { product: ProductCardData }) {
         <h3 className="mt-2 font-serif text-2xl text-ink transition-colors group-hover:text-sage">
           {product.name}
         </h3>
-        {product.description ? (
+        {product.readyBlocks && product.readyBlocks.length > 0 ? (
+          <div className="mt-3">
+            <p className="text-[0.7rem] font-medium uppercase tracking-[0.14em] text-ink-3">
+              {product.readyBlocks.length} {product.readyBlocks.length === 1 ? "slab" : "slabs"} available
+            </p>
+            <div className="mt-2 flex flex-wrap gap-1.5">
+              {product.readyBlocks.map((b, i) => (
+                <span
+                  key={i}
+                  className="rounded-full bg-sage-soft px-2.5 py-1 text-[0.72rem] font-semibold text-sage"
+                >
+                  {b.qty ? `${b.qty} Sqft` : "Available"}
+                </span>
+              ))}
+            </div>
+          </div>
+        ) : product.description ? (
           <p className="mt-2 line-clamp-2 text-sm leading-relaxed text-ink-2">
             {product.description}
           </p>

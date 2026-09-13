@@ -34,7 +34,11 @@ export default async function ProductsPage({
       orderBy: [{ featured: "desc" }, { sortOrder: "asc" }],
       include: {
         category: { select: { name: true } },
-        gallery: { where: { readyStock: true }, select: { id: true } },
+        gallery: {
+          where: { readyStock: true },
+          select: { id: true, qty: true },
+          orderBy: { sortOrder: "asc" },
+        },
       },
     }),
   ]);
@@ -113,6 +117,7 @@ export default async function ProductsPage({
                       description: p.description,
                       categoryName: p.category.name,
                       readyStock: p.gallery.length > 0,
+                      readyBlocks: readyMode ? p.gallery.map((g) => ({ qty: g.qty })) : undefined,
                     }}
                   />
                 </Reveal>
