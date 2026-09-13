@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { Plus, Star, Pencil } from "lucide-react";
 import { prisma } from "@/lib/db";
+import ReadyStockToggle from "@/components/admin/ReadyStockToggle";
 
 export default async function AdminProductsPage() {
   const products = await prisma.product.findMany({
@@ -26,24 +27,29 @@ export default async function AdminProductsPage() {
 
       <div className="mt-8 divide-y divide-line border border-line bg-surface">
         {products.map((p) => (
-          <Link
+          <div
             key={p.id}
-            href={`/admin/products/${p.id}`}
             className="group flex items-center gap-4 p-4 transition-colors hover:bg-paper-2/50"
           >
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src={p.imageUrl} alt="" className="h-14 w-14 shrink-0 object-cover" />
-            <div className="min-w-0 flex-1">
-              <p className="flex items-center gap-2 truncate font-medium text-ink">
-                {p.name}
-                {p.featured ? <Star size={14} className="fill-sage text-sage" /> : null}
-              </p>
-              <p className="text-xs uppercase tracking-[0.1em] text-ink-3">{p.category.name}</p>
-            </div>
-            <span className="hidden items-center gap-1.5 text-[0.72rem] uppercase tracking-[0.12em] text-ink-3 transition-colors group-hover:text-ink sm:inline-flex">
+            <Link href={`/admin/products/${p.id}`} className="flex min-w-0 flex-1 items-center gap-4">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img src={p.imageUrl} alt="" className="h-14 w-14 shrink-0 object-cover" />
+              <div className="min-w-0 flex-1">
+                <p className="flex items-center gap-2 truncate font-medium text-ink">
+                  {p.name}
+                  {p.featured ? <Star size={14} className="fill-sage text-sage" /> : null}
+                </p>
+                <p className="text-xs uppercase tracking-[0.1em] text-ink-3">{p.category.name}</p>
+              </div>
+            </Link>
+            <ReadyStockToggle id={p.id} initial={p.readyStock} />
+            <Link
+              href={`/admin/products/${p.id}`}
+              className="hidden items-center gap-1.5 text-[0.72rem] uppercase tracking-[0.12em] text-ink-3 transition-colors hover:text-ink sm:inline-flex"
+            >
               <Pencil size={14} /> Edit
-            </span>
-          </Link>
+            </Link>
+          </div>
         ))}
         {products.length === 0 ? (
           <div className="p-10 text-center">

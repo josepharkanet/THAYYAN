@@ -104,12 +104,27 @@ export default function FeedbackSubmit({
                   <input value={location} onChange={(e) => setLocation(e.target.value)} placeholder="City / Country" className="border border-line bg-surface px-3.5 py-2.5 text-ink outline-none focus:border-sage" />
                 </div>
 
-                <div className="flex items-center gap-1">
+                <div className="flex items-center gap-0.5">
                   {[1, 2, 3, 4, 5].map((n) => (
-                    <button key={n} type="button" onClick={() => setRating(n)} aria-label={`${n} stars`}>
-                      <Star size={26} className={n <= rating ? "fill-amber-400 text-amber-400" : "text-line"} />
+                    <button
+                      key={n}
+                      type="button"
+                      onClick={() => setRating(n)}
+                      aria-label={`${n} star${n > 1 ? "s" : ""}`}
+                      aria-pressed={n === rating}
+                      className="rounded p-1.5 transition-transform hover:scale-110 active:scale-95"
+                    >
+                      <Star
+                        size={28}
+                        strokeWidth={1.5}
+                        className={
+                          "pointer-events-none transition-colors " +
+                          (n <= rating ? "fill-amber-400 text-amber-400" : "fill-transparent text-ink-3")
+                        }
+                      />
                     </button>
                   ))}
+                  <span className="ml-2 text-sm text-ink-3">{rating}/5</span>
                 </div>
 
                 <textarea value={message} onChange={(e) => setMessage(e.target.value)} rows={4} placeholder="Tell us about your experience with Stonic…" className="w-full resize-y border border-line bg-surface px-3.5 py-2.5 text-ink outline-none focus:border-sage" />

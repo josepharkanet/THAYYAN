@@ -142,10 +142,20 @@ function AddForm({ onDone }: { onDone: () => void }) {
         <input value={name} onChange={(e) => setName(e.target.value)} placeholder="Customer name*" className={inputCls} />
         <input value={location} onChange={(e) => setLocation(e.target.value)} placeholder="City / Country" className={inputCls} />
       </div>
-      <div className="mt-3 flex items-center gap-1">
+      <div className="mt-3 flex items-center gap-0.5">
         {[1, 2, 3, 4, 5].map((n) => (
-          <button key={n} type="button" onClick={() => setRating(n)}><Star size={22} className={n <= rating ? "fill-amber-400 text-amber-400" : "text-line"} /></button>
+          <button
+            key={n}
+            type="button"
+            onClick={() => setRating(n)}
+            aria-label={`${n} star${n > 1 ? "s" : ""}`}
+            aria-pressed={n === rating}
+            className="rounded p-1 transition-transform hover:scale-110 active:scale-95"
+          >
+            <Star size={22} className={"pointer-events-none " + (n <= rating ? "fill-amber-400 text-amber-400" : "fill-transparent text-ink-3")} />
+          </button>
         ))}
+        <span className="ml-2 text-xs text-ink-3">{rating}/5</span>
       </div>
       <textarea value={message} onChange={(e) => setMessage(e.target.value)} rows={3} placeholder="Feedback message" className={`${inputCls} mt-3 w-full resize-y`} />
       <div className="mt-3">

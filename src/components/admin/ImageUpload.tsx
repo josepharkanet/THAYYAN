@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { UploadCloud, X, Film, Loader2, Link2, Images, Search } from "lucide-react";
+import { UploadCloud, X, Film, Loader2, Link2, Images, Search, Trash2, Play } from "lucide-react";
 
 async function uploadFile(file: File): Promise<string> {
   const fd = new FormData();
@@ -21,7 +21,9 @@ async function uploadFile(file: File): Promise<string> {
   return data.url;
 }
 
-/* ─────────────── Media library picker (existing images) ─────────────── */
+/* ─────────────── Media library picker (existing files) ─────────────── */
+type MediaItem = { url: string; kind: "image" | "video"; deletable: boolean };
+
 function MediaLibrary({
   onPick,
   onClose,
@@ -29,9 +31,10 @@ function MediaLibrary({
   onPick: (url: string) => void;
   onClose: () => void;
 }) {
-  const [images, setImages] = useState<string[] | null>(null);
+  const [items, setItems] = useState<MediaItem[] | null>(null);
   const [q, setQ] = useState("");
   const [error, setError] = useState("");
+  const [deleting, setDeleting] = useState<string | null>(null);
 
   useEffect(() => {
     (async () => {
@@ -39,22 +42,47 @@ function MediaLibrary({
         const res = await fetch("/api/admin/media", { credentials: "same-origin" });
         const data = await res.json();
         if (!res.ok) throw new Error(data.error || "Could not load library");
-        setImages(data.images ?? []);
+        // Fall back to the old { images: string[] } shape just in case.
+        const list: MediaItem[] =
+          data.items ??
+          (data.images ?? []).map((url: string) => ({ url, kind: "image", deletable: false }));
+        setItems(list);
       } catch (e) {
         setError(e instanceof Error ? e.message : "Could not load library");
-        setImages([]);
+        setItems([]);
       }
     })();
   }, []);
 
-  const shown = (images ?? []).filter((u) => u.toLowerCase().includes(q.toLowerCase()));
+  async function remove(url: string) {
+    if (!confirm("Delete this file permanently?\n\nIf it's still used somewhere on the site, that image or video will break.")) return;
+    setDeleting(url);
+    setError("");
+    try {
+      const res = await fetch("/api/admin/media", {
+        method: "DELETE",
+        headers: { "Content-Type": "application/json" },
+        credentials: "same-origin",
+        body: JSON.stringify({ url }),
+      });
+      const data = await res.json().catch(() => ({}));
+      if (!res.ok) throw new Error(data.error || "Could not delete");
+      setItems((prev) => (prev ? prev.filter((it) => it.url !== url) : prev));
+    } catch (e) {
+      setError(e instanceof Error ? e.message : "Could not delete");
+    } finally {
+      setDeleting(null);
+    }
+  }
+
+  const shown = (items ?? []).filter((it) => it.url.toLowerCase().includes(q.toLowerCase()));
 
   return (
     <div className="fixed inset-0 z-[60] flex items-center justify-center p-4" role="dialog">
       <div className="absolute inset-0 bg-ink/60" onClick={onClose} />
       <div className="relative flex max-h-[85vh] w-full max-w-3xl flex-col overflow-hidden rounded-md bg-paper shadow-2xl">
         <div className="flex items-center justify-between gap-4 border-b border-line px-5 py-4">
-          <h3 className="font-serif text-xl text-ink">Image library</h3>
+          <h3 className="font-serif text-xl text-ink">Media library</h3>
           <div className="relative hidden flex-1 sm:block">
             <Search size={15} className="absolute left-3 top-1/2 -translate-y-1/2 text-ink-3" />
             <input value={q} onChange={(e) => setQ(e.target.value)} placeholder="Search…" className="w-full border border-line bg-surface py-2 pl-9 pr-3 text-sm text-ink outline-none focus:border-sage" />
@@ -62,26 +90,60 @@ function MediaLibrary({
           <button onClick={onClose} aria-label="Close" className="text-ink-3 hover:text-ink"><X size={22} /></button>
         </div>
         <div className="flex-1 overflow-y-auto p-5">
-          {images === null ? (
+          {items === null ? (
             <div className="flex h-40 items-center justify-center text-ink-3"><Loader2 className="animate-spin" /></div>
-          ) : error ? (
-            <p className="py-10 text-center text-sm text-red-600">{error}</p>
           ) : shown.length === 0 ? (
-            <p className="py-10 text-center text-sm text-ink-2">No images yet — upload one to start your library.</p>
+            <p className="py-10 text-center text-sm text-ink-2">
+              {error || "No media yet — upload something to start your library."}
+            </p>
           ) : (
-            <div className="grid grid-cols-3 gap-3 sm:grid-cols-4 md:grid-cols-5">
-              {shown.map((url) => (
-                <button
-                  key={url}
-                  type="button"
-                  onClick={() => { onPick(url); onClose(); }}
-                  className="group relative aspect-square overflow-hidden rounded-sm border border-line bg-paper-2 transition-all hover:ring-2 hover:ring-sage"
-                >
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img src={url} alt="" loading="lazy" className="h-full w-full object-cover" />
-                </button>
-              ))}
-            </div>
+            <>
+              {error ? <p className="mb-4 text-center text-sm text-red-600">{error}</p> : null}
+              <p className="mb-4 text-xs text-ink-3">
+                Tap an image to use it. Uploaded files show a trash icon — tap it to delete permanently.
+              </p>
+              <div className="grid grid-cols-3 gap-3 sm:grid-cols-4 md:grid-cols-5">
+                {shown.map((it) => (
+                  <div
+                    key={it.url}
+                    className="group relative aspect-square overflow-hidden rounded-sm border border-line bg-paper-2"
+                  >
+                    {it.kind === "video" ? (
+                      <>
+                        <video src={it.url} className="h-full w-full object-cover" muted playsInline preload="metadata" />
+                        <span className="pointer-events-none absolute inset-0 flex items-center justify-center">
+                          <span className="flex h-8 w-8 items-center justify-center rounded-full bg-ink/60 text-white">
+                            <Play size={15} className="translate-x-0.5" />
+                          </span>
+                        </span>
+                      </>
+                    ) : (
+                      <button
+                        type="button"
+                        onClick={() => { onPick(it.url); onClose(); }}
+                        className="absolute inset-0 h-full w-full transition-all hover:ring-2 hover:ring-sage"
+                        aria-label="Use this image"
+                      >
+                        {/* eslint-disable-next-line @next/next/no-img-element */}
+                        <img src={it.url} alt="" loading="lazy" className="h-full w-full object-cover" />
+                      </button>
+                    )}
+
+                    {it.deletable ? (
+                      <button
+                        type="button"
+                        onClick={() => remove(it.url)}
+                        disabled={deleting === it.url}
+                        aria-label="Delete file"
+                        className="absolute right-1.5 top-1.5 z-10 flex h-7 w-7 items-center justify-center rounded-full bg-ink/75 text-white shadow-sm transition-colors hover:bg-red-600"
+                      >
+                        {deleting === it.url ? <Loader2 size={13} className="animate-spin" /> : <Trash2 size={13} />}
+                      </button>
+                    ) : null}
+                  </div>
+                ))}
+              </div>
+            </>
           )}
         </div>
       </div>

@@ -140,6 +140,15 @@ export async function deleteProduct(id: string) {
   return { ok: true };
 }
 
+/** Quick toggle used by the products list — flip Ready Stock without opening the product. */
+export async function setProductReadyStock(id: string, readyStock: boolean) {
+  await requireAdmin();
+  await prisma.product.update({ where: { id }, data: { readyStock } });
+  revalidateSite();
+  revalidatePath("/admin/products");
+  return { ok: true, readyStock };
+}
+
 /* ──────────────────────────── Categories ──────────────────────────── */
 
 const categorySchema = z.object({
