@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
+import ReadyBlocksStrip from "./ReadyBlocksStrip";
 
 export type ProductCardData = {
   slug: string;
@@ -60,23 +61,7 @@ export default function ProductCard({ product }: { product: ProductCardData }) {
             <p className="text-[0.7rem] font-medium uppercase tracking-[0.14em] text-ink-3">
               {product.readyBlocks.length} {product.readyBlocks.length === 1 ? "block" : "blocks"} available
             </p>
-            <ul className="mt-2 space-y-1.5">
-              {product.readyBlocks.map((b, i) => (
-                <li key={i} className="flex items-center gap-2.5">
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img
-                    src={b.url}
-                    alt=""
-                    loading="lazy"
-                    className="h-9 w-9 shrink-0 rounded-sm border border-line object-cover"
-                  />
-                  <span className="text-sm text-ink-3">{i + 1}.</span>
-                  <span className="text-sm font-semibold text-sage">
-                    {b.qty ? `${b.qty} Sqft` : "Available"}
-                  </span>
-                </li>
-              ))}
-            </ul>
+            <ReadyBlocksStrip blocks={product.readyBlocks} />
           </div>
         ) : product.description ? (
           <p className="mt-2 line-clamp-2 text-sm leading-relaxed text-ink-2">
