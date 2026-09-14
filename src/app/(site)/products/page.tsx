@@ -29,7 +29,12 @@ export async function generateMetadata({
       }),
       getSettings(),
     ]);
-    const image = abs(settings.ogImage || first?.imageUrl);
+    const source = settings.ogImage || first?.imageUrl;
+    const image = source
+      ? source.startsWith("http")
+        ? source
+        : abs(`/api/og-image?src=${encodeURIComponent(source)}`)
+      : undefined;
     const title = "Ready Stock — Available Now | Stonic Export";
     const description =
       "In-stock marble, granite & natural stone slabs ready for immediate dispatch. See available sizes and enquire for the best price.";
@@ -39,7 +44,7 @@ export async function generateMetadata({
       openGraph: {
         title,
         description,
-        images: image ? [{ url: image }] : undefined,
+        images: image ? [{ url: image, width: 1200, height: 630, type: "image/jpeg" }] : undefined,
       },
       twitter: {
         card: "summary_large_image",

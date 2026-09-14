@@ -23,7 +23,12 @@ const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://www.stonicexport.co
 export async function generateMetadata(): Promise<Metadata> {
   const settings = await getSettings();
   // Admin-controlled social share image; falls back to the built-in default.
-  const share = settings.ogImage || "/hero-poster.jpg";
+  const source = settings.ogImage || "/hero-poster.jpg";
+  // Route local images through the optimiser so the preview is a light
+  // 1200×630 JPEG (WhatsApp drops multi-MB source photos).
+  const share = source.startsWith("http")
+    ? source
+    : `/api/og-image?src=${encodeURIComponent(source)}`;
   return {
     metadataBase: new URL(siteUrl),
     title: {
@@ -49,7 +54,7 @@ export async function generateMetadata(): Promise<Metadata> {
       description:
         "Premium Indian marble, granite & natural stone, direct from the quarries to the global market.",
       url: siteUrl,
-      images: [share],
+      images: [{ url: share, width: 1200, height: 630, type: "image/jpeg" }],
     },
     twitter: {
       card: "summary_large_image",
